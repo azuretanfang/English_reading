@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confucious and Chinese Philosophy - 精读笔记</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f0f4f8; color: #2c3e50; line-height: 1.8; }
+  .header { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 32px 40px; text-align: center; }
+  .header h1 { font-size: 26px; margin-bottom: 8px; }
+  .header p { font-size: 14px; opacity: 0.85; }
+  .container { max-width: 1100px; margin: 30px auto; padding: 0 24px 60px; }
+  .full-text { background: #fff; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+  .full-text h2 { color: #2e86c1; font-size: 18px; margin-bottom: 16px; }
+  .full-text p { font-size: 15px; line-height: 2.2; color: #34495e; margin-bottom: 12px; text-align: justify; }
+  .sentence-block { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+  .sentence-en { font-size: 17px; line-height: 2; color: #2c3e50; padding: 14px 18px; background: #fafbff; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; margin-bottom: 16px; }
+  .sentence-en .vocab { position: relative; cursor: help; font-weight: 600; text-decoration: underline; text-decoration-style: wavy; text-underline-offset: 3px; }
+  .sentence-en .vocab:hover::after { content: attr(data-tip); position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 8px); background: #1a1a2e; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; white-space: pre-wrap; z-index: 100; width: max-content; max-width: 280px; line-height: 1.5; font-weight: normal; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .vocab-cet4 { color: #2471a3; text-decoration-color: #2471a3; }
+  .vocab-cet6 { color: #1e8449; text-decoration-color: #1e8449; }
+  .vocab-ielts { color: #d35400; text-decoration-color: #d35400; }
+  .vocab-proper { color: #7d3c98; text-decoration-color: #7d3c98; }
+  .vocab-basic { color: #2c3e50; text-decoration-color: #888; }
+  .analysis h3 { font-size: 15px; color: #2e86c1; margin-bottom: 10px; }
+  .analysis ul { list-style: none; padding-left: 0; }
+  .analysis li { font-size: 14px; color: #444; padding: 6px 0 6px 18px; position: relative; }
+  .analysis li::before { content: "▸"; position: absolute; left: 0; color: #2e86c1; }
+  .analysis .label { font-weight: 600; color: #2c3e50; }
+  .grammar-note { background: #fff9e6; border-left: 3px solid #f39c12; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 12px; font-size: 13px; color: #7d6608; line-height: 1.7; }
+  .error-note { background: #fdecea; border-left: 3px solid #e74c3c; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 12px; font-size: 13px; color: #7b241c; line-height: 1.7; }
+  .info-box { background: #eaf2fb; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; padding: 14px 20px; margin-bottom: 28px; font-size: 14px; color: #1a3e6e; line-height: 1.8; }
+  .summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .summary-table th { background: #2e86c1; color: #fff; padding: 10px 14px; text-align: left; }
+  .summary-table td { padding: 9px 14px; border-bottom: 1px solid #e8edf2; }
+  .summary-table tr:nth-child(even) td { background: #f7fafc; }
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+  .tag-cet4 { background: #d6eaf8; color: #2471a3; }
+  .tag-cet6 { background: #d5f5e3; color: #1e8449; }
+  .tag-ielts { background: #fdebd0; color: #d35400; }
+  .tag-proper { background: #e8daef; color: #7d3c98; }
+  .tag-basic { background: #eaeded; color: #666; }
+  .back-link { display: inline-block; margin-bottom: 18px; color: #2e86c1; text-decoration: none; font-size: 14px; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📖 Confucious and Chinese Philosophy — 精读笔记</h1>
+  <p>逐句语法拆解 · 生词分级标注 · 双栏阅读笔记</p>
+</div>
+
+<div class="container">
+
+  <a class="back-link" href="index.html">← 返回笔记目录</a>
+
+  <div class="info-box">
+    <strong>📌 使用说明：</strong>左侧为原文（生词带彩色下划线，鼠标悬停查看释义）；右侧为语法拆解 + 生词详解。文末附全文语法总结与生词分级统计。
+  </div>
+
+  <!-- ==================== 全文展示 ==================== -->
+  <div class="full-text">
+    <h2>📄 全文预览</h2>
+    <p>Born in 551 BC, Confucius, kong zi, has made the greatest contribution to Chinese culture of anyone in history. Although he was raised in a poor family, he visited famous scholars and learned a lot.</p>
+    <p>He developed his thoughts into a system of philosophy known as Confucianism. Confucianism emphasized self-cultivation, harmonious relationships with each other and respect for the elderly.</p>
+    <p>Friends should be honest to each other. Rulers should make an effort to provide a happy life for people. He was a great teacher as well and promoted education for ordinary people.</p>
+    <p>He traveled around to promote his political thinking but failed. But he never gave up. Kong Zi is a great Chinese spiritual leader.</p>
+    <p>Over the last 2,000 years, his philosophy has continued to influence China and the rest of the world. It is also regarded as the symbol of oriental culture.</p>
+  </div>
+
+  <!-- ==================== 句1 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-cet4" data-tip="born (v.) 出生｜过去分词作状语&#10;CET-4 基础词">Born</span> <span class="vocab vocab-cet6" data-tip="BC (abbr.) 公元前｜Before Christ的缩写&#10;CET-6 专有名词">BC</span>, <span class="vocab vocab-proper" data-tip="Confucius (n.) 孔子｜拉丁化名字&#10;专有名词">Confucius</span>, <span class="vocab vocab-proper" data-tip="kong zi (n.) 孔子（拼音）｜中文名音译&#10;专有名词">kong zi</span>, <span class="vocab vocab-basic" data-tip="has made 现在完成时｜has + 过去分词&#10;基础语法">has made</span> <span class="vocab vocab-cet4" data-tip="greatest (adj.) 最大的｜good/ great的最高级&#10;CET-4 基础词">the greatest</span> <span class="vocab vocab-cet4" data-tip="contribution (n.) 贡献｜contribute的名词形式&#10;CET-4 核心词">contribution</span> <span class="vocab vocab-basic" data-tip="to (prep.) 对｜方向/对象介词&#10;基础词">to</span> <span class="vocab vocab-cet4" data-tip="Chinese (adj.) 中国的｜专有形容词&#10;CET-4 基础词">Chinese</span> <span class="vocab vocab-cet6" data-tip="culture (n.) 文化｜society's customs and beliefs&#10;CET-6 核心词">culture</span> <span class="vocab vocab-basic" data-tip="of (prep.) 的｜所属关系介词&#10;基础词">of</span> <span class="vocab vocab-basic" data-tip="anyone (pron.) 任何人｜any + one&#10;基础词">anyone</span> <span class="vocab vocab-basic" data-tip="in (prep.) 在…中｜位置/时间介词&#10;基础词">in</span> <span class="vocab vocab-basic" data-tip="history (n.) 历史｜past events&#10;CET-4 基础词">history</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（SVO + 状语修饰）</li>
+        <li><span class="label">主语：</span>Confucius（插入语 kong zi 为同位语）</li>
+        <li><span class="label">谓语：</span>has made（现在完成时，强调从过去持续至今的影响）</li>
+        <li><span class="label">宾语：</span>the greatest contribution</li>
+        <li><span class="label">状语：</span>Born in 551 BC（过去分词短语作状语，表背景信息）</li>
+        <li><span class="label">比较结构：</span>of anyone in history（最高级 the greatest 的比较范围）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：过去分词作状语</strong><br>
+        "Born in 551 BC" = "Because/As he was born in 551 BC"，省略了主语和 be 动词，使句子更简洁。类似用法：<em>Born in a small town, she became a famous writer.</em>
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">contribution (n.)：</span>贡献。搭配：make a contribution to... 对…做出贡献</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">culture (n.)：</span>文化。衍生词：cultural (adj.) 文化的</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">greatest (adj.)：</span>最大的，最伟大的（great 的最高级）</li>
+        <li><span class="tag tag-proper">专有</span> <span class="label">Confucius (n.)：</span>孔子（拉丁文名，西方学术界通用）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句2 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-cet4" data-tip="Although (conj.) 虽然｜引导让步状语从句&#10;CET-4 核心词">Although</span> <span class="vocab vocab-basic" data-tip="he (pron.) 他｜第三人称单数主格&#10;基础词">he</span> <span class="vocab vocab-basic" data-tip="was raised 被抚养｜raise的被动语态过去时&#10;基础语法">was raised</span> <span class="vocab vocab-basic" data-tip="in (prep.) 在…中｜位置介词&#10;基础词">in</span> <span class="vocab vocab-basic" data-tip="a (art.) 一个｜不定冠词&#10;基础词">a</span> <span class="vocab vocab-cet4" data-tip="poor (adj.) 贫穷的｜反义词 rich&#10;CET-4 基础词">poor</span> <span class="vocab vocab-basic" data-tip="family (n.) 家庭｜basic word&#10;CET-4 基础词">family</span>, <span class="vocab vocab-basic" data-tip="he (pron.) 他｜主语&#10;基础词">he</span> <span class="vocab vocab-basic" data-tip="visited (v.) 拜访｜visit的过去式&#10;CET-4 基础词">visited</span> <span class="vocab vocab-cet6" data-tip="famous (adj.) 著名的｜well-known&#10;CET-6 基础词">famous</span> <span class="vocab vocab-cet6" data-tip="scholars (n.) 学者｜ plural of scholar&#10;CET-6 核心词">scholars</span> <span class="vocab vocab-basic" data-tip="and (conj.) 和｜并列连词&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="learned (v.) 学习｜learn的过去式&#10;CET-4 基础词">learned</span> <span class="vocab vocab-basic" data-tip="a lot 很多｜副词短语&#10;基础短语">a lot</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>复合句（Although 让步状语从句 + 主句）</li>
+        <li><span class="label">从句：</span>Although he was raised in a poor family（被动语态，一般过去时）</li>
+        <li><span class="label">主句：</span>he visited famous scholars and learned a lot（两个并列谓语）</li>
+        <li><span class="label">时态：</span>一般过去时（描述过去事实）</li>
+        <li><span class="label">语态：</span>从句用被动语态（was raised = 被抚养长大）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：Although 不能与 but 连用</strong><br>
+        正确：<em>Although he was poor, he studied hard.</em><br>
+        错误：<em>Although he was poor, but he studied hard.</em> ❌<br>
+        （中文习惯"虽然…但是…"，英文二选一）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">scholar (n.)：</span>学者。搭配：famous scholar 著名学者</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">raise (v.)：</span>抚养，养育（此处用被动 was raised）。另义：举起，提高</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">although (conj.)：</span>虽然，尽管。引导让步状语从句</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句3 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="He (pron.) 他｜主语&#10;基础词">He</span> <span class="vocab vocab-basic" data-tip="developed (v.) 发展｜develop的过去式&#10;CET-4 核心词">developed</span> <span class="vocab vocab-basic" data-tip="his (pron.) 他的｜物主代词&#10;基础词">his</span> <span class="vocab vocab-basic" data-tip="thoughts (n.) 思想｜thought的复数&#10;CET-4 基础词">thoughts</span> <span class="vocab vocab-basic" data-tip="into (prep.) 成为｜转变方向介词&#10;基础词">into</span> <span class="vocab vocab-basic" data-tip="a (art.) 一个｜不定冠词&#10;基础词">a</span> <span class="vocab vocab-basic" data-tip="system (n.) 体系｜set of connected things&#10;CET-4 核心词">system</span> <span class="vocab vocab-basic" data-tip="of (prep.) 的｜所属介词&#10;基础词">of</span> <span class="vocab vocab-cet6" data-tip="philosophy (n.) 哲学｜study of fundamental questions&#10;CET-6 核心词">philosophy</span> <span class="vocab vocab-basic" data-tip="known as 被称为｜过去分词短语作定语&#10;固定搭配">known as</span> <span class="vocab vocab-proper" data-tip="Confucianism (n.) 儒家思想｜Confucius + -ianism&#10;专有名词">Confucianism</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（SVO + 宾补/定语修饰）</li>
+        <li><span class="label">主语：</span>He</li>
+        <li><span class="label">谓语：</span>developed</li>
+        <li><span class="label">宾语：</span>his thoughts</li>
+        <li><span class="label">状语/补语：</span>into a system of philosophy（develop A into B：把A发展成B）</li>
+        <li><span class="label">定语：</span>(which is) known as Confucianism（过去分词短语作后置定语，省略 which is）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：develop A into B</strong><br>
+        意为"把A发展成B"。例句：<em>She developed her idea into a successful business.</em><br>
+        过去分词 known 作定语：<em>a man known as "the teacher"</em>（一个被称为"老师"的人）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">philosophy (n.)：</span>哲学。衍生词：philosopher (n.) 哲学家</li>
+        <li><span class="tag tag-proper">专有</span> <span class="label">Confucianism (n.)：</span>儒家思想，儒学（-ianism 表示"…主义/学说"）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">system (n.)：</span>体系，系统。搭配：a system of... …的体系</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句4 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-proper" data-tip="Confucianism (n.) 儒家思想｜专有名词&#10;专有名词">Confucianism</span> <span class="vocab vocab-cet4" data-tip="emphasized (v.) 强调｜emphasize的过去式&#10;CET-4 核心词">emphasized</span> <span class="vocab vocab-cet6" data-tip="self-cultivation (n.) 自我修养｜self + cultivation&#10;CET-6 学术词">self-cultivation</span>, <span class="vocab vocab-cet6" data-tip="harmonious (adj.) 和谐的｜peaceful and friendly&#10;CET-6 核心词">harmonious</span> <span class="vocab vocab-basic" data-tip="relationships (n.) 关系｜relationship复数&#10;CET-4 基础词">relationships</span> <span class="vocab vocab-basic" data-tip="with (prep.) 与｜伴随介词&#10;基础词">with</span> <span class="vocab vocab-basic" data-tip="each other 彼此｜相互代词&#10;基础短语">each other</span> <span class="vocab vocab-basic" data-tip="and (conj.) 和｜并列连词&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="respect (n.) 尊重｜admiration for someone&#10;CET-4 核心词">respect</span> <span class="vocab vocab-basic" data-tip="for (prep.) 对｜对象介词&#10;基础词">for</span> <span class="vocab vocab-basic" data-tip="the elderly 老年人｜the + adj. 表示一类人&#10;固定搭配">the elderly</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语 + 谓语 + 三个并列宾语）</li>
+        <li><span class="label">主语：</span>Confucianism</li>
+        <li><span class="label">谓语：</span>emphasized（一般过去时）</li>
+        <li><span class="label">宾语（并列）：</span>① self-cultivation ② harmonious relationships with each other ③ respect for the elderly</li>
+        <li><span class="label">结构：</span>emphasized A, B and C（三个并列名词短语）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点："the + 形容词" 表示一类人</strong><br>
+        the elderly = 老年人（复数，谓语动词用复数）<br>
+        类似用法：the poor（穷人）、the rich（富人）、the young（年轻人）<br>
+        注意：<em>Confucianism emphasizes...</em> 主语是单数，谓语用 emphasized（过去时）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">self-cultivation (n.)：</span>自我修养，修身。cultivation = 培养，修养</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">harmonious (adj.)：</span>和谐的。名词：harmony</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">emphasize (v.)：</span>强调。名词：emphasis</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">respect (n./v.)：</span>尊重。搭配：respect for... 对…的尊重</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">the elderly：</span>老年人（固定搭配，elderly 是形容词作名词用）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句5 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="Friends (n.) 朋友｜复数&#10;CET-4 基础词">Friends</span> <span class="vocab vocab-basic" data-tip="should (modal v.) 应该｜情态动词&#10;基础词">should</span> <span class="vocab vocab-cet4" data-tip="honest (adj.) 诚实的｜truthful&#10;CET-4 核心词">be honest</span> <span class="vocab vocab-basic" data-tip="to (prep.) 对｜方向介词&#10;基础词">to</span> <span class="vocab vocab-basic" data-tip="each other 彼此｜相互代词&#10;基础短语">each other</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语 + 情态动词 + 表语 + 状语）</li>
+        <li><span class="label">主语：</span>Friends</li>
+        <li><span class="label">谓语：</span>should be（情态动词 + be 动词原形）</li>
+        <li><span class="label">表语：</span>honest（形容词作表语）</li>
+        <li><span class="label">状语：</span>to each other（对象状语）</li>
+        <li><span class="label">时态：</span>一般现在时（表达普遍真理/道德规范）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：should + 动词原形</strong><br>
+        should 是情态动词，后面永远接动词原形（不能用 to be honest，只能用 be honest）。<br>
+        例句：<em>You should be careful.</em> ✅ <em>You should to be careful.</em> ❌
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">honest (adj.)：</span>诚实的。注意：h 不发音，读作 /ˈɒnɪst/。反义词：dishonest</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句6 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-cet6" data-tip="Rulers (n.) 统治者｜plural of ruler&#10;CET-6 核心词">Rulers</span> <span class="vocab vocab-basic" data-tip="should (modal v.) 应该｜情态动词&#10;基础词">should</span> <span class="vocab vocab-basic" data-tip="make an effort 努力｜固定短语&#10;基础短语">make an effort</span> <span class="vocab vocab-basic" data-tip="to (prep.) 为了｜目的状语标记&#10;基础词">to</span> <span class="vocab vocab-basic" data-tip="provide (v.) 提供｜supply&#10;CET-4 核心词">provide</span> <span class="vocab vocab-basic" data-tip="a (art.) 一个｜不定冠词&#10;基础词">a</span> <span class="vocab vocab-basic" data-tip="happy (adj.) 幸福的｜joyful&#10;CET-4 基础词">happy</span> <span class="vocab vocab-basic" data-tip="life (n.) 生活｜way of living&#10;CET-4 基础词">life</span> <span class="vocab vocab-basic" data-tip="for (prep.) 为｜受益对象介词&#10;基础词">for</span> <span class="vocab vocab-basic" data-tip="people (n.) 人民｜persons in general&#10;CET-4 基础词">people</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语 + 情态动词 + 谓语 + 宾语 + 目的状语）</li>
+        <li><span class="label">主语：</span>Rulers</li>
+        <li><span class="label">谓语：</span>should make an effort（情态动词 + 动词短语）</li>
+        <li><span class="label">目的状语：</span>to provide a happy life for people（不定式短语作目的状语）</li>
+        <li><span class="label">搭配：</span>make an effort to do sth = 努力做某事</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：make an effort to do sth</strong><br>
+        意为"努力做某事"，effort 后面接不定式 to do。<br>
+        同义表达：try to do / strive to do / work hard to do<br>
+        例句：<em>She made an effort to finish the project on time.</em>
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">ruler (n.)：</span>统治者，君主。也可表示"尺子"（一词多义）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">provide (v.)：</span>提供。搭配：provide sth for sb = provide sb with sth</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">make an effort：</span>努力，尽力（固定短语）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句7 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="He (pron.) 他｜主语&#10;基础词">He</span> <span class="vocab vocab-basic" data-tip="was (v.) 是｜be动词过去式&#10;基础词">was</span> <span class="vocab vocab-basic" data-tip="a (art.) 一个｜不定冠词&#10;基础词">a</span> <span class="vocab vocab-basic" data-tip="great (adj.) 伟大的｜very good&#10;CET-4 基础词">great</span> <span class="vocab vocab-basic" data-tip="teacher (n.) 老师｜person who teaches&#10;CET-4 基础词">teacher</span> <span class="vocab vocab-basic" data-tip="as well 也｜置于句末&#10;固定短语">as well</span> <span class="vocab vocab-basic" data-tip="and (conj.) 并且｜并列连词&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="promoted (v.) 推广｜promote的过去式&#10;CET-4 核心词">promoted</span> <span class="vocab vocab-basic" data-tip="education (n.) 教育｜teaching and learning&#10;CET-4 核心词">education</span> <span class="vocab vocab-basic" data-tip="for (prep.) 为｜对象介词&#10;基础词">for</span> <span class="vocab vocab-cet6" data-tip="ordinary (adj.) 普通的｜normal, not special&#10;CET-6 核心词">ordinary</span> <span class="vocab vocab-basic" data-tip="people (n.) 人民｜普通百姓&#10;CET-4 基础词">people</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>并列复合句（两个分句由 and 连接）</li>
+        <li><span class="label">分句1：</span>He was a great teacher as well（系表结构 + as well 置于句末）</li>
+        <li><span class="label">分句2：</span>and (he) promoted education for ordinary people（省略主语 he）</li>
+        <li><span class="label">时态：</span>一般过去时（was, promoted）</li>
+        <li><span class="label">as well：</span>也，同样（置于句末，相当于 too/also）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：as well / too / also 的区别</strong><br>
+        as well：置于句末，前无逗号 → <em>He is a teacher as well.</em><br>
+        too：置于句末，前有逗号 → <em>He is a teacher, too.</em><br>
+        also：置于句中（be动词后/实义动词前）→ <em>He is also a teacher.</em>
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">ordinary (adj.)：</span>普通的，平凡的。反义词：extraordinary（非凡的）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">promote (v.)：</span>推广，促进；促销（一词多义）。名词：promotion</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">education (n.)：</span>教育。动词：educate</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句8 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="He (pron.) 他｜主语&#10;基础词">He</span> <span class="vocab vocab-basic" data-tip="traveled (v.) 游历｜travel的过去式（美式拼写）&#10;CET-4 基础词">traveled</span> <span class="vocab vocab-basic" data-tip="around (adv.) 到处｜here and there&#10;基础词">around</span> <span class="vocab vocab-basic" data-tip="to (prep.) 为了｜目的标记&#10;基础词">to</span> <span class="vocab vocab-basic" data-tip="promote (v.) 推广｜make known&#10;CET-4 核心词">promote</span> <span class="vocab vocab-basic" data-tip="his (pron.) 他的｜物主代词&#10;基础词">his</span> <span class="vocab vocab-cet6" data-tip="political (adj.) 政治的｜related to politics&#10;CET-6 核心词">political</span> <span class="vocab vocab-cet6" data-tip="thinking (n.) 思想｜way of thinking&#10;CET-6 学术词">thinking</span> <span class="vocab vocab-basic" data-tip="but (conj.) 但是｜转折连词&#10;基础词">but</span> <span class="vocab vocab-basic" data-tip="failed (v.) 失败｜fail的过去式&#10;CET-4 基础词">failed</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>并列句（两个分句由 but 连接，表转折）</li>
+        <li><span class="label">分句1：</span>He traveled around to promote his political thinking（不定式 to promote 作目的状语）</li>
+        <li><span class="label">分句2：</span>(he) failed（省略主语 he）</li>
+        <li><span class="label">目的状语：</span>to promote his political thinking（动词不定式表目的）</li>
+        <li><span class="label">拼写说明：</span>traveled（美式双写 l 为单 l + ed；英式：travelled 双 l）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：不定式 to do 表目的</strong><br>
+        He traveled around <em>to promote...</em> = He traveled around <em>in order to promote...</em><br>
+        意为"他周游列国，<strong>为了</strong>推广他的政治思想"。<br>
+        类似：<em>She studies hard to pass the exam.</em>（努力学习是为了通过考试）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">political (adj.)：</span>政治的。名词：politics；政客：politician</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">thinking (n.)：</span>思想，思维。近义词：thought（更抽象）；thinking 更侧重"思考方式"</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">fail (v.)：</span>失败。反义词：succeed；名词：failure</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句9 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="But (conj.) 但是｜转折连词，此处单独成句强调&#10;基础词">But</span> <span class="vocab vocab-basic" data-tip="he (pron.) 他｜主语&#10;基础词">he</span> <span class="vocab vocab-basic" data-tip="never (adv.) 从不｜not at any time&#10;CET-4 基础词">never</span> <span class="vocab vocab-basic" data-tip="gave up 放弃｜give up的过去式&#10;固定短语">gave up</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语 + 状语 + 谓语）</li>
+        <li><span class="label">主语：</span>he</li>
+        <li><span class="label">状语：</span>never（频度副词，放在实义动词之前、be动词/助动词之后）</li>
+        <li><span class="label">谓语：</span>gave up（短语动词，不及物，可不接宾语）</li>
+        <li><span class="label">风格说明：</span>But 单独成句，是口语化/记叙文中强调转折的写作手法（正式写作中不推荐）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：give up 的用法</strong><br>
+        give up sth = 放弃某物：<em>He gave up his dream.</em><br>
+        give up doing sth = 放弃做某事：<em>He gave up smoking.</em><br>
+        give up（不及物用法）= 放弃，认输：<em>Never give up!</em>（永不言弃！）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-basic">基础</span> <span class="label">give up (phr.v.)：</span>放弃。常用励志短语：Never give up!（永不言弃！）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">never (adv.)：</span>从不，绝不。本身含否定意义，不能再加 not</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句10 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-proper" data-tip="Kong Zi (n.) 孔子｜拼音音译名&#10;专有名词">Kong Zi</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜be动词第三人称单数&#10;基础词">is</span> <span class="vocab vocab-basic" data-tip="a (art.) 一个｜不定冠词&#10;基础词">a</span> <span class="vocab vocab-basic" data-tip="great (adj.) 伟大的｜very good&#10;CET-4 基础词">great</span> <span class="vocab vocab-basic" data-tip="Chinese (adj.) 中国的｜&#10;CET-4 基础词">Chinese</span> <span class="vocab vocab-cet6" data-tip="spiritual (adj.) 精神的｜related to spirit&#10;CET-6 核心词">spiritual</span> <span class="vocab vocab-basic" data-tip="leader (n.) 领袖｜person who leads&#10;CET-4 核心词">leader</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主系表结构）</li>
+        <li><span class="label">主语：</span>Kong Zi（= Confucius，中文拼音名）</li>
+        <li><span class="label">系动词：</span>is（一般现在时，表达客观事实/当前状态）</li>
+        <li><span class="label">表语：</span>a great Chinese spiritual leader（名词短语）</li>
+        <li><span class="label">注意：</span>时态从过去时（was born, developed）切换为现在时（is），表示从历史人物延续至今的评价</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：时态切换的表达效果</strong><br>
+        文章前部分用过去时（was born, developed, emphasized）叙述孔子生平；<br>
+        此处切换为现在时（is, has continued），表达"孔子至今仍是中国精神领袖"这一<strong>持续至今的状态</strong>，增强时代感和现实意义。
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">spiritual (adj.)：</span>精神的，心灵的。反义词：material（物质的）。名词：spirit（精神）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">leader (n.)：</span>领袖，领导者。动词：lead；名词：leadership（领导力）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句11 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="Over (prep.) 在…期间｜during&#10;基础词">Over</span> <span class="vocab vocab-basic" data-tip="the last 2,000 years 过去2000年来｜时间状语&#10;固定表达">the last 2,000 years</span>, <span class="vocab vocab-basic" data-tip="his (pron.) 他的｜物主代词&#10;基础词">his</span> <span class="vocab vocab-cet6" data-tip="philosophy (n.) 哲学｜&#10;CET-6 核心词">philosophy</span> <span class="vocab vocab-basic" data-tip="has continued 一直在｜现在完成时&#10;基础语法">has continued</span> <span class="vocab vocab-basic" data-tip="to (prep.) 去｜不定式标记&#10;基础词">to</span> <span class="vocab vocab-cet4" data-tip="influence (v.) 影响｜have an effect on&#10;CET-4 核心词">influence</span> <span class="vocab vocab-basic" data-tip="China (n.) 中国｜&#10;基础词">China</span> <span class="vocab vocab-basic" data-tip="and (conj.) 和｜&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="the rest of 其余的｜&#10;固定搭配">the rest of</span> <span class="vocab vocab-basic" data-tip="the world 世界｜&#10;基础词">the world</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语 + 现在完成时谓语 + 宾语）</li>
+        <li><span class="label">时间状语：</span>Over the last 2,000 years（"过去2000年来"，与现在完成时连用）</li>
+        <li><span class="label">主语：</span>his philosophy</li>
+        <li><span class="label">谓语：</span>has continued to influence（现在完成时 + 不定式）</li>
+        <li><span class="label">宾语：</span>China and the rest of the world</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：现在完成时 + over the last + 时间段</strong><br>
+        "Over the last + 时间段" 表示"在过去某段时间里一直…"，<strong>必须与现在完成时连用</strong>。<br>
+        例句：<em>Over the last 10 years, she has written 5 books.</em><br>
+        类似时间状语：in the past/recent years, since 2000, for 2,000 years
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">influence (v./n.)：</span>影响。动词：<em>Confucius influenced China.</em> 名词：<em>have an influence on...</em></li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">continue (v.)：</span>继续。搭配：continue to do sth / continue doing sth</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">the rest of：</span>其余的，剩下的（固定搭配）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句12 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="It (pron.) 它｜指代his philosophy&#10;基础词">It</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜被动语态be动词&#10;基础词">is</span> <span class="vocab vocab-basic" data-tip="also (adv.) 也｜in addition&#10;基础词">also</span> <span class="vocab vocab-basic" data-tip="regarded as 被视为｜被动短语&#10;固定搭配">regarded as</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="symbol (n.) 象征｜sign that represents something&#10;CET-4 核心词">symbol</span> <span class="vocab vocab-basic" data-tip="of (prep.) …的｜&#10;基础词">of</span> <span class="vocab vocab-cet6" data-tip="oriental (adj.) 东方的｜eastern, Asian&#10;CET-6 核心词">oriental</span> <span class="vocab vocab-basic" data-tip="culture (n.) 文化｜&#10;CET-6 核心词">culture</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主系表结构，被动语态）</li>
+        <li><span class="label">主语：</span>It（指代 his philosophy，即 Confucianism）</li>
+        <li><span class="label">谓语：</span>is regarded as（一般现在时的被动语态）</li>
+        <li><span class="label">主语补足语：</span>the symbol of oriental culture（名词短语）</li>
+        <li><span class="label">搭配：</span>be regarded as = 被视为，被看作（相当于 be considered as）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：被动语态 be + 过去分词</strong><br>
+        is regarded（一般现在时被动）= "被视作"<br>
+        主动语态改写：<em>People regard it as the symbol of oriental culture.</em><br>
+        常用被动表达：be regarded as / be considered as / be seen as / be viewed as（都表示"被视为"）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">oriental (adj.)：</span>东方的（特指亚洲/东亚文化）。反义词：occidental（西方的）。注意：当代更常用 Asian 或 East Asian，"oriental" 在某些语境下被认为不够尊重</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">symbol (n.)：</span>象征，符号。搭配：a symbol of... …的象征</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">regard (v.)：</span>视为，看待。过去分词：regarded。搭配：regard A as B（把A视为B）</li>
+      </ul>
+      <div class="error-note">
+        <strong>⚠️ 文化用语提示：</strong>"oriental" 一词在当代英语中，描述人或文化时被认为不够恰当，更推荐使用 <em>Asian</em> 或 <em>East Asian</em>。原文使用该词，阅读时了解即可，自己写作时建议避免使用。
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 全文语法总结 ==================== -->
+  <div class="sentence-block">
+    <h2 style="color:#2e86c1;font-size:18px;margin-bottom:16px;">📊 全文语法总结</h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>语法项目</th>
+          <th>本文字例</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>过去分词作状语</td><td>Born in 551 BC, Confucius...</td><td>省略主语+be动词，表背景</td></tr>
+        <tr><td>Although 让步从句</td><td>Although he was raised in a poor family...</td><td>不能与 but 连用</td></tr>
+        <tr><td>一般过去时</td><td>was raised, visited, developed, emphasized</td><td>叙述过去事实</td></tr>
+        <tr><td>被动语态（过去时）</td><td>was raised</td><td>be + 过去分词</td></tr>
+        <tr><td>被动语态（现在时）</td><td>is regarded as</td><td>表达客观事实/普遍认知</td></tr>
+        <tr><td>现在完成时</td><td>has made, has continued</td><td>与 over the last... 连用，强调持续至今</td></tr>
+        <tr><td>情态动词 should</td><td>should be honest, should make an effort</td><td>+ 动词原形，表达道德义务</td></tr>
+        <tr><td>不定式表目的</td><td>to promote his political thinking</td><td>to do 作目的状语</td></tr>
+        <tr><td>并列宾语</td><td>emphasized A, B and C</td><td>三个名词短语并列</td></tr>
+        <tr><td>the + adj. 表示一类人</td><td>the elderly</td><td>谓语动词用复数</td></tr>
+        <tr><td>时态切换（过去→现在）</td><td>was → is, emphasized → has continued</td><td>从叙述历史切换到表达持续影响</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 生词分级统计 ==================== -->
+  <div class="sentence-block">
+    <h2 style="color:#2e86c1;font-size:18px;margin-bottom:16px;">📚 生词分级统计</h2>
+    <table class="summary-table">
+      <thead>
+        <tr><th>级别</th><th>词汇</th><th>数量</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="tag tag-cet4">CET-4</span></td><td>contribution, culture, raise, although, develop, system, emphasize, honest, provide, promote, education, fail, never, influence, continue, symbol, regard, leader</td><td>18</td></tr>
+        <tr><td><span class="tag tag-cet6">CET-6</span></td><td>scholar, philosophy, self-cultivation, harmonious, ruler, ordinary, political, thinking, spiritual, oriental</td><td>10</td></tr>
+        <tr><td><span class="tag tag-proper">专有名词</span></td><td>Confucius, Kong Zi, Confucianism</td><td>3</td></tr>
+        <tr><td><span class="tag tag-basic">基础词</span></td><td>born, BC, thoughts, into, system, known as, friends, should, ordinary, travel, around, give up, over, the rest of</td><td>14</td></tr>
+      </tbody>
+      <tfoot>
+        <tr style="font-weight:600;"><td>合计</td><td>-</td><td>45</td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- ==================== 文章主要问题 ==================== -->
+  <div class="sentence-block">
+    <h2 style="color:#e74c3c;font-size:18px;margin-bottom:16px;">⚠️ 文章主要问题汇总</h2>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题1：拼写错误 — "Confucious"</strong><br>
+      标题写为 <em>Confucious</em>，但正确拼写是 <strong>Confucius</strong>（孔子）。<em>-ious</em> 是常见形容词后缀（delicious, previous），容易误拼。<br>
+      正确：<em>Confucius</em> ✅ &nbsp;&nbsp; 错误：<em>Confucious</em> ❌
+    </div>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题2：拼写不一致 — "Confucius" vs "Kong Zi"</strong><br>
+      文章开头用 <em>Confucius, kong zi</em>（拉丁名 + 拼音），句10单独用 <em>Kong Zi</em>（拼音首字母大写）。全文应统一：建议统一用 <em>Confucius</em>（国际通用）或 <em>Kong Zi</em>（中文名），避免混用造成读者困惑。
+    </div>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题3：美式拼写 — "traveled"（句8）</strong><br>
+      <em>traveled</em> 是美式拼写（单 l + ed），英式拼写为 <em>travelled</em>（双 l）。学术写作中需根据目标读者选择统一拼写体系，不要混用。
+    </div>
+    <div class="error-note">
+      <strong>问题4：文化用语 — "oriental"（句12）</strong><br>
+      <em>oriental</em> 在当代英语中描述文化时被认为不够尊重，更推荐使用 <em>Asian</em> 或 <em>East Asian culture</em>。阅读时了解即可，自己写作时建议使用更现代的词汇。
+    </div>
+  </div>
+
+  <div style="text-align:center;color:#aaa;font-size:13px;margin-top:32px;">
+    Generated by English Reading Skill · 2026-06-09
+  </div>
+
+</div>
+
+</body>
+</html>
