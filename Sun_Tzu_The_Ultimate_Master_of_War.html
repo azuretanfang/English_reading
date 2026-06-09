@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sun Tzu The Ultimate Master of War - 精读笔记</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f0f4f8; color: #2c3e50; line-height: 1.8; }
+  .header { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 32px 40px; text-align: center; }
+  .header h1 { font-size: 26px; margin-bottom: 8px; }
+  .header p { font-size: 14px; opacity: 0.85; }
+  .container { max-width: 1100px; margin: 30px auto; padding: 0 24px 60px; }
+  .full-text { background: #fff; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+  .full-text h2 { color: #2e86c1; font-size: 18px; margin-bottom: 16px; }
+  .full-text p { font-size: 15px; line-height: 2.2; color: #34495e; margin-bottom: 12px; text-align: justify; }
+  .sentence-block { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+  .sentence-en { font-size: 17px; line-height: 2; color: #2c3e50; padding: 14px 18px; background: #fafbff; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; margin-bottom: 16px; }
+  .sentence-en .vocab { position: relative; cursor: help; font-weight: 600; text-decoration: underline; text-decoration-style: wavy; text-underline-offset: 3px; }
+  .sentence-en .vocab:hover::after { content: attr(data-tip); position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(100% + 8px); background: #1a1a2e; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; white-space: pre-wrap; z-index: 100; width: max-content; max-width: 280px; line-height: 1.5; font-weight: normal; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .vocab-cet4 { color: #2471a3; text-decoration-color: #2471a3; }
+  .vocab-cet6 { color: #1e8449; text-decoration-color: #1e8449; }
+  .vocab-ielts { color: #d35400; text-decoration-color: #d35400; }
+  .vocab-proper { color: #7d3c98; text-decoration-color: #7d3c98; }
+  .vocab-basic { color: #2c3e50; text-decoration-color: #888; }
+  .analysis h3 { font-size: 15px; color: #2e86c1; margin-bottom: 10px; }
+  .analysis ul { list-style: none; padding-left: 0; }
+  .analysis li { font-size: 14px; color: #444; padding: 6px 0 6px 18px; position: relative; }
+  .analysis li::before { content: "▸"; position: absolute; left: 0; color: #2e86c1; }
+  .analysis .label { font-weight: 600; color: #2c3e50; }
+  .grammar-note { background: #fff9e6; border-left: 3px solid #f39c12; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 12px; font-size: 13px; color: #7d6608; line-height: 1.7; }
+  .error-note { background: #fdecea; border-left: 3px solid #e74c3c; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 12px; font-size: 13px; color: #7b241c; line-height: 1.7; }
+  .info-box { background: #eaf2fb; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; padding: 14px 20px; margin-bottom: 28px; font-size: 14px; color: #1a3e6e; line-height: 1.8; }
+  .summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .summary-table th { background: #2e86c1; color: #fff; padding: 10px 14px; text-align: left; }
+  .summary-table td { padding: 9px 14px; border-bottom: 1px solid #e8edf2; }
+  .summary-table tr:nth-child(even) td { background: #f7fafc; }
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+  .tag-cet4 { background: #d6eaf8; color: #2471a3; }
+  .tag-cet6 { background: #d5f5e3; color: #1e8449; }
+  .tag-ielts { background: #fdebd0; color: #d35400; }
+  .tag-proper { background: #e8daef; color: #7d3c98; }
+  .tag-basic { background: #eaeded; color: #666; }
+  .back-link { display: inline-block; margin-bottom: 18px; color: #2e86c1; text-decoration: none; font-size: 14px; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📖 Sun Tzu: The Ultimate Master of War — 精读笔记</h1>
+  <p>逐句语法拆解 · 生词分级标注 · 双栏阅读笔记</p>
+</div>
+
+<div class="container">
+
+  <a class="back-link" href="index.html">← 返回笔记目录</a>
+
+  <div class="info-box">
+    <strong>📌 使用说明：</strong>左侧为原文（生词带彩色下划线，鼠标悬停查看释义）；右侧为语法拆解 + 生词详解。文末附全文语法总结与生词分级统计。
+  </div>
+
+  <!-- ==================== 全文展示 ==================== -->
+  <div class="full-text">
+    <h2>📄 全文预览</h2>
+    <p>Sun Tzu, who lived in China during the Spring and Autumn Period, is regarded as the ultimate master of war. His great military work, <em>The Art of War</em>, has been read for more than 2,000 years.</p>
+    <p>Sun Tzu believed that competition between economies and logistics is the nature of war. Only if the nation is prosperous and its people are strong enough will they win the war, otherwise the war will bring huge damages to the nation and people.</p>
+    <p>Gathering information on your enemies is the key to winning wars. The victorious general must be familiar with his enemies just as with himself and direct troops according to the newest situation.</p>
+    <p>The supreme art of war is to subdue the enemy without force. His spirit reminds us that peace is the common objective we should pursue.</p>
+  </div>
+
+  <!-- ==================== 句1 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-proper" data-tip="Sun Tzu (n.) 孙子｜中国古代军事家&#10;专有名词">Sun Tzu</span>, <span class="vocab vocab-basic" data-tip="who (pron.) 谁｜关系代词引导定语从句&#10;基础语法">who</span> <span class="vocab vocab-basic" data-tip="lived (v.) 生活｜live的过去式&#10;CET-4 基础词">lived</span> <span class="vocab vocab-basic" data-tip="in (prep.) 在｜位置介词&#10;基础词">in</span> <span class="vocab vocab-basic" data-tip="China (n.) 中国｜&#10;基础词">China</span> <span class="vocab vocab-basic" data-tip="during (prep.) 在…期间｜时间介词&#10;CET-4 基础词">during</span> <span class="vocab vocab-cet6" data-tip="Spring and Autumn Period (n.) 春秋时期｜中国历史朝代&#10;专有名词">the Spring and Autumn Period</span>, <span class="vocab vocab-basic" data-tip="is regarded as 被视为｜被动语态&#10;固定搭配">is regarded as</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-cet6" data-tip="ultimate (adj.) 终极的｜greatest, final&#10;CET-6 核心词">ultimate</span> <span class="vocab vocab-cet4" data-tip="master (n.) 大师｜expert, person with great skill&#10;CET-4 核心词">master</span> <span class="vocab vocab-basic" data-tip="of (prep.) …的｜所属介词&#10;基础词">of</span> <span class="vocab vocab-basic" data-tip="war (n.) 战争｜armed conflict&#10;CET-4 基础词">war</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>复合句（主句 + 非限制性定语从句）</li>
+        <li><span class="label">主句主语：</span>Sun Tzu</li>
+        <li><span class="label">主句谓语：</span>is regarded as（一般现在时被动语态）</li>
+        <li><span class="label">主句表语：</span>the ultimate master of war</li>
+        <li><span class="label">定语从句：</span>who lived in China during the Spring and Autumn Period（修饰 Sun Tzu，提供背景信息）</li>
+        <li><span class="label">标点符号：</span>定语从句前后有逗号，是非限制性定语从句，可以省略</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：非限制性定语从句</strong><br>
+        用逗号隔开，对先行词作补充说明（去掉后主句意思仍完整）。<br>
+        例句：<em>My brother, who lives in Beijing, is a teacher.</em><br>
+        对比限制性定语从句（无逗号）：<em>The man who lives in Beijing is my brother.</em>（去掉后不知道是哪个man）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">ultimate (adj.)：</span>终极的，最根本的。近义词：final, supreme</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">master (n.)：</span>大师，能手。也可作动词：掌握（master a skill）</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">Spring and Autumn Period：</span>春秋时期（公元前770-476年）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">regard (v.)：</span>视为，看待。搭配：regard A as B</li>
+        <li><span class="tag tag-proper">专有</span> <span class="label">Sun Tzu (n.)：</span>孙子（中国春秋时期军事家，著有《孙子兵法》）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句2 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="His (pron.) 他的｜物主代词&#10;基础词">His</span> <span class="vocab vocab-cet4" data-tip="great (adj.) 伟大的｜very good&#10;CET-4 基础词">great</span> <span class="vocab vocab-cet6" data-tip="military (adj.) 军事的｜related to the army&#10;CET-6 核心词">military</span> <span class="vocab vocab-basic" data-tip="work (n.) 作品｜book or composition&#10;CET-4 基础词">work</span>, <span class="vocab vocab-proper" data-tip="The Art of War (n.) 孙子兵法｜Sun Tzu's book&#10;专有名词">The Art of War</span>, <span class="vocab vocab-basic" data-tip="has been read 已被阅读｜现在完成时的被动语态&#10;基础语法">has been read</span> <span class="vocab vocab-basic" data-tip="for (prep.) 长达｜时间段介词&#10;基础词">for</span> <span class="vocab vocab-basic" data-tip="more than 超过｜over&#10;基础短语">more than</span> <span class="vocab vocab-basic" data-tip="2,000 years 2000年｜时间长度&#10;基础表达">2,000 years</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语 + 谓语，插入语补充说明）</li>
+        <li><span class="label">主语：</span>His great military work, <em>The Art of War</em>（同位语，解释说明 work 的名称）</li>
+        <li><span class="label">谓语：</span>has been read（现在完成时的被动语态）</li>
+        <li><span class="label">时间状语：</span>for more than 2,000 years（for + 时间段，与完成时连用）</li>
+        <li><span class="label">语态：</span>被动语态（书被人读）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：现在完成时的被动语态</strong><br>
+        结构：<em>have/has been + 过去分词</em><br>
+        例句：<em>The book has been read by millions of people.</em><br>
+        （这本书已被数百万人阅读。）<br>
+        与一般现在时被动（is read）的区别：完成时强调"从过去持续到现在"。
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">military (adj.)：</span>军事的，军队的。名词：military（军队）</li>
+        <li><span class="tag tag-proper">专有</span> <span class="label">The Art of War：</span>《孙子兵法》（Sun Tzu 的军事著作）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句3 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-proper" data-tip="Sun Tzu (n.) 孙子｜&#10;专有名词">Sun Tzu</span> <span class="vocab vocab-basic" data-tip="believed (v.) 认为｜believe的过去式&#10;CET-4 基础词">believed</span> <span class="vocab vocab-basic" data-tip="that (conj.) 那个｜宾语从句引导词&#10;基础语法">that</span> <span class="vocab vocab-basic" data-tip="competition (n.) 竞争｜rivalry&#10;CET-4 核心词">competition</span> <span class="vocab vocab-basic" data-tip="between (prep.) 在…之间｜两者之间的介词&#10;基础词">between</span> <span class="vocab vocab-cet6" data-tip="economies (n.) 经济体｜economic systems&#10;CET-6 核心词">economies</span> <span class="vocab vocab-basic" data-tip="and (conj.) 和｜并列连词&#10;基础词">and</span> <span class="vocab vocab-cet6" data-tip="logistics (n.) 后勤｜military supply management&#10;CET-6 学术词">logistics</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜be动词&#10;基础词">is</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="nature (n.) 本质｜basic character&#10;CET-4 核心词">nature</span> <span class="vocab vocab-basic" data-tip="of (prep.) …的｜&#10;基础词">of</span> <span class="vocab vocab-basic" data-tip="war (n.) 战争｜&#10;CET-4 基础词">war</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>复合句（主句 + 宾语从句）</li>
+        <li><span class="label">主句：</span>Sun Tzu believed（一般过去时）</li>
+        <li><span class="label">宾语从句：</span>that competition between economies and logistics is the nature of war（that 可省略）</li>
+        <li><span class="label">从句主语：</span>competition between economies and logistics</li>
+        <li><span class="label">从句谓语：</span>is（一般现在时，表达普遍真理，不受主句过去时影响）</li>
+      </ul>
+      <div class="error-note">
+        <strong>⚠️ 表达问题：competition between economies and logistics</strong><br>
+        这句话的逻辑不太好理解——"经济体之间的竞争"和"后勤"之间是什么关系？<br>
+        孙子原意应是"战争的本质是经济与后勤的较量"，但英文表达成了"economies 和 logistics 之间的 competition"，意思变成了"各经济体之间的竞争和后勤是战争的本质"，逻辑有歧义。<br>
+        更好的表达：<em>Sun Tzu believed that war is essentially a contest of economies and logistics.</em>
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">economy (n.)：</span>经济，经济体。形容词：economic（经济的）；economical（节约的，注意区别）</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">logistics (n.)：</span>后勤，物流。军事语境中指"军需补给"。源自希腊语"logistikos"（计算、推理）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">nature (n.)：</span>本质，性质。搭配：the nature of... …的本质</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">competition (n.)：</span>竞争。动词：compete；形容词：competitive</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句4 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="Only if 只有｜条件状语从句引导词&#10;固定搭配">Only if</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="nation (n.) 国家｜country&#10;CET-4 基础词">nation</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜be动词&#10;基础词">is</span> <span class="vocab vocab-cet6" data-tip="prosperous (adj.) 繁荣的｜successful and thriving&#10;CET-6 核心词">prosperous</span> <span class="vocab vocab-basic" data-tip="and (conj.) 并且｜&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="its (pron.) 它的｜物主代词&#10;基础词">its</span> <span class="vocab vocab-basic" data-tip="people (n.) 人民｜&#10;CET-4 基础词">people</span> <span class="vocab vocab-basic" data-tip="are (v.) 是｜be动词复数&#10;基础词">are</span> <span class="vocab vocab-basic" data-tip="strong (adj.) 强大的｜powerful&#10;CET-4 基础词">strong</span> <span class="vocab vocab-basic" data-tip="enough (adv.) 足够｜to a satisfactory degree&#10;CET-4 基础词">enough</span> <span class="vocab vocab-basic" data-tip="will (modal v.) 将会｜将来时助动词&#10;基础词">will</span> <span class="vocab vocab-basic" data-tip="they (pron.) 他们｜指代国家人民&#10;基础词">they</span> <span class="vocab vocab-basic" data-tip="win (v.) 赢得｜be victorious&#10;CET-4 基础词">win</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="war (n.) 战争｜&#10;CET-4 基础词">war</span>, <span class="vocab vocab-basic" data-tip="otherwise (adv.) 否则｜if not&#10;CET-4 基础词">otherwise</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="war (n.) 战争｜&#10;CET-4 基础词">war</span> <span class="vocab vocab-basic" data-tip="will (modal v.) 将会｜&#10;基础词">will</span> <span class="vocab vocab-basic" data-tip="bring (v.) 带来｜cause to happen&#10;CET-4 基础词">bring</span> <span class="vocab vocab-basic" data-tip="huge (adj.) 巨大的｜very large&#10;CET-4 基础词">huge</span> <span class="vocab vocab-basic" data-tip="damages (n.) 损害｜harm, loss&#10;CET-4 基础词">damages</span> <span class="vocab vocab-basic" data-tip="to (prep.) 对｜对象介词&#10;基础词">to</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="nation (n.) 国家｜&#10;CET-4 基础词">nation</span> <span class="vocab vocab-basic" data-tip="and (conj.) 和｜&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="people (n.) 人民｜&#10;CET-4 基础词">people</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>并列复合句（Only if 条件句 + otherwise 并列句）</li>
+        <li><span class="label">条件状语从句：</span>Only if the nation is prosperous and its people are strong enough（放在句首，主句需倒装）</li>
+        <li><span class="label">主句（倒装）：</span>will they win the war（正常语序：they will win → 倒装：will they win）</li>
+        <li><span class="label">并列句2：</span>otherwise the war will bring huge damages to the nation and people（otherwise 引导相反情况的结果）</li>
+        <li><span class="label">时态：</span>条件句用一般现在时（is, are），主句用将来时（will win, will bring）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：Only if 开头的倒装句</strong><br>
+        当 "only + 状语" 放在句首时，主句需要倒装（助动词/情态动词提前）。<br>
+        正常语序：<em>They will win the war only if the nation is prosperous.</em><br>
+        倒装语序：<em>Only if the nation is prosperous will they win the war.</em> ✅<br>
+        类似用法：<em>Only then did I understand.</em>（直到那时我才明白。）
+      </div>
+      <div class="error-note">
+        <strong>⚠️ 用词问题：huge damages</strong><br>
+        "damage" 作为"损害"讲时，通常是<strong>不可数名词</strong>，不用复数 damages。<br>
+        damages（复数形式）是法律术语，意思是"赔偿金"（如：pay damages for the accident）。<br>
+        正确表达：<em>bring huge damage</em>（不可数）或 <em>cause great harm</em>。<br>
+        例句：<em>The war brought huge damage to the country.</em> ✅
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">prosperous (adj.)：</span>繁荣的，兴旺的。名词：prosperity；动词：prosper</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">otherwise (adv./conj.)：</span>否则，另外。作连词时= or else。例句：<em>Hurry up, otherwise you'll be late.</em></li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">damage (n.)：</span>损害，损坏（不可数）。动词：damage。法律语境下 damages = 赔偿金（可数）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">enough (adv./adj.)：</span>足够。用法：adj. + enough（+ to do）：<em>strong enough to win</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句5 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="Gathering (v.) 收集｜collect, assemble&#10;CET-4 基础词">Gathering</span> <span class="vocab vocab-basic" data-tip="information (n.) 信息｜data, facts&#10;CET-4 核心词">information</span> <span class="vocab vocab-basic" data-tip="on (prep.) 关于｜about&#10;基础词">on</span> <span class="vocab vocab-basic" data-tip="your (pron.) 你的｜&#10;基础词">your</span> <span class="vocab vocab-basic" data-tip="enemies (n.) 敌人｜plural of enemy&#10;CET-4 基础词">enemies</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜&#10;基础词">is</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="key (n.) 关键｜most important factor&#10;CET-4 核心词">key</span> <span class="vocab vocab-basic" data-tip="to (prep.) 对于｜&#10;基础词">to</span> <span class="vocab vocab-basic" data-tip="winning (v.) 赢得｜gerund&#10;CET-4 基础词">winning</span> <span class="vocab vocab-basic" data-tip="wars (n.) 战争｜plural&#10;CET-4 基础词">wars</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主语是动名词短语）</li>
+        <li><span class="label">主语：</span>Gathering information on your enemies（动名词短语作主语，谓语动词用单数 is）</li>
+        <li><span class="label">谓语：</span>is</li>
+        <li><span class="label">表语：</span>the key to winning wars（the key to... 的 to 是介词，后面接动名词 winning）</li>
+        <li><span class="label">重点：</span>the key to 中的 to 是介词，不是不定式符号！</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：the key to + 名词/动名词</strong><br>
+        "the key to..." 中的 to 是<strong>介词</strong>，后面必须接名词或动名词（-ing），不能接动词原形。<br>
+        正确：<em>the key to winning</em> ✅ &nbsp; 错误：<em>the key to win</em> ❌<br>
+        类似用法：<em>the answer to..., the solution to..., the approach to...</em>（to 都是介词）
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">gather (v.)：</span>收集，聚集。名词：gathering（收集；集会）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">enemy (n.)：</span>敌人。复数：enemies。反义词：ally（盟友）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">key (n.)：</span>关键，答案。搭配：the key to... …的关键</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句6 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="The (art.) 定冠词｜&#10;基础词">The</span> <span class="vocab vocab-cet4" data-tip="victorious (adj.) 胜利的｜having won&#10;CET-4 核心词">victorious</span> <span class="vocab vocab-basic" data-tip="general (n.) 将军｜high-ranking officer&#10;CET-4 基础词">general</span> <span class="vocab vocab-basic" data-tip="must (modal v.) 必须｜have to&#10;基础词">must</span> <span class="vocab vocab-basic" data-tip="be familiar with 熟悉｜know well&#10;固定搭配">be familiar with</span> <span class="vocab vocab-basic" data-tip="his (pron.) 他的｜&#10;基础词">his</span> <span class="vocab vocab-basic" data-tip="enemies (n.) 敌人｜&#10;CET-4 基础词">enemies</span> <span class="vocab vocab-basic" data-tip="just as 正如｜in the same way as&#10;固定短语">just as</span> <span class="vocab vocab-basic" data-tip="with (prep.) 对｜&#10;基础词">with</span> <span class="vocab vocab-basic" data-tip="himself (pron.) 他自己｜reflexive pronoun&#10;基础词">himself</span> <span class="vocab vocab-basic" data-tip="and (conj.) 并且｜&#10;基础词">and</span> <span class="vocab vocab-basic" data-tip="direct (v.) 指挥｜command, guide&#10;CET-4 核心词">direct</span> <span class="vocab vocab-basic" data-tip="troops (n.) 军队｜soldiers&#10;CET-4 基础词">troops</span> <span class="vocab vocab-basic" data-tip="according to 根据｜as per&#10;固定短语">according to</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-cet6" data-tip="newest (adj.) 最新的｜most recent&#10;CET-6 基础词">newest</span> <span class="vocab vocab-basic" data-tip="situation (n.) 情况｜circumstances&#10;CET-4 核心词">situation</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>并列复合句（must be... and (must) direct...）</li>
+        <li><span class="label">主语：</span>The victorious general</li>
+        <li><span class="label">谓语1：</span>must be familiar with his enemies</li>
+        <li><span class="label">比较结构：</span>just as with himself（就像了解自己一样）</li>
+        <li><span class="label">谓语2：</span>(must) direct troops according to the newest situation（省略 must）</li>
+        <li><span class="label">注意：</span>just as with himself 这里省略了 he is familiar，完整应是 just as (he is familiar) with himself</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：just as 的比较/方式状语从句</strong><br>
+        just as 引导方式状语从句，表示"正如…，就像…一样"。<br>
+        例句：<em>Do as I say, just as you always do.</em>（照我说的做，就像你一直做的那样。）<br>
+        此处：<em>(be familiar with) his enemies just as with himself</em> = 了解敌人就像了解自己一样
+      </div>
+      <div class="error-note">
+        <strong>⚠️ 用词建议：newest → latest</strong><br>
+        "newest" 通常指"最崭新的/最新型的"（如 the newest iPhone），而描述"最新情况/最新消息"时，更常用 <em>latest</em>。<br>
+        建议改为：<em>according to the latest situation</em>（根据最新情况）<br>
+        对比：<em>the latest news</em>（最新消息）✅ / <em>the newest news</em> ❌
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">victorious (adj.)：</span>胜利的，获胜的。名词：victory（胜利）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">general (n.)：</span>将军。也可作形容词：一般的，普遍的</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">troop (n.)：</span>军队，部队（常用复数 troops）。也可指"一群"（a troop of monkeys）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">be familiar with：</span>熟悉，了解。反义：be unfamiliar with</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">latest (adj.)：</span>最新的，最近的（比 newest 更常用于抽象事物）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 句7 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="The (art.) 定冠词｜&#10;基础词">The</span> <span class="vocab vocab-cet6" data-tip="supreme (adj.) 至高无上的｜highest, ultimate&#10;CET-6 核心词">supreme</span> <span class="vocab vocab-basic" data-tip="art (n.) 艺术｜skill, ability&#10;CET-4 基础词">art</span> <span class="vocab vocab-basic" data-tip="of (prep.) …的｜&#10;基础词">of</span> <span class="vocab vocab-basic" data-tip="war (n.) 战争｜&#10;CET-4 基础词">war</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜&#10;基础词">is</span> <span class="vocab vocab-basic" data-tip="to (prep.) 去｜不定式符号&#10;基础词">to</span> <span class="vocab vocab-basic" data-tip="subdue (v.) 征服｜defeat, bring under control&#10;CET-6 书面词">subdue</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="enemy (n.) 敌人｜&#10;CET-4 基础词">enemy</span> <span class="vocab vocab-basic" data-tip="without (prep.) 不｜with no&#10;基础词">without</span> <span class="vocab vocab-basic" data-tip="force (n.) 武力｜physical power&#10;CET-4 基础词">force</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>简单句（主系表结构，表语是不定式短语）</li>
+        <li><span class="label">主语：</span>The supreme art of war</li>
+        <li><span class="label">系动词：</span>is</li>
+        <li><span class="label">表语：</span>to subdue the enemy without force（不定式短语作表语，解释说明主语的内容）</li>
+        <li><span class="label">状语：</span>without force（介词短语作方式状语）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：主语 + be + to do（不定式作表语）</</strong><br>
+        当主语是 idea, purpose, goal, art 等抽象名词时，表语常用不定式来解释其内容。<br>
+        例句：<em>My goal is to finish the project by Friday.</em><br>
+        <em>The purpose of education is to develop critical thinking.</em>
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">supreme (adj.)：</span>至高无上的，最高的。名词：supremacy（霸权，最高地位）</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">subdue (v.)：</span>征服，制服（书面语）。近义词：defeat, conquer。注意：这是一个较生僻的词，口语中更常用 defeat</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">force (n.)：</span>武力，力量。搭配：by force（用武力）；作动词：force sb to do sth（强迫某人做某事）</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 背景知识："不战而屈人之兵"</strong><br>
+        这句话对应的是《孙子兵法》中的核心思想："不战而屈人之兵，善之善者也。"<br>
+        英文翻译：<em>To subdue the enemy without fighting is the acme of skill.</em>（Lionel Giles 译版）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 句8 ==================== -->
+  <div class="sentence-block">
+    <div class="sentence-en">
+      <span class="vocab vocab-basic" data-tip="His (pron.) 他的｜&#10;基础词">His</span> <span class="vocab vocab-basic" data-tip="spirit (n.) 精神｜mind, soul&#10;CET-4 核心词">spirit</span> <span class="vocab vocab-basic" data-tip="reminds (v.) 提醒｜cause to remember&#10;CET-4 核心词">reminds</span> <span class="vocab vocab-basic" data-tip="us (pron.) 我们｜&#10;基础词">us</span> <span class="vocab vocab-basic" data-tip="that (conj.) 那个｜宾语从句引导词&#10;基础语法">that</span> <span class="vocab vocab-basic" data-tip="peace (n.) 和平｜absence of war&#10;CET-4 核心词">peace</span> <span class="vocab vocab-basic" data-tip="is (v.) 是｜&#10;基础词">is</span> <span class="vocab vocab-basic" data-tip="the (art.) 定冠词｜&#10;基础词">the</span> <span class="vocab vocab-basic" data-tip="common (adj.) 共同的｜shared by all&#10;CET-4 基础词">common</span> <span class="vocab vocab-basic" data-tip="objective (n.) 目标｜goal, aim&#10;CET-6 核心词">objective</span> <span class="vocab vocab-basic" data-tip="we (pron.) 我们｜&#10;基础词">we</span> <span class="vocab vocab-basic" data-tip="should (modal v.) 应该｜&#10;基础词">should</span> <span class="vocab vocab-basic" data-tip="pursue (v.) 追求｜try to achieve&#10;CET-6 核心词">pursue</span>.
+    </div>
+    <div class="analysis">
+      <h3>🔍 语法拆解</h3>
+      <ul>
+        <li><span class="label">句型：</span>复合句（主句 + 宾语从句，从句中嵌套另一个宾语从句）</li>
+        <li><span class="label">主句：</span>His spirit reminds us that...（remind sb that... 提醒某人…）</li>
+        <li><span class="label">宾语从句1：</span>that peace is the common objective（that 可省略）</li>
+        <li><span class="label">定语从句（省略 that）：</span>(that) we should pursue（修饰 objective，解释说明是"我们应该追求的目标"）</li>
+        <li><span class="label">嵌套结构：</span>reminds us [that peace is the common objective (that) we should pursue]</li>
+      </ul>
+      <div class="grammar-note">
+        <strong>💡 语法要点：remind 的三种用法</strong><br>
+        1. <em>remind sb of sth</em>：使某人想起某事 → <em>This song reminds me of my childhood.</em><br>
+        2. <em>remind sb to do sth</em>：提醒某人做某事 → <em>Remind me to call Mom.</em><br>
+        3. <em>remind sb that...</em>：提醒某人（that 从句）→ <em>He reminded me that the meeting was at 3pm.</em>
+      </div>
+      <h3 style="margin-top:16px;">📚 生词详解</h3>
+      <ul>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">remind (v.)：</span>提醒，使想起。名词：reminder（提示物）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">peace (n.)：</span>和平。反义词：war；形容词：peaceful（和平的）</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">objective (n.)：</span>目标，目的（正式用语）。近义词：goal, aim, target。注意：objective 也可作形容词，意为"客观的"（反义词：subjective 主观的）</li>
+        <li><span class="tag tag-cet6">CET-6</span> <span class="label">pursue (v.)：</span>追求，从事。名词：pursuit（追求；职业）</li>
+        <li><span class="tag tag-cet4">CET-4</span> <span class="label">common (adj.)：</span>共同的；常见的。搭配：common goal（共同目标）；common sense（常识）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== 全文语法总结 ==================== -->
+  <div class="sentence-block">
+    <h2 style="color:#2e86c1;font-size:18px;margin-bottom:16px;">📊 全文语法总结</h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>语法项目</th>
+          <th>本文字例</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>非限制性定语从句</td><td>Sun Tzu, who lived in China...</td><td>逗号隔开，补充说明，可省略</td></tr>
+        <tr><td>被动语态（现在时）</td><td>is regarded as</td><td>表达客观事实/普遍认知</td></tr>
+        <tr><td>现在完成时的被动语态</td><td>has been read</td><td>have/has been + 过去分词</td></tr>
+        <tr><td>宾语从句</td><td>Sun Tzu believed that...</td><td>that 可省略</td></tr>
+        <tr><td>Only if 倒装句</td><td>Only if... will they win...</td><td>only + 状语在句首，主句倒装</td></tr>
+        <tr><td>otherwise 并列句</td><td>..., otherwise the war will bring...</td><td>引导相反情况的并列句</td></tr>
+        <tr><td>动名词作主语</td><td>Gathering information... is the key</td><td>谓语动词用单数</td></tr>
+        <tr><td>the key to + 动名词</td><td>the key to winning wars</td><td>to 是介词，接 -ing 形式</td></tr>
+        <tr><td>just as 方式状语从句</td><td>just as with himself</td><td>表示"就像…一样"</td></tr>
+        <tr><td>不定式作表语</td><td>The supreme art... is to subdue...</td><td>解释主语的内容</td></tr>
+        <tr><td>remind 从句结构</td><td>reminds us that...</td><td>remind sb that... 提醒某人...</td></tr>
+        <tr><td>嵌套宾语从句</td><td>...that peace is the objective (that) we pursue</td><td>从句中嵌套定语从句</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 生词分级统计 ==================== -->
+  <div class="sentence-block">
+    <h2 style="color:#2e86c1;font-size:18px;margin-bottom:16px;">📚 生词分级统计</h2>
+    <table class="summary-table">
+      <thead>
+        <tr><th>级别</th><th>词汇</th><th>数量</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="tag tag-cet4">CET-4</span></td><td>master, military, competition, nature, otherwise, damage, enough, gather, enemy, key, victorious, general, troop, force, remind, peace, common</td><td>17</td></tr>
+        <tr><td><span class="tag tag-cet6">CET-6</span></td><td>ultimate, prosperous, economies, logistics, supreme, subdue, latest, objective, pursue</td><td>9</td></tr>
+        <tr><td><span class="tag tag-ielts">IELTS</span></td><td>logistics, subdue, pursue, objective</td><td>已包含在CET-6中</td></tr>
+        <tr><td><span class="tag tag-proper">专有名词</span></td><td>Sun Tzu, The Art of War, Spring and Autumn Period</td><td>3</td></tr>
+        <tr><td><span class="tag tag-basic">基础词</span></td><td>lived, during, work, believed, nation, people, war, enough, winning, situation</td><td>10</td></tr>
+      </tbody>
+      <tfoot>
+        <tr style="font-weight:600;"><td>合计</td><td>-</td><td>39</td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- ==================== 文章主要问题 ==================== -->
+  <div class="sentence-block">
+    <h2 style="color:#e74c3c;font-size:18px;margin-bottom:16px;">⚠️ 文章主要问题汇总</h2>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题1：标题表达不自然 — "Ultimate Master of War"</strong><br>
+      "master of war" 这个表达不太自然，通常会说 "master of warfare"（军事战略大师）或 "greatest military strategist"（最伟大的军事家）。<br>
+      建议修改标题为：<em>Sun Tzu: The Greatest Military Strategist</em> 或 <em>Sun Tzu and The Art of War</em>。
+    </div>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题2：逻辑不清 — "competition between economies and logistics"（句3）</strong><br>
+      这句话的意思模糊——"经济体之间的竞争"和"后勤"之间是什么关系？孙子原意应是"战争的本质是经济与后勤的较量"，但英文表达有歧义。<br>
+      建议改为：<em>Sun Tzu believed that war is essentially a contest of economies and logistics.</em>
+    </div>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题3：不可数名词误用复数 — "huge damages"（句4）</strong><br>
+      "damage" 作"损害"讲时是不可数名词，不能用复数 damages（法律术语"赔偿金"除外）。<br>
+      正确：<em>bring huge damage</em> ✅ &nbsp; 错误：<em>bring huge damages</em> ❌<br>
+      建议改为：<em>cause great harm</em> 或 <em>bring huge damage</em>。
+    </div>
+    <div class="error-note" style="margin-bottom:12px;">
+      <strong>问题4：用词不当 — "newest situation"（句6）</strong><br>
+      "newest" 通常指"最崭新的/最新型的"，描述"最新情况"时更常用 <em>latest</em>。<br>
+      建议改为：<em>according to the latest situation</em> ✅
+    </div>
+    <div class="error-note">
+      <strong>问题5：句子过长，逻辑关系不清晰（句4）</strong><br>
+      句4把"只有国家繁荣人民强大才能打赢"和"否则战争会带来巨大损害"放在一个句子里，用了逗号连接两个独立分句，这是<strong>逗号拼接错误（comma splice）</strong>。<br>
+      建议改为两句：<em>Only if the nation is prosperous and its people are strong enough will they win the war. Otherwise, the war will bring huge damage to the nation and its people.</em>
+    </div>
+  </div>
+
+  <div style="text-align:center;color:#aaa;font-size:13px;margin-top:32px;">
+    Generated by English Reading Skill · 2026-06-09
+  </div>
+
+</div>
+
+</body>
+</html>
