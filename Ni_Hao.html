@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ni Hao — 精读笔记</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", serif;
+    background: #f0f4f8;
+    color: #2c3e50;
+    line-height: 1.8;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a5276 0%, #2e86c1 50%, #5dade2 100%);
+    color: #fff;
+    padding: 40px 32px 32px;
+    text-align: center;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+  .header .subtitle { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+
+  .legend {
+    display: flex; gap: 16px; justify-content: center;
+    flex-wrap: wrap; margin-top: 16px; font-size: 13px;
+  }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .legend .dot {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 50%; flex-shrink: 0;
+  }
+
+  .container {
+    max-width: 1280px; margin: 0 auto; padding: 24px 16px 60px;
+  }
+
+  .sentence-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e8edf2;
+    transition: box-shadow 0.2s;
+  }
+  .sentence-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.10); }
+
+  .col-left, .col-right {
+    padding: 20px 24px;
+  }
+  .col-left {
+    background: #fafbff;
+    border-right: 1px solid #e8edf2;
+  }
+  .col-right {
+    background: #fff;
+  }
+
+  .sent-num {
+    display: inline-block;
+    background: #2e86c1;
+    color: #fff;
+    font-size: 12px; font-weight: 700;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center; line-height: 28px;
+    margin-right: 8px; vertical-align: middle;
+  }
+
+  /* Word Level Tags */
+  .w  { cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .w:hover { background: #fff9e6; border-radius: 2px; }
+
+  .w-cet4   { border-bottom-color: #3498db; }
+  .w-cet6   { border-bottom-color: #2ecc71; }
+  .w-ielts  { border-bottom-color: #e67e22; }
+  .w-proper { border-bottom-color: #9b59b6; color: #6c3483; font-weight: 600; }
+  .w-basic  { border-bottom-color: #bdc3c7; }
+
+  .w::after {
+    content: attr(data-tip);
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #2c3e50; color: #fff; font-size: 12px;
+    padding: 4px 10px; border-radius: 6px; white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.15s;
+    z-index: 200;
+  }
+  .w:hover::after { opacity: 1; }
+
+  .section-title {
+    font-size: 13px; font-weight: 700; color: #2e86c1;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 8px; padding-bottom: 4px;
+    border-bottom: 2px solid #ebf5fb;
+  }
+  .grammar-block {
+    background: #fdfefe; border-left: 3px solid #2e86c1;
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+    margin-bottom: 14px; font-size: 14px; line-height: 1.9;
+  }
+  .grammar-block .label {
+    display: inline-block; background: #2e86c1; color: #fff;
+    font-size: 11px; padding: 1px 8px; border-radius: 4px;
+    margin-right: 6px; vertical-align: middle;
+  }
+  .vocab-block { margin-bottom: 14px; }
+  .vocab-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 7px 0; border-bottom: 1px dashed #f0f0f0;
+    font-size: 13.5px;
+  }
+  .vocab-level {
+    flex-shrink: 0; font-size: 11px; font-weight: 700;
+    padding: 1px 7px; border-radius: 4px; color: #fff;
+  }
+  .lv-cet4   { background: #3498db; }
+  .lv-cet6   { background: #27ae60; }
+  .lv-ielts  { background: #e67e22; }
+  .lv-proper  { background: #9b59b6; }
+  .lv-basic   { background: #95a5a6; }
+  .vocab-word { font-weight: 700; color: #2c3e50; min-width: 110px; }
+  .vocab-pos  { color: #888; font-size: 12px; }
+  .vocab-mean { color: #555; }
+  .note-block {
+    background: #fffde7; border-left: 3px solid #f1c40f;
+    padding: 9px 13px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: #7d6608; line-height: 1.8;
+  }
+  .note-block .icon { margin-right: 4px; }
+
+  .translation {
+    margin-top: 10px; padding: 8px 12px;
+    background: #eafaf1; border-radius: 6px;
+    font-size: 13.5px; color: #1e8449;
+    border-left: 3px solid #27ae60;
+  }
+
+  @media (max-width: 860px) {
+    .sentence-card { grid-template-columns: 1fr; }
+    .col-left { border-right: none; border-bottom: 1px solid #e8edf2; }
+  }
+
+  .warn-box {
+    background: #fdedec; border-left: 4px solid #e74c3c;
+    padding: 12px 16px; border-radius: 0 8px 8px 0;
+    margin-bottom: 20px; font-size: 14px; color: #922b21;
+  }
+  .warn-box strong { color: #e74c3c; }
+
+  .info-box {
+    background: #ebf5fb; border-left: 4px solid #2e86c1;
+    padding: 12px 16px; border-radius: 0 8px 8px 0;
+    margin-bottom: 20px; font-size: 14px; color: #1a5276;
+  }
+
+  /* Summary table */
+  .summary-table {
+    width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px;
+  }
+  .summary-table th {
+    background: #2e86c1; color: #fff; padding: 10px 14px;
+    text-align: left;
+  }
+  .summary-table th:first-child { border-radius: 6px 0 0 0; }
+  .summary-table th:last-child { border-radius: 0 6px 0 0; }
+  .summary-table td { padding: 9px 14px; border-bottom: 1px solid #eee; }
+  .summary-table tr:nth-child(even) td { background: #fafbff; }
+
+  .stat-box {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .stat-item {
+    flex: 1; min-width: 140px; background: #fff;
+    border-radius: 8px; padding: 14px; text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .stat-num { font-size: 28px; font-weight: 700; }
+  .stat-label { font-size: 13px; color: #555; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<div class="header">
+  <h1>📖 Ni Hao — 精读笔记</h1>
+  <div class="subtitle">逐句语法拆解 · 生词分级标注 · 双栏阅读笔记</div>
+  <div class="legend">
+    <span><span class="dot" style="background:#3498db"></span> CET-4 四级</span>
+    <span><span class="dot" style="background:#27ae60"></span> CET-6 六级</span>
+    <span><span class="dot" style="background:#e67e22"></span> IELTS 高级</span>
+    <span><span class="dot" style="background:#9b59b6"></span> 专有名词</span>
+    <span><span class="dot" style="background:#bdc3c7"></span> 基础词</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== 说明 ==================== -->
+<div class="info-box">
+  <strong>📝 文章说明：</strong>本文介绍中国人的问候语"你好"及其文化背景，难度为<strong>CEFR A2-B1（初中级）</strong>，适合英语入门学习者。文章存在若干语法不完整问题，已在对应句子中标注。
+</div>
+
+<div class="warn-box">
+  <strong>⚠️ 语法提示：</strong>原文第5句为<strong>片段句（sentence fragment）</strong>，缺少谓语动词，不是完整句子。已在解析中详细说明。
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 1 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">1</span>
+      <span class="w w-proper" data-tip="phrase 你好（拼音）">Ni hao</span>
+      <span class="w w-cet4" data-tip="v. 是（be动词第三人称单数现在时）">is</span>
+      <span class="w w-cet6" data-tip="det. 最（最高级）">the most</span>
+      <span class="w w-ielts" data-tip="adv. 通常，最常见地">commonly</span>
+      <span class="w w-cet4" data-tip="v. 使用（过去分词作形容词）">used</span>
+      <span class="w w-cet4" data-tip="n. 问候语">greeting</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>"你好"是最常用的问候语。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主系表（SVC）：Ni hao (S) + is (V) + the most...greeting (C)<br>
+      <span class="label">时态</span> <strong>一般现在时</strong> — 描述客观事实<br>
+      <span class="label">最高级</span> the most + 副词 commonly → most commonly（最常用地）<br>
+      <span class="label">修饰</span> used（过去分词作形容词）= 被使用的，常用的
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">greeting</span> <span class="vocab-pos">/ˈɡriːtɪŋ/ n.</span>
+          <div class="vocab-mean">问候语，招呼。动词：greet（问候）。常见问候语：greeting card（贺卡）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-ielts">IELTS</span>
+        <div><span class="vocab-word">commonly</span> <span class="vocab-pos">/ˈkɒmənli/ adv.</span>
+          <div class="vocab-mean">通常，最常见地（= usually, frequently）。形容词：common（常见的）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 最高级句型</div>
+    <div class="note-block">
+      <strong>the most + 形容词/副词</strong> = 最……<br><br>
+      This is <strong>the most commonly used</strong> greeting in China.<br>
+      （这是全中国最常用问候语。）<br><br>
+      多音节副词/形容词用 <strong>most</strong> 构成最高级。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 2 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">2</span>
+      <span class="w w-proper" data-tip="n. 孔丘（孔子名）">Kong Qiu</span>,
+      <span class="w w-cet4" data-tip="conj. 或者说">or</span>
+      <span class="w w-proper" data-tip="n. 孔子（拉丁文名）">Confucius</span>,
+      <span class="w w-cet4" data-tip="v. 告诉（过去式）">told</span>
+      <span class="w w-cet4" data-tip="pron. 人们（复数）">people</span>
+      <span class="w w-basic" data-tip="num. 2500">2,500</span>
+      <span class="w w-cet4" data-tip="n. 年（复数）">years</span>
+      <span class="w w-cet4" data-tip="prep. 以前">ago</span>
+      <span class="w w-cet4" data-tip="conj. 那（引导宾语从句）">that</span>
+      <span class="w w-cet4" data-tip="pron. 每个人">everyone</span>
+      <span class="w w-cet4" data-tip="modal verb 必须">must</span>
+      <span class="w w-cet6" data-tip="v. 遵循，跟随">follow</span>
+      <span class="w w-ielts" data-tip="n. 礼仪，礼节">etiquette</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>2500年前，孔丘（即孔子）告诉人们，每个人都必须遵循礼仪。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓宾 + 宾语从句：S + told + O + that 从句<br>
+      <span class="label">时态</span> <strong>一般过去时</strong>：told（tell的过去式）<br>
+      <span class="label">同位语</span> Kong Qiu, <strong>or Confucius</strong>（A, or B = A即B，同位语解释）<br>
+      <span class="label">宾语从句</span> that everyone must follow etiquette（that 可省略）<br>
+      <span class="label">时间状语</span> 2,500 years ago（……年前，ago放在时间段后面）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">follow</span> <span class="vocab-pos">/ˈfɒləʊ/ v.</span>
+          <div class="vocab-mean">①跟随；②遵循，遵守（规则、礼仪）。follow the rules = 遵守规则</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-ielts">IELTS</span>
+        <div><span class="vocab-word">etiquette</span> <span class="vocab-pos">/ˈetɪket/ n.</span>
+          <div class="vocab-mean">礼仪，礼节，行为规范（正式用语）。social etiquette = 社交礼仪</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">ago</span> <span class="vocab-pos">/əˈɡəʊ/ adv.</span>
+          <div class="vocab-mean">……以前（<u>放在时间段后面</u>）。2,500 years ago ✓ / ago 2,500 years ✗</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 宾语从句省略 that</div>
+    <div class="note-block">
+      He told people <strong>(that)</strong> everyone must follow etiquette.<br>
+      that 在口语和非正式文体中常省略。<br><br>
+      <u>注意</u>：tell 接双宾语 → tell sb. sth. = tell sb. (that) + 从句
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 3 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">3</span>
+      <span class="w w-cet4" data-tip="conj. 所以">So</span>,
+      <span class="w w-proper" data-tip="n. 中国">China</span>
+      <span class="w w-cet4" data-tip="v. 被称呼为（被动）">is called</span>
+      <span class="w w-cet4" data-tip="det. 定冠词">the</span>
+      <span class="w w-cet6" data-tip="n. 家，家园">‘home</span>
+      <span class="w w-cet4" data-tip="prep. …的">of</span>
+      <span class="w w-ielts" data-tip="n. 礼仪（复数）">etiquette’</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>因此，中国被称为"礼仪之邦"。</div>
+    <div class="note-block" style="margin-top:8px">
+      <span class="icon">💡</span> <strong>"home of etiquette"</strong> 是意译，中文"礼仪之邦"更地道。
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓（被动）：China (S) + is called (V)<br>
+      <span class="label">时态</span> <strong>一般现在时被动</strong>：is called（描述客观事实）<br>
+      <span class="label">逻辑</span> So = 因此（承接上句，表因果关系）<br>
+      <span class="label">比喻</span> home of ... = ……的故乡/发源地（比喻用法）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">be called</span> <span class="vocab-pos">phrase</span>
+          <div class="vocab-mean">被称为……，被叫做……（被动语态）。比较：be named（被命名为）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">home of ...</span> <span class="vocab-pos">phrase</span>
+          <div class="vocab-mean">……的故乡/发源地。home of etiquette = 礼仪之乡</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 被动语态（复习）</div>
+    <div class="note-block">
+      <strong>结构</strong>：be + 过去分词（done）<br><br>
+      China <strong>is called</strong> the home of etiquette.<br>
+      （中国被称为礼仪之邦。）<br><br>
+      <u>主动语态</u>：People call China the home of etiquette.
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 4 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">4</span>
+      <span class="w w-proper" data-tip="phrase 你好">Ni hao</span>
+      <span class="w w-cet4" data-tip="v. 是（be动词）">is</span>
+      <span class="w w-cet6" data-tip="adj. 最典型的">the most typical</span>
+      <span class="w w-cet4" data-tip="n. 问候语">greeting</span>
+      <span class="w w-cet4" data-tip="prep. 在…里">in</span>
+      <span class="w w-proper" data-tip="n. 中国">China</span>
+      <span class="w w-cet6" data-tip="v. 祝愿（现在分词）">wishing</span>
+      <span class="w w-cet4" data-tip="pron. 你">you</span>
+      <span class="w w-cet4" data-tip="adv. 好，良好">well</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>"你好"是中国最典型的问候语，它祝愿你一切安好。</div>
+    <div class="note-block" style="margin-top:8px">
+      <span class="icon">⚠️</span> <strong>语法分析：</strong>wishing you well 是现在分词短语作后置定语，修饰 greeting。句意通顺，但 wishing 的逻辑主语是 greeting（问候语本身"祝愿"），在语法上稍显别扭，更自然的表达是：<em>Ni hao is the most typical greeting in China, which wishes you well.</em>
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主系表 + 分词定语：S + is + C, wishing...（伴随/定语）<br>
+      <span class="label">时态</span> <strong>一般现在时</strong><br>
+      <span class="label">分词短语</span> wishing you well（现在分词短语，修饰 greeting）<br>
+      <span class="label">改进建议</span> 用定语从句更佳：..., <strong>which wishes</strong> you well.
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">typical</span> <span class="vocab-pos">/ˈtɪpɪkl/ adj.</span>
+          <div class="vocab-mean">典型的，有代表性的。the most typical = 最典型的。typically adv. 通常</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">wish</span> <span class="vocab-pos">/wɪʃ/ v.</span>
+          <div class="vocab-mean">祝愿，希望。wish sb. well = 祝愿某人安好。比较：hope（希望，后接从句）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">well</span> <span class="vocab-pos">/wel/ adv.</span>
+          <div class="vocab-mean">好，良好（修饰动词）。wish you well = 祝你安好。比较：good（形容词）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 现在分词作定语</div>
+    <div class="note-block">
+      a greeting <strong>wishing</strong> you well<br>
+      = a greeting <strong>that wishes</strong> you well（相当于省略了 that + 谓语）<br><br>
+      <u>注意</u>：此处 greeting 被赋予了"主动祝愿"的动作，修辞上可以接受，但更严谨的写法是使用定语从句。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 5（片段句） -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">5</span>
+      <span class="w w-cet4" data-tip="det. 一个">A</span>
+      <span class="w w-cet4" data-tip="n. 问候语">greeting</span>
+      <span class="w w-cet4" data-tip="conj. 那个（引导定语从句）">that</span>
+      <span class="w w-cet6" data-tip="v. 祝愿（第三人称单数）">wishes</span>
+      <span class="w w-cet4" data-tip="pron. 你">you</span>
+      <span class="w w-cet4" data-tip="adj. 好的（健康）">good health</span>,
+      <span class="w w-cet4" data-tip="det. 一个">a</span>
+      <span class="w w-cet4" data-tip="adj. 好的">good</span>
+      <span class="w w-cet4" data-tip="n. 工作">job</span>
+      <span class="w w-cet4" data-tip="conj. 和">and</span>
+      <span class="w w-cet4" data-tip="det. 一个">a</span>
+      <span class="w w-cet4" data-tip="adj. 快乐的">happy</span>
+      <span class="w w-cet4" data-tip="n. 家庭">family</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>（这是一个）祝愿你身体健康、工作顺利、家庭幸福的问候语。</div>
+    <div class="note-block" style="margin-top:8px">
+      <span class="icon">❌</span> <strong>严重语法问题：</strong>此句为<strong>片段句（sentence fragment）</strong>，只有名词短语 + 定语从句，<u>缺少主句谓语动词</u>，不是完整句子。
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解（含错误分析）</div>
+    <div class="grammar-block" style="border-left-color:#e74c3c;">
+      <span class="label" style="background:#e74c3c;">⚠️ 错误</span> <strong>片段句（Sentence Fragment）</strong><br>
+      <span class="label">结构</span> A greeting [that wishes you...] . ← 只有名词短语，无主句！<br>
+      <span class="label">分析</span> that 引导定语从句修饰 greeting，但整个句子没有主句谓语动词<br>
+      <span class="label">修正方案1</span> 加上谓语：<em>This is a greeting that wishes you good health...</em><br>
+      <span class="label">修正方案2</span> 合并到前句：<em>Ni hao is a greeting that wishes you good health...</em><br>
+      <span class="label">修正方案3</span> 改为列举：<em>It wishes you good health, a good job and a happy family.</em>
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">health</span> <span class="vocab-pos">/helθ/ n.</span>
+          <div class="vocab-mean">健康。good health = 身体健康。healthy adj. 健康的</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">job</span> <span class="vocab-pos">/dʒɒb/ n.</span>
+          <div class="vocab-mean">工作，职位。a good job = 好工作，工作顺利。比较：work（不可数）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">family</span> <span class="vocab-pos">/ˈfæməli/ n.</span>
+          <div class="vocab-mean">家庭，家人。happy family = 幸福的家庭。family 作集合名词，谓语用复数</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 片段句（Fragment）识别</div>
+    <div class="note-block" style="border-left-color:#e74c3c;background:#fdf2f2;">
+      <strong>什么是片段句？</strong><br>
+      只有名词短语/从句，缺少主句谓语动词，不能独立成句。<br><br>
+      <strong>❌ 片段句：</strong>A greeting that wishes you well.<br>
+      <strong>✅ 完整句：</strong>It is a greeting that wishes you well.<br><br>
+      <u>常见错误来源</u>：把列举/补充说明误认为完整句子。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 6 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">6</span>
+      <span class="w w-cet6" data-tip="phrase 让我们（缩写）">Let's</span>
+      <span class="w w-cet4" data-tip="v. 说">say</span>
+      <span class="w w-cet4" data-tip="pron. 那个">that</span>
+      <span class="w w-cet4" data-tip="adv. 一起">together</span>:
+      <span class="w w-proper" data-tip="phrase 你好">‘Ni hao!’</span>
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>让我们一起说："你好！"</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> <strong>祈使句（Let's 句型）</strong>：Let's + 动词原形...<br>
+      <span class="label">时态</span> 祈使语气（表示建议、邀请）<br>
+      <span class="label">缩写</span> Let's = <strong>Let us</strong>（让我们）<br>
+      <span class="label">状语</span> together（副词，修饰 say）<br>
+      <span class="label">直接引语</span> : 'Ni hao!'（冒号引出直接引语）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">Let's = Let us</span> <span class="vocab-pos">phrase</span>
+          <div class="vocab-mean">让我们……（用于提出建议或邀请）。Let's go! = 我们走吧！</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">together</span> <span class="vocab-pos">/təˈɡeðə/ adv.</span>
+          <div class="vocab-mean">一起，共同。say together = 一起说。比较：alone（单独地）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 Let's 祈使句</div>
+    <div class="note-block">
+      <strong>Let's + 动词原形</strong> = 让我们……（表建议）<br><br>
+      <strong>Let's say</strong> that together. = 让我们一起说。<br>
+      <strong>Let's go</strong> home. = 我们回家吧。<br><br>
+      <u>否定</u>：Let's <strong>not</strong> go. = 我们别去了。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 7 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">7</span>
+      <span class="w w-proper" data-tip="phrase 你好（感叹句）">Ni hao!</span>
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>你好！</div>
+    <div class="note-block" style="margin-top:8px">
+      <span class="icon">💬</span> 独立感叹句，用于结尾互动，增强读者参与感。
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> <strong>感叹句（Exclamation）</strong><br>
+      <span class="label">功能</span> 独立成句，用于结尾互动，呼应上文"Let's say..."<br>
+      <span class="label">标点</span> 感叹号（!）表强烈语气/热情<br>
+      <span class="label">修辞</span> 直接与读者互动（direct address），增强参与感
+    </div>
+    <div class="section-title">💡 感叹号的使用</div>
+    <div class="note-block">
+      感叹号（!）用于：<br>
+      ① 感叹句：<strong>What</strong> a beautiful day! / <strong>How</strong> beautiful!<br>
+      ② 祈使句（强烈语气）：<strong>Stop</strong>! / <strong>Ni hao</strong>!<br>
+      ③ 欢呼/口号：<strong>Welcome</strong>! / <strong>Cheers</strong>!<br><br>
+      <u>注意</u>：正式写作中感叹号不宜过多使用。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- 总结区域 -->
+<!-- #################################################################### -->
+<div style="background:#fff;border-radius:12px;padding:28px 32px;margin-top:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+  <h2 style="color:#2e86c1;font-size:20px;margin-bottom:16px;">📝 全文语法总结</h2>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>时态/句型</th>
+        <th>出现句子</th>
+        <th>用法说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:700;color:#2e86c1;">一般现在时（主动）</td>
+        <td>句1, 4, 6</td>
+        <td>描述客观事实、常态；Let's 祈使句表建议</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:#2e86c1;">一般现在时（被动）</td>
+        <td>句3</td>
+        <td>is called（被称为），描述客观事实</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:#2e86c1;">一般过去时（主动）</td>
+        <td>句2</td>
+        <td>told（过去式），描述历史上发生的动作</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:#e74c3c;">片段句（错误）</td>
+        <td>句5 ⚠️</td>
+        <td>缺少主句谓语动词，不是完整句子</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:#9b59b6;">祈使句（Let's）</td>
+        <td>句6</td>
+        <td>Let's + 动词原形，表建议/邀请</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:#f39c12;">感叹句</td>
+        <td>句7</td>
+        <td>独立感叹句，增强互动感</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#2e86c1;font-size:16px;margin:24px 0 12px;">📊 生词分级统计</h3>
+  <div class="stat-box">
+    <div class="stat-item" style="border-top:3px solid #3498db;">
+      <div class="stat-num" style="color:#3498db;">5</div>
+      <div class="stat-label">CET-4 四级词</div>
+    </div>
+    <div class="stat-item" style="border-top:3px solid #27ae60;">
+      <div class="stat-num" style="color:#27ae60;">5</div>
+      <div class="stat-label">CET-6 六级词</div>
+    </div>
+    <div class="stat-item" style="border-top:3px solid #e67e22;">
+      <div class="stat-num" style="color:#e67e22;">2</div>
+      <div class="stat-label">IELTS 高级词</div>
+    </div>
+    <div class="stat-item" style="border-top:3px solid #9b59b6;">
+      <div class="stat-num" style="color:#9b59b6;">3</div>
+      <div class="stat-label">专有名词/文化词</div>
+    </div>
+  </div>
+
+  <h3 style="color:#2e86c1;font-size:16px;margin:24px 0 12px;">⚠️ 文章主要问题汇总</h3>
+  <div style="background:#fdf2f2;border-radius:8px;padding:16px 20px;font-size:14px;line-height:2;">
+    <div>❌ <strong>句5片段句</strong>：缺少主句谓语动词，不是完整句子。应修正为完整句。</div>
+    <div>⚠️ <strong>句4分词用法</strong>：wishing you well 作定语稍显别扭，建议改为定语从句 which wishes...</div>
+    <div>📝 <strong>文化表达</strong>："home of etiquette" 是直译，中文"礼仪之邦"更地道，英文可写 "a land of etiquette"。</div>
+  </div>
+</div>
+
+</div><!-- end .container -->
+
+</body>
+</html>
