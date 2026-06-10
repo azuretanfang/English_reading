@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sun and Chinese Solar Terms — 精读笔记</title>
+<style>
+  /* ========== Reset & Base ========== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", serif;
+    background: #f0f4f8;
+    color: #2c3e50;
+    line-height: 1.8;
+  }
+
+  /* ========== Header ========== */
+  .header {
+    background: linear-gradient(135deg, #1a5276 0%, #2e86c1 50%, #5dade2 100%);
+    color: #fff;
+    padding: 40px 32px 32px;
+    text-align: center;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+  .header .subtitle { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+
+  /* ========== Legend (词级图例) ========== */
+  .legend {
+    display: flex; gap: 16px; justify-content: center;
+    flex-wrap: wrap; margin-top: 16px; font-size: 13px;
+  }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .legend .dot {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ========== Two-Column Layout ========== */
+  .container {
+    max-width: 1280px; margin: 0 auto; padding: 24px 16px 60px;
+  }
+
+  /* Sentence Card */
+  .sentence-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e8edf2;
+    transition: box-shadow 0.2s;
+  }
+  .sentence-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.10); }
+
+  .col-left, .col-right {
+    padding: 20px 24px;
+  }
+  .col-left {
+    background: #fafbff;
+    border-right: 1px solid #e8edf2;
+  }
+  .col-right {
+    background: #fff;
+  }
+
+  /* Sentence number badge */
+  .sent-num {
+    display: inline-block;
+    background: #2e86c1;
+    color: #fff;
+    font-size: 12px; font-weight: 700;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center; line-height: 28px;
+    margin-right: 8px; vertical-align: middle;
+  }
+
+  /* ========== Word Level Tags ========== */
+  .w  { cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .w:hover { background: #fff9e6; border-radius: 2px; }
+
+  .w-cet4   { border-bottom-color: #3498db; }
+  .w-cet6   { border-bottom-color: #2ecc71; }
+  .w-ielts  { border-bottom-color: #e67e22; }
+  .w-proper { border-bottom-color: #9b59b6; color: #6c3483; font-weight: 600; }
+  .w-basic  { border-bottom-color: #bdc3c7; }
+
+  /* Tooltip */
+  .w { position: relative; }
+  .w::after {
+    content: attr(data-tip);
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #2c3e50; color: #fff; font-size: 12px;
+    padding: 4px 10px; border-radius: 6px; white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.15s;
+    z-index: 200;
+  }
+  .w:hover::after { opacity: 1; }
+
+  /* ========== Right Column Content ========== */
+  .section-title {
+    font-size: 13px; font-weight: 700; color: #2e86c1;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 8px; padding-bottom: 4px;
+    border-bottom: 2px solid #ebf5fb;
+  }
+  .grammar-block {
+    background: #fdfefe; border-left: 3px solid #2e86c1;
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+    margin-bottom: 14px; font-size: 14px; line-height: 1.9;
+  }
+  .grammar-block .label {
+    display: inline-block; background: #2e86c1; color: #fff;
+    font-size: 11px; padding: 1px 8px; border-radius: 4px;
+    margin-right: 6px; vertical-align: middle;
+  }
+  .vocab-block { margin-bottom: 14px; }
+  .vocab-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 7px 0; border-bottom: 1px dashed #f0f0f0;
+    font-size: 13.5px;
+  }
+  .vocab-level {
+    flex-shrink: 0; font-size: 11px; font-weight: 700;
+    padding: 1px 7px; border-radius: 4px; color: #fff;
+  }
+  .lv-cet4   { background: #3498db; }
+  .lv-cet6   { background: #27ae60; }
+  .lv-ielts  { background: #e67e22; }
+  .lv-proper  { background: #9b59b6; }
+  .lv-basic   { background: #95a5a6; }
+  .vocab-word { font-weight: 700; color: #2c3e50; min-width: 110px; }
+  .vocab-pos  { color: #888; font-size: 12px; }
+  .vocab-mean { color: #555; }
+  .note-block {
+    background: #fffde7; border-left: 3px solid #f1c40f;
+    padding: 9px 13px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: #7d6608; line-height: 1.8;
+  }
+  .note-block .icon { margin-right: 4px; }
+
+  /* ========== Translation ========== */
+  .translation {
+    margin-top: 10px; padding: 8px 12px;
+    background: #eafaf1; border-radius: 6px;
+    font-size: 13.5px; color: #1e8449;
+    border-left: 3px solid #27ae60;
+  }
+
+  /* ========== Responsive ========== */
+  @media (max-width: 860px) {
+    .sentence-card { grid-template-columns: 1fr; }
+    .col-left { border-right: none; border-bottom: 1px solid #e8edf2; }
+  }
+
+  /* ========== Warning box ========== */
+  .warn-box {
+    background: #fdedec; border-left: 4px solid #e74c3c;
+    padding: 12px 16px; border-radius: 0 8px 8px 0;
+    margin-bottom: 20px; font-size: 14px; color: #922b21;
+  }
+  .warn-box strong { color: #e74c3c; }
+
+  /* ========== Original Text ========== */
+  .original-text {
+    background: #fff; border-radius: 12px; padding: 24px 28px;
+    margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e8edf2;
+  }
+  .original-text h2 { color: #2e86c1; font-size: 18px; margin-bottom: 14px; }
+  .original-text .text-body {
+    font-size: 15.5px; line-height: 2.2; color: #2c3e50;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", serif;
+  }
+
+  /* ========== Culture Note ========== */
+  .culture-block {
+    background: #f4ecf7; border-left: 3px solid #9b59b6;
+    padding: 9px 13px; border-radius: 0 8px 8px 0;
+    margin-bottom: 14px; font-size: 13px; color: #6c3483; line-height: 1.8;
+  }
+  .culture-block .icon { margin-right: 4px; }
+
+  /* ========== Summary Table ========== */
+  .summary-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  .summary-table thead tr {
+    background: #2e86c1; color: #fff;
+  }
+  .summary-table th {
+    padding: 10px 14px; text-align: left;
+  }
+  .summary-table th:first-child { border-radius: 6px 0 0 0; }
+  .summary-table th:last-child { border-radius: 0 6px 0 0; }
+  .summary-table tbody tr { border-bottom: 1px solid #eee; }
+  .summary-table tbody tr:nth-child(even) { background: #fafbff; }
+  .summary-table td { padding: 9px 14px; }
+  .summary-table td:first-child { font-weight: 700; color: #2e86c1; }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<div class="header">
+  <h1>☀️ Sun and Chinese Solar Terms — 精读笔记</h1>
+  <div class="subtitle">逐句语法拆解 · 生词分级标注 · 文化背景注释 · 双栏阅读笔记</div>
+  <div class="legend">
+    <span><span class="dot" style="background:#3498db"></span> CET-4 四级</span>
+    <span><span class="dot" style="background:#27ae60"></span> CET-6 六级</span>
+    <span><span class="dot" style="background:#e67e22"></span> IELTS 高级</span>
+    <span><span class="dot" style="background:#9b59b6"></span> 专有名词</span>
+    <span><span class="dot" style="background:#bdc3c7"></span> 基础词</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== 说明 ==================== -->
+<div class="warn-box">
+  <strong>⚠️ 阅读提示：</strong>本文为英文学习短文，介绍中国太阳神话与二十四节气文化。文中"tai yáng"为"太阳"的拼音标注（对应英文Sun），阅读时请注意。
+</div>
+
+<!-- ==================== 原文展示 ==================== -->
+<div class="original-text">
+  <h2>📄 原文</h2>
+  <div class="text-body">
+    <p style="margin-bottom:14px;">Sun, tài yáng, brings light and vitality to the world. Legends say that there were ten tài yáng in the sky in ancient times. People couldn't put up with the hot weather brought by ten tài yáng. A hero named Houyi shot down nine tài yáng with his bow. The Chinese created a calendar according to shadows produced by the last tài yáng.</p>
+    <p style="margin-bottom:0;">The Chinese have created 24 solar terms according to the circulation laws of tài yáng. They are used to guide farming activities. The rise and set of tài yáng represents hope in the hearts of Chinese people.</p>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 1 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">1</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音标注）">Sun, tài yáng,</span>
+      <span class="w w-cet4" data-tip="v. 带来（第三人称单数）">brings</span>
+      <span class="w w-cet4" data-tip="n. 光，光线">light</span>
+      <span class="w w-cet4" data-tip="conj. 和">and</span>
+      <span class="w w-ielts" data-tip="n. 活力，生命力">vitality</span>
+      <span class="w w-cet4" data-tip="prep. 给…">to</span>
+      <span class="w w-basic" data-tip="det. 这个世界">the world</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>太阳给世界带来光明与活力。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓宾双宾：Sun (S) + brings (V) + light and vitality (O) + to the world (间接宾语)<br>
+      <span class="label">时态</span> <strong>一般现在时</strong>（描述客观事实/永恒真理）<br>
+      <span class="label">插入语</span> tài yáng（拼音标注，前后有逗号隔开，起补充说明作用）<br>
+      <span class="label">并列宾语</span> light <strong>and</strong> vitality（bring A and B to C）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">bring</span> <span class="vocab-pos">/brɪŋ/ v.</span>
+          <div class="vocab-mean">带来；导致。bring A to B = 把A带给B。过去式：brought。bring light to... = 给……带来光明</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">light</span> <span class="vocab-pos">/laɪt/ n.</span>
+          <div class="vocab-mean">光，光线（不可数）。bring light = 带来光明（比喻希望、启蒙）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-ielts">IELTS</span>
+        <div><span class="vocab-word">vitality</span> <span class="vocab-pos">/vaɪˈtæləti/ n.</span>
+          <div class="vocab-mean">活力，生命力（不可数）。vital adj. 至关重要的。the vitality of nature = 大自然的生命力</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 句型仿写</div>
+    <div class="note-block">
+      Reading <strong>brings</strong> knowledge <strong>and</strong> joy <strong>to</strong> my life.<br>
+      （阅读给我的生活带来知识与快乐。）
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 2 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">2</span>
+      <span class="w w-cet6" data-tip="n. 传说（复数）">Legends</span>
+      <span class="w w-cet4" data-tip="v. 说（复数动词）">say</span>
+      <span class="w w-basic" data-tip="conj. 引导宾语从句">that</span>
+      <span class="w w-cet4" data-tip="动词过去式：存在（复数）">there were</span>
+      <span class="w w-cet4" data-tip="num. 十">ten</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音）">tài yáng</span>
+      <span class="w w-cet4" data-tip="prep. 在…里">in</span>
+      <span class="w w-basic" data-tip="det. 特指天空">the sky</span>
+      <span class="w w-cet4" data-tip="prep. 在…里">in</span>
+      <span class="w w-cet6" data-tip="adj. 古老的">ancient</span>
+      <span class="w w-cet4" data-tip="n. 时代，时期（复数）">times</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>传说在古代天空中有十个太阳。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓 + 宾语从句（内含 there be 句型）<br>
+      <span class="label">主句</span> Legends <strong>say</strong> that...（一般现在时，引用传说用现在时）<br>
+      <span class="label">宾语从句</span> that <strong>there were</strong> ten tài yáng...（there be 句型，过去时，因为 in ancient times）<br>
+      <span class="label">there be 句型</span> there + be + 主语 + 地点/时间状语。were（复数 ten tài yáng）<br>
+      <span class="label">时态</span> 从句用过去时 were，因为描述的是"古代"存在的状态
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">legend</span> <span class="vocab-pos">/ˈledʒənd/ n.</span>
+          <div class="vocab-mean">传说，传奇故事（可数）。Legends say that... = 传说……（常见开篇句式）。legendary adj. 传奇的</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">ancient</span> <span class="vocab-pos">/ˈeɪnʃənt/ adj.</span>
+          <div class="vocab-mean">古老的，古代的。in ancient times = 在古代。ancient civilization = 古代文明</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">times</span> <span class="vocab-pos">/taɪmz/ n.（复数）</span>
+          <div class="vocab-mean">时代，时期。in ancient times = 在古代。比较：time（时间，不可数）vs times（时代，多次）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">🏛️ 文化背景</div>
+    <div class="culture-block">
+      <span class="icon">🏛️</span> <strong>"ten suns"：</strong>出自《山海经》《淮南子》——尧帝时十日并出，草木枯焦。后羿射下九日，只留一日。这是中国神话中最重要的太阳神话。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 3 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">3</span>
+      <span class="w w-basic" data-tip="n. 人们">People</span>
+      <span class="w w-cet4" data-tip="modal verb 不能">couldn't</span>
+      <span class="w w-ielts" data-tip="phrasal v. 忍受，容忍">put up with</span>
+      <span class="w w-basic" data-tip="det. 特指">the</span>
+      <span class="w w-cet4" data-tip="adj. 热的">hot</span>
+      <span class="w w-cet4" data-tip="n. 天气">weather</span>
+      <span class="w w-cet6" data-tip="v. 被带来（过去分词）">brought</span>
+      <span class="w w-basic" data-tip="prep. 被…">by</span>
+      <span class="w w-cet4" data-tip="num. 十">ten</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音）">tài yáng</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>人们无法忍受十个太阳带来的炎热天气。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓宾 + 过去分词作后置定语<br>
+      <span class="label">时态</span> <strong>一般过去时</strong>（couldn't = could not，过去能力否定）<br>
+      <span class="label">短语动词</span> put up with = 忍受，容忍（三人称不可分短语动词）<br>
+      <span class="label">过去分词定语</span> (the hot weather) <strong>brought by</strong> ten tài yáng（省略 which was，过去分词短语作后置定语）<br>
+      <span class="label">被动含义</span> brought by... = 被……带来的（天气是"被太阳带来的"）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-ielts">IELTS</span>
+        <div><span class="vocab-word">put up with</span> <span class="vocab-pos">phrase v.</span>
+          <div class="vocab-mean">忍受，容忍（= tolerate, endure）。I can't <strong>put up with</strong> the noise. = 我无法忍受噪音。<u>注意</u>：三个词固定搭配，不可拆分记忆</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">weather</span> <span class="vocab-pos">/ˈweðə/ n.</span>
+          <div class="vocab-mean">天气（不可数）。hot weather = 炎热天气。比较：climate（气候，长期）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">bring (brought)</span> <span class="vocab-pos">/brɔːt/ v.（过去式）</span>
+          <div class="vocab-mean">带来。bring-brought-brought。weather brought by... = 由……带来的天气</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 短语动词：put up with</div>
+    <div class="note-block">
+      <strong>put up with + n. = 忍受……</strong><br><br>
+      同义表达：<br>
+      · tolerate（正式）= 容忍<br>
+      · endure（正式）= 忍受（更强调"长期忍受"）<br>
+      · stand / bear（口语）= 受不了<br><br>
+      例句：She <strong>puts up with</strong> his bad temper.（她忍受着他的坏脾气。）
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 4 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">4</span>
+      <span class="w w-cet4" data-tip="det. 一个">A</span>
+      <span class="w w-cet4" data-tip="n. 英雄">hero</span>
+      <span class="w w-cet6" data-tip="v. 被命名（过去分词作定语）">named</span>
+      <span class="w w-proper" data-tip="n. 后羿（中国神话人物）">Houyi</span>
+      <span class="w w-cet6" data-tip="v. 射下（过去式）">shot down</span>
+      <span class="w w-cet4" data-tip="num. 九">nine</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音）">tài yáng</span>
+      <span class="w w-cet4" data-tip="prep. 用…">with</span>
+      <span class="w w-basic" data-tip="pron. 他的">his</span>
+      <span class="w w-cet4" data-tip="n. 弓">bow</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>一位名叫后羿的英雄用他的弓射下了九个太阳。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓宾 + 方式状语：A hero (S) + shot down (V) + nine tài yáng (O)...<br>
+      <span class="label">时态</span> <strong>一般过去时</strong>：shot（shoot 的过去式）<br>
+      <span class="label">定语</span> <strong>named</strong> Houyi（过去分词作后置定语 = who was named Houyi，省略关系代词）<br>
+      <span class="label">短语动词</span> shoot down = 射下，击落（分开可：shoot it down / shoot down the plane）<br>
+      <span class="label">方式状语</span> with his bow（用……工具，介词 with 表手段）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">shoot down</span> <span class="vocab-pos">phrase v.</span>
+          <div class="vocab-mean">射下，击落。shoot-shot-shot。shoot down the plane = 击落飞机。本文：shoot down nine suns = 射下九个太阳</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">hero</span> <span class="vocab-pos">/ˈhɪərəʊ/ n.</span>
+          <div class="vocab-mean">英雄（复数 heroes）。heroic adj. 英雄的。Houyi is a legendary hero.</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">bow</span> <span class="vocab-pos">/baʊ/ n.</span>
+          <div class="vocab-mean">弓（武器）。比较：bow /baʊ/（鞠躬）vs bow /baʊ/（弓）——拼写相同，意思不同。<u>注意</u>：arrow = 箭</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">name</span> <span class="vocab-pos">/neɪm/ v.</span>
+          <div class="vocab-mean">给……命名；名叫……（作动词）。a hero <strong>named</strong> Houyi = 一个名叫后羿的英雄（= a hero <strong>who is named</strong> Houyi）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">🏛️ 文化背景</div>
+    <div class="culture-block">
+      <span class="icon">🏛️</span> <strong>后羿（Houyi）：</strong>中国神话人物，帝尧时的神射手。奉尧命射落九日，只留一日，拯救万物。另有"后羿射日"与"嫦娥奔月"相关联的传说体系。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 5 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">5</span>
+      <span class="w w-proper" data-tip="n. 中国人">The Chinese</span>
+      <span class="w w-cet4" data-tip="v. 创造（过去式）">created</span>
+      <span class="w w-cet4" data-tip="det. 一个">a</span>
+      <span class="w w-cet4" data-tip="n. 日历">calendar</span>
+      <span class="w w-cet4" data-tip="prep. 根据">according to</span>
+      <span class="w w-basic" data-tip="n. 影子（复数）">shadows</span>
+      <span class="w w-cet6" data-tip="v. 被产生（过去分词）">produced</span>
+      <span class="w w-basic" data-tip="prep. 被…">by</span>
+      <span class="w w-basic" data-tip="det. 特指，仅剩的">the last</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音）">tài yáng</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>中国人根据最后一个太阳产生的影子创立了历法。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓宾 + 方式状语（according to...）<br>
+      <span class="label">时态</span> <strong>一般过去时</strong>：created（历史上的动作）<br>
+      <span class="label">介词短语</span> <strong>according to</strong> + n. = 根据……，依照……<br>
+      <span class="label">过去分词定语</span> (shadows) <strong>produced by</strong> the last tài yáng（= which were produced by...，省略）<br>
+      <span class="label">逻辑</span> 最后一个太阳（唯一留存的那一个）→ 其影子变化 → 创立历法（二十四节气的基础）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">calendar</span> <span class="vocab-pos">/ˈkælɪndə/ n.</span>
+          <div class="vocab-mean">日历，历法。create a calendar = 创立历法。solar calendar = 阳历。lunar calendar = 阴历</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">according to</span> <span class="vocab-pos">prep. phrase</span>
+          <div class="vocab-mean">根据，按照（后接名词，不接句子）。according to the report = 根据报告。<u>注意</u>：according to 不能用于引出观点（不能说 according to me）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">shadow</span> <span class="vocab-pos">/ˈʃædəʊ/ n.</span>
+          <div class="vocab-mean">影子，阴影（可数）。shadows produced by the sun = 太阳产生的影子（用于测定时间→日晷原理）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">produce</span> <span class="vocab-pos">/prəˈdjuːs/ v.</span>
+          <div class="vocab-mean">产生，生产（动词）。produced by... = 由……产生的（过去分词）。product n. 产品；production n. 生产</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">🏛️ 文化背景</div>
+    <div class="culture-block">
+      <span class="icon">🏛️</span> <strong>"calendar according to shadows"：</strong>中国古代用"圭表"测日影长短，确定节气与历法。影子最长时为冬至，最短时为夏至——这是二十四节气的天文基础。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 6 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">6</span>
+      <span class="w w-proper" data-tip="n. 中国人">The Chinese</span>
+      <span class="w w-cet6" data-tip="v. 已经创造（现在完成时）">have created</span>
+      <span class="w w-cet4" data-tip="num. 24">24</span>
+      <span class="w w-ielts" data-tip="adj. 太阳的，日光的">solar</span>
+      <span class="w w-cet4" data-tip="n. 术语，条款（复数）">terms</span>
+      <span class="w w-cet4" data-tip="prep. 根据">according to</span>
+      <span class="w w-basic" data-tip="det. 特指">the</span>
+      <span class="w w-ielts" data-tip="n. 循环，流通">circulation</span>
+      <span class="w w-cet6" data-tip="n. 规律，法则（复数）">laws</span>
+      <span class="w w-basic" data-tip="prep. …的">of</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音）">tài yáng</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>中国人根据太阳的运行规律创立了24个节气。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓宾 + 方式状语（according to...）<br>
+      <span class="label">时态</span> <strong>现在完成时</strong>：have created（强调对现在的影响——节气至今仍在使用）<br>
+      <span class="label">专有名词</span> 24 solar terms = 二十四节气（英文固定译法）<br>
+      <span class="label">介词短语</span> according to the circulation laws of tài yáng（of 所有格 chain：laws of tài yáng）<br>
+      <span class="label">比较</span> 句5 created（过去时）vs 句6 have created（完成时）——从"创立历法"到"创立节气"是递进，后者影响持续至今
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-ielts">IELTS</span>
+        <div><span class="vocab-word">solar</span> <span class="vocab-pos">/ˈsəʊlə/ adj.</span>
+          <div class="vocab-mean">太阳的，日光的。solar terms = 节气（直译"太阳术语"）。solar energy = 太阳能。solar system = 太阳系</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">term</span> <span class="vocab-pos">/tɜːm/ n.</span>
+          <div class="vocab-mean">术语；条款；学期（可数）。solar terms = 节气。in terms of... = 就……而言。technical terms = 技术术语</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-ielts">IELTS</span>
+        <div><span class="vocab-word">circulation</span> <span class="vocab-pos">/ˌsɜːkjəˈleɪʃn/ n.</span>
+          <div class="vocab-mean">循环，流通（不可数）。the circulation of the sun = 太阳的运行/循环（此处指太阳在黄道上的位置变化）。circulate v.</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">law</span> <span class="vocab-pos">/lɔː/ n.</span>
+          <div class="vocab-mean">规律；法律（可数）。the laws of nature = 自然规律。此处 circulation laws = 运行规律（= 规律性的循环运动）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">🏛️ 文化背景</div>
+    <div class="culture-block">
+      <span class="icon">🏛️</span> <strong>二十四节气（24 Solar Terms）：</strong>中国古代根据太阳在黄道上的位置（每15°为一个节气）划分的农事指导系统，2016年被列入联合国非物质文化遗产。英文中常译为 "The 24 Solar Terms" 或 "The 24 Solar Periods"。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 7 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">7</span>
+      <span class="w w-basic" data-tip="pron. 它们（指节气）">They</span>
+      <span class="w w-cet4" data-tip="v. 被使用（被动现在时）">are used</span>
+      <span class="w w-cet4" data-tip="prep. 为了">to</span>
+      <span class="w w-cet4" data-tip="v. 指导（原形）">guide</span>
+      <span class="w w-cet4" data-tip="n. 农耕（复数）">farming</span>
+      <span class="w w-cet6" data-tip="n. 活动（复数）">activities</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>它们（节气）被用来指导农耕活动。</div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主谓（被动）+ 目的状语（to + 动词原形）<br>
+      <span class="label">时态</span> <strong>一般现在时被动</strong>：are used（常态性描述，节气至今仍在使用）<br>
+      <span class="label">被动结构</span> be used <strong>to do</strong>... = 被用来做……（to 是不定式符号，后接动词原形）<br>
+      <span class="label">代词</span> They = 24 solar terms（前一句的宾语，本句主语）<br>
+      <span class="label">注意</span> be used to <strong>doing</strong>（习惯于做……）≠ be used <strong>to do</strong>（被用来做……）——本文是后者
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">be used to do</span> <span class="vocab-pos">structure</span>
+          <div class="vocab-mean">被用来做……（被动+不定式）。The tool <strong>is used to cut</strong> paper.（这工具被用来剪纸。）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">guide</span> <span class="vocab-pos">/ɡaɪd/ v.</span>
+          <div class="vocab-mean">指导，引导。guide farming activities = 指导农耕活动。guide n. 指南，导游。guidance n. 指导</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">farming</span> <span class="vocab-pos">/ˈfɑːmɪŋ/ n.</span>
+          <div class="vocab-mean">农耕，农业（不可数）。farming activities = 农耕活动。farm n. 农场 v. 耕种。farmer = 农民</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">activity</span> <span class="vocab-pos">/ækˈtɪvəti/ n.</span>
+          <div class="vocab-mean">活动（可数，复数 activities）。farming activities = 农事活动。比较：action（行动）vs activity（活动/状态）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 be used to：两个不同意思</div>
+    <div class="note-block">
+      <strong>① be used to do... = 被用来做……（被动语态）</strong><br>
+      Solar terms <strong>are used to guide</strong> farming.（节气被用来指导农耕。）<br><br>
+      <strong>② be used to (doing) sth. = 习惯于……（to 是介词）</strong><br>
+      I <strong>am used to getting up</strong> early.（我习惯早起。）<br><br>
+      <u>区分关键</u>：to 后面是动词原形 → ①；to 后面是 -ing → ②。
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- SENTENCE 8 -->
+<!-- #################################################################### -->
+<div class="sentence-card">
+  <div class="col-left">
+    <p>
+      <span class="sent-num">8</span>
+      <span class="w w-basic" data-tip="n. 升起">The rise</span>
+      <span class="w w-cet4" data-tip="conj. 和">and</span>
+      <span class="w w-basic" data-tip="n. 落下（应为setting）">set</span>
+      <span class="w w-cet4" data-tip="prep. …的">of</span>
+      <span class="w w-proper" data-tip="n. 太阳（拼音）">tài yáng</span>
+      <span class="w w-cet6" data-tip="v. 代表（第三人称单数）">represents</span>
+      <span class="w w-cet4" data-tip="n. 希望">hope</span>
+      <span class="w w-cet4" data-tip="prep. 在…里">in</span>
+      <span class="w w-basic" data-tip="det. 特指">the</span>
+      <span class="w w-basic" data-tip="n. 心（复数）">hearts</span>
+      <span class="w w-cet4" data-tip="prep. …的">of</span>
+      <span class="w w-proper" data-tip="adj. 中国的">Chinese</span>
+      <span class="w w-basic" data-tip="n. 人们">people</span>.
+    </p>
+    <div class="translation">📌 <strong>译文：</strong>太阳的升起与落下代表着中国人心中的希望。</div>
+    <div class="note-block" style="margin-top:10px">
+      <span class="icon">⚠️</span><strong>语法问题：</strong>"The rise and set" 中 set 应为 <strong>setting</strong>（与 rise 平行，都用名词形式）。正确写法：The <strong>rise and setting</strong> of tài yáng（或 The <strong>rising and setting</strong> of the sun）。
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="section-title">🔍 语法拆解</div>
+    <div class="grammar-block">
+      <span class="label">句型</span> 主系表：The rise and set (S) + represents (V) + hope (O)...<br>
+      <span class="label">时态</span> <strong>一般现在时</strong>（客观陈述，太阳升落象征希望）<br>
+      <span class="label">主语</span> The rise and (the) set of tài yáng —— <u>错误</u>：set 是动词原形，不能作主语。应为 <strong>setting</strong>（名词化）<br>
+      <span class="label">谓语</span> represents（单数，因为主语是单数概念"太阳的升落"这一整体现象）<br>
+      <span class="label">状语</span> in the hearts of Chinese people（地点状语，比喻"内心深处"）
+    </div>
+    <div class="section-title">📚 生词详解</div>
+    <div class="vocab-block">
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet6">CET-6</span>
+        <div><span class="vocab-word">represent</span> <span class="vocab-pos">/ˌreprɪˈzent/ v.</span>
+          <div class="vocab-mean">代表，象征。The dove <strong>represents</strong> peace.（鸽子象征和平。）representation n. 代表；象征</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">rise</span> <span class="vocab-pos">/raɪz/ n./v.</span>
+          <div class="vocab-mean">升起（n. 或 v.）。the rise of the sun = 日出。比较：raise（及物动词，需接宾语）vs rise（不及物）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">hope</span> <span class="vocab-pos">/həʊp/ n.</span>
+          <div class="vocab-mean">希望（可数或不可数）。represents hope = 代表希望。hope v. 希望（hope to do / hope that...）</div>
+        </div>
+      </div>
+      <div class="vocab-item">
+        <span class="vocab-level lv-cet4">CET-4</span>
+        <div><span class="vocab-word">heart</span> <span class="vocab-pos">/hɑːt/ n.</span>
+          <div class="vocab-mean">心，内心（可数，复数 hearts）。in the hearts of... = 在……心中（比喻，表情感归属）</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">💡 改正："rise and set" → "rise and setting"</div>
+    <div class="note-block">
+      <strong>错误：</strong>The rise and set of the sun...（set 是动词原形，不能作主语）<br><br>
+      <strong>正确：</strong>The <strong>rise and setting</strong> of the sun...（setting 是名词化的动名词）<br><br>
+      <strong>更自然：</strong>The <strong>rising and setting</strong> of the sun...（rising / setting 更常用）<br><br>
+      平行结构原则：A and B 词性必须一致。rise（n.）+ set（？）≠ 平行；rise（n.）+ setting（n.）= 平行 ✓
+    </div>
+  </div>
+</div>
+
+<!-- #################################################################### -->
+<!-- 总结区域 -->
+<!-- #################################################################### -->
+<div style="background:#fff;border-radius:12px;padding:28px 32px;margin-top:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+  <h2 style="color:#2e86c1;font-size:20px;margin-bottom:16px;">📝 全文语法总结</h2>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>时态/语态</th>
+        <th>出现句子</th>
+        <th>用法说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>一般现在时（主动）</td>
+          <td>句1、句2（say）、句8</td>
+          <td>描述客观事实、永恒真理、传说引用（Legends say...）</td>
+      </tr>
+      <tr>
+        <td>一般过去时（主动）</td>
+        <td>句2（there were）、句3、句4、句5</td>
+        <td>描述历史事件、神话故事（古代发生的事情）</td>
+      </tr>
+      <tr>
+        <td>现在完成时（主动）</td>
+        <td>句6</td>
+        <td>强调过去动作对现在的影响（节气至今仍在使用）</td>
+      </tr>
+      <tr>
+        <td>一般现在时（被动）</td>
+        <td>句7</td>
+        <td>描述常态性被动现象（节气被用于指导农耕）</td>
+      </tr>
+      <tr>
+        <td>宾语从句（that引导）</td>
+        <td>句2</td>
+        <td>Legends say that...（that可省略）</td>
+      </tr>
+      <tr>
+        <td>there be 句型（过去时）</td>
+        <td>句2</td>
+        <td>there were + 复数主语 + 地点/时间状语</td>
+      </tr>
+      <tr>
+        <td>过去分词作定语</td>
+        <td>句3、句5</td>
+        <td>brought by... / produced by...（省略 which was）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#2e86c1;font-size:16px;margin:24px 0 12px;">📊 生词分级统计</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:140px;background:#ebf5fb;border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#3498db;">9</div>
+      <div style="font-size:13px;color:#555;margin-top:4px;">CET-4 四级词</div>
+    </div>
+    <div style="flex:1;min-width:140px;background:#eafaf1;border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#27ae60;">8</div>
+      <div style="font-size:13px;color:#555;margin-top:4px;">CET-6 六级词</div>
+    </div>
+    <div style="flex:1;min-width:140px;background:#fef9e7;border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#e67e22;">6</div>
+      <div style="font-size:13px;color:#555;margin-top:4px;">IELTS 高级词</div>
+    </div>
+    <div style="flex:1;min-width:140px;background:#f4ecf7;border-radius:8px;padding:14px;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#9b59b6;">3</div>
+      <div style="font-size:13px;color:#555;margin-top:4px;">专有名词</div>
+    </div>
+  </div>
+
+  <h3 style="color:#2e86c1;font-size:16px;margin:24px 0 12px;">🏛️ 文化背景总览</h3>
+  <div style="font-size:14px;color:#444;line-height:2;">
+    <div>① <strong>后羿射日：</strong>《淮南子·本经训》记载，帝尧时十日并出，禾稼草木枯死，后羿奉命射落九日，只留一日，拯救万物。</div>
+    <div>② <strong>二十四节气：</strong>根据太阳在黄道上的位置划分（每15°一个节气），指导农事活动，2016年列入联合国非遗名录。</div>
+    <div>③ <strong>圭表测影：</strong>古代用"圭表"（直立的标杆+量影的尺）测量日影长短，确定冬至、夏至、春分、秋分等关键节点。</div>
+    <div>④ <strong>太阳与中国文化：</strong>太阳（日）在中国文化中象征光明、正义、新生。"日出""日落"常用于比喻希望与轮回。</div>
+    <div>⑤ <strong>"tai yáng"拼音标注：</strong>本文独创写法，在英文 Sun 后附拼音 tài yáng，帮助中国学习者建立中英对应关系，是双语学习材料的一种创新形式。</div>
+  </div>
+</div>
+
+</div><!-- end .container -->
+
+</body>
+</html>
