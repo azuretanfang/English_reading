@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 Traditional Chinese Painting - 国画</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #2c5f2e 0%, #5c8a1e 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5f2e 0%, #5c8a1e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; }
+
+        .content { padding: 40px 30px; }
+        .section { margin-bottom: 40px; }
+
+        .section-title {
+            font-size: 1.6em;
+            color: #2c5f2e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2c5f2e;
+            display: flex;
+            align-items: center;
+        }
+        .section-title span { margin-right: 10px; font-size: 1.2em; }
+
+        .original-text {
+            background: #f2f9f0;
+            border-left: 4px solid #2c5f2e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            font-size: 15.5px;
+            line-height: 2.2;
+        }
+
+        .translation {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            color: #856404;
+        }
+
+        /* 逐句精读卡片 */
+        .sentence-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #d5e8d4;
+        }
+        .sentence-num {
+            display: inline-block;
+            background: #2c5f2e;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px; height: 28px;
+            text-align: center; line-height: 28px;
+            font-size: 13px; font-weight: bold;
+            margin-right: 8px; vertical-align: middle;
+        }
+        .en-sentence { font-size: 16px; color: #1a1a2e; font-weight: 500; }
+        .zh-trans {
+            color: #555; font-size: 14.5px;
+            margin: 8px 0 10px 36px;
+            padding-left: 12px;
+            border-left: 3px solid #a9d18e;
+        }
+        .grammar-box {
+            background: #f2f9f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0 10px 36px;
+            font-size: 13.5px; color: #1a3a1e;
+        }
+        .grammar-box strong { color: #2c5f2e; }
+        .note-box {
+            background: #fff9e6;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0 10px 36px;
+            font-size: 13px; color: #7d6608;
+            border-left: 3px solid #f0c040;
+        }
+        .vocab-tag {
+            display: inline-block;
+            background: #e8f5e3; color: #1e5e1e;
+            border-radius: 4px; padding: 1px 7px;
+            font-size: 12px; margin-right: 6px;
+            border: 1px solid #a9d18e;
+        }
+
+        /* 词汇表 */
+        .vocabulary-table {
+            width: 100%; border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .vocabulary-table thead {
+            background: linear-gradient(135deg, #2c5f2e 0%, #5c8a1e 100%);
+            color: white;
+        }
+        .vocabulary-table th, .vocabulary-table td {
+            padding: 12px 15px; text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .vocabulary-table tbody tr:hover { background: #f2f9f0; }
+
+        /* 语法点 */
+        .grammar-point {
+            background: #f2f9f0;
+            border-left: 4px solid #2c5f2e;
+            padding: 20px; margin: 15px 0; border-radius: 8px;
+        }
+        .grammar-point h4 { color: #2c5f2e; margin-bottom: 10px; }
+
+        .structure-box {
+            background: #f5f5f5; padding: 15px;
+            border-radius: 8px; margin: 10px 0;
+            font-family: "Courier New", monospace;
+        }
+
+        /* 文章结构 */
+        .process-flow {
+            display: flex; flex-wrap: wrap;
+            gap: 15px; margin: 20px 0; justify-content: center;
+        }
+        .process-step {
+            background: linear-gradient(135deg, #2c5f2e 0%, #5c8a1e 100%);
+            color: white; padding: 15px 20px;
+            border-radius: 8px; flex: 1; min-width: 140px;
+            text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .process-arrow {
+            display: flex; align-items: center;
+            font-size: 2em; color: #2c5f2e;
+        }
+
+        .highlight-box {
+            background: #e8f5e3;
+            border-left: 4px solid #2c5f2e;
+            padding: 20px; margin: 15px 0;
+            border-radius: 8px; color: #1a3a1e;
+        }
+        .highlight-box h4 { color: #2c5f2e; margin-bottom: 8px; }
+
+        .cultural-note {
+            background: #f2f9f0;
+            border-left: 4px solid #5c8a1e;
+            padding: 20px; margin: 15px 0;
+            border-radius: 8px; color: #1a3a1e;
+        }
+        .cultural-note h4 { color: #2c5f2e; margin-bottom: 8px; }
+
+        .contrast-box {
+            display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0;
+        }
+        .contrast-side {
+            flex: 1; min-width: 200px;
+            border-radius: 8px; padding: 16px;
+        }
+        .contrast-side.west { background: #e3f2fd; border-left: 4px solid #2196f3; color: #1a3a5c; }
+        .contrast-side.east { background: #e8f5e3; border-left: 4px solid #2c5f2e; color: #1a3a1e; }
+        .contrast-side h4 { margin-bottom: 8px; }
+
+        .practice-template {
+            background: #fff3cd; border: 2px dashed #ffc107;
+            padding: 20px; margin: 15px 0; border-radius: 8px;
+        }
+
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { padding: 10px 0 10px 30px; position: relative; }
+        .checklist li:before {
+            content: "☐"; position: absolute; left: 0;
+            font-size: 1.2em; color: #2c5f2e;
+        }
+
+        code {
+            background: #f5f5f5; padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            color: #e83e8c;
+        }
+
+        .footer {
+            background: #f8f9fa; padding: 20px 30px;
+            text-align: center; color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .content { padding: 20px 15px; }
+            .process-flow { flex-direction: column; }
+            .process-arrow { transform: rotate(90deg); justify-content: center; }
+            .contrast-box { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>🖌️ 14 Traditional Chinese Painting</h1>
+        <p class="subtitle">国画 - 英语精读笔记</p>
+    </div>
+
+    <div class="content">
+
+        <!-- ① 原文 -->
+        <div class="section">
+            <h2 class="section-title"><span>📄</span>原文</h2>
+            <div class="original-text">
+                Red, green, black, white, heavy, light, dry and wet changes of water and ink on paper show the mysteries of traditional Chinese painting, guo hua. Tools and materials involve writing brushes, ink, colored ink, rice paper and silk. The hardness or softness of brushes, paper absorbency and color determine the features of guo hua. Water, ink and lines are the most essential factors for guo hua. Unlike Western paintings, guo hua doesn't use three dimensions or realism. Instead, paintings involve a unique Chinese view of scenery. It's very common that a Chinese painting is attached with a poem. If you understand guo hua you will have a better understanding of Chinese people.
+            </div>
+            <div class="translation">
+                纸上水墨的红、绿、黑、白、浓、淡、干、湿变化，展现了传统中国画（国画）的奥妙。工具和材料包括毛笔、墨汁、彩墨、宣纸和绢。笔的软硬、纸的吸墨性及颜色决定了国画的特点。水、墨和线条是国画最核心的要素。与西方绘画不同，国画不追求三维立体或写实主义，而是呈现一种独特的中国山水意境。中国画附上一首诗是非常常见的事。如果你了解国画，你将对中国人有更深刻的理解。
+            </div>
+        </div>
+
+        <!-- ② 逐句精读 -->
+        <div class="section">
+            <h2 class="section-title"><span>📖</span>逐句精读（共7句）</h2>
+
+            <!-- 句1 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">1</span><span class="en-sentence">Red, green, black, white, heavy, light, dry and wet changes of water and ink on paper show the mysteries of traditional Chinese painting, guo hua.</span></div>
+                <div class="zh-trans">纸上水墨的红、绿、黑、白、浓、淡、干、湿变化，展现了传统中国画（国画）的奥妙。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：并列主语（形容词列举）+ 谓语 + 宾语 + 同位语</strong><br>
+                    <code>Red, green, black, white, heavy, light, dry and wet changes</code>：八个形容词并列修饰 <code>changes</code>，构成名词短语作主语。注意最后两个用 <code>and</code> 连接，是英语列举的标准写法（A, B, C and D）。<br><br>
+                    <code>of water and ink on paper</code>：介词短语作后置定语，修饰 <code>changes</code>，说明是"纸上水墨的变化"。<br><br>
+                    <code>traditional Chinese painting, guo hua</code>：<code>guo hua</code> 是同位语，是"traditional Chinese painting"的中文拼音名称。<br><br>
+                    <strong>📌 mysteries：</strong>复数形式，表示"种种奥妙/神秘之处"，比单数 mystery 更强调多维度的复杂美感。
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">mysteries 奥妙</span>
+                    <span class="vocab-tag">guo hua 国画</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>mystery</strong> /ˈmɪstri/ n. 神秘，奥妙（复数 mysteries）<br>
+                    • <strong>heavy/light</strong> 此处指墨色的"浓/淡"，不是重量
+                </div>
+            </div>
+
+            <!-- 句2 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">2</span><span class="en-sentence">Tools and materials involve writing brushes, ink, colored ink, rice paper and silk.</span></div>
+                <div class="zh-trans">工具和材料包括毛笔、墨汁、彩墨、宣纸和绢。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主语 + 谓语 + 宾语（并列名词列举）</strong><br>
+                    <code>involve</code>：此处意为"包括，涉及"，相当于 <code>include</code>，但语气稍正式，常用于介绍组成要素。<br><br>
+                    <strong>📌 involve vs. include：</strong><br>
+                    • <code>include</code>：列举部分成员（可能不完全）<br>
+                    • <code>involve</code>：强调"涉及到/包含"，常用于描述过程、活动所需的要素
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>writing brush</strong> 毛笔（也称 calligraphy brush）<br>
+                    • <strong>colored ink</strong> 彩墨<br>
+                    • <strong>rice paper</strong> 宣纸（实际多用树皮等制作，非真正大米纸）<br>
+                    • <strong>silk</strong> /sɪlk/ n. 绢，丝绸
+                </div>
+            </div>
+
+            <!-- 句3 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">3</span><span class="en-sentence">The hardness or softness of brushes, paper absorbency and color determine the features of guo hua.</span></div>
+                <div class="zh-trans">笔的软硬、纸的吸墨性以及颜色决定了国画的特点。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：并列主语（三个名词短语）+ 谓语 + 宾语</strong><br>
+                    三个并列主语：<br>
+                    ① <code>The hardness or softness of brushes</code>（笔的软硬）<br>
+                    ② <code>paper absorbency</code>（纸的吸墨性）<br>
+                    ③ <code>color</code>（颜色）<br><br>
+                    <strong>📌 hardness or softness：</strong>用 <code>or</code> 连接一对反义词，表示"软硬程度"，是英语中常见的对立词组合表达。类似：<em>the length or shortness of...</em><br><br>
+                    <strong>📌 absorbency：</strong>名词，由动词 absorb（吸收）→ absorbent（能吸收的）→ absorbency（吸收性）派生而来。
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>hardness</strong> /ˈhɑːrdnəs/ n. 硬度（hard → hardness）<br>
+                    • <strong>absorbency</strong> /əbˈzɔːrbənsi/ n. 吸收性，吸墨性<br>
+                    • <strong>determine</strong> /dɪˈtɜːrmɪn/ v. 决定，确定<br>
+                    • <strong>feature</strong> /ˈfiːtʃər/ n. 特点，特征（复数 features）
+                </div>
+            </div>
+
+            <!-- 句4 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">4</span><span class="en-sentence">Water, ink and lines are the most essential factors for guo hua.</span></div>
+                <div class="zh-trans">水、墨和线条是国画最核心的要素。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主系表结构（最高级表强调）</strong><br>
+                    <code>the most essential factors</code>：最高级 <code>most essential</code> 修饰 <code>factors</code>，强调"最根本/最不可缺少的"。<br><br>
+                    <strong>📌 essential vs. important：</strong><br>
+                    • <code>important</code>：重要的（普通程度）<br>
+                    • <code>essential</code>：必不可少的（强调缺少就不成立）<br>
+                    例：<em>Water is essential for life.</em>（水对生命是必不可少的。）<br><br>
+                    <strong>📌 for guo hua：</strong>介词 <code>for</code> 表示"对……来说/对于……而言"。
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>essential</strong> /ɪˈsenʃl/ adj. 必不可少的，核心的<br>
+                    • <strong>factor</strong> /ˈfæktər/ n. 要素，因素
+                </div>
+            </div>
+
+            <!-- 句5 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">5</span><span class="en-sentence">Unlike Western paintings, guo hua doesn't use three dimensions or realism. Instead, paintings involve a unique Chinese view of scenery.</span></div>
+                <div class="zh-trans">与西方绘画不同，国画不追求三维立体或写实主义，而是呈现一种独特的中国山水意境。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：对比结构 + Instead 转折</strong><br>
+                    <code>Unlike Western paintings, ...</code>：<code>Unlike</code> 是介词，引导对比状语，意为"与……不同"，直接置于句首形成鲜明对比。<br><br>
+                    <code>Instead</code>：副词，独立成句（或置于句首），表示"而是/转而"，引出与前句相反的内容。注意 <code>Instead</code> 后跟句子；而 <code>instead of</code> 后跟名词/动名词。<br><br>
+                    <strong>📌 unlike vs. different from：</strong><br>
+                    • <code>Unlike A, B...</code>（句首对比状语，简洁）<br>
+                    • <code>B is different from A...</code>（主谓宾结构，更正式）
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">Unlike 与…不同</span>
+                    <span class="vocab-tag">Instead 而是</span>
+                    <span class="vocab-tag">realism 写实主义</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>dimension</strong> /dɪˈmenʃn/ n. 维度（three dimensions = 三维）<br>
+                    • <strong>realism</strong> /ˈriːəlɪzəm/ n. 写实主义，现实主义<br>
+                    • <strong>scenery</strong> /ˈsiːnəri/ n. 风景，景色（不可数）<br>
+                    • <strong>view of scenery</strong> 山水意境，对景色的诠释视角
+                </div>
+            </div>
+
+            <!-- 句6 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">6</span><span class="en-sentence">It's very common that a Chinese painting is attached with a poem.</span></div>
+                <div class="zh-trans">中国画上附有一首诗是非常常见的事。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：It is + 形容词 + that 从句（形式主语）</strong><br>
+                    <code>It</code> 是形式主语，真正的主语是 <code>that a Chinese painting is attached with a poem</code>（that 宾语从句）。<br><br>
+                    <strong>📌 形式主语结构：</strong>当主语是从句或不定式时，常用 <code>It</code> 代替，将真实主语后置，使句子更平衡。<br>
+                    <div class="structure-box" style="margin:8px 0;">It is + adj. + that + 从句<br>例：It is important that you practice every day.</div>
+                    <strong>📌 be attached with：</strong>固定搭配，意为"附有，附上"。<br>
+                    注意区分：<code>attach A to B</code>（把A附在B上）/ <code>be attached with</code>（附有）
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>attach</strong> /əˈtætʃ/ v. 附上，连接（attached adj. 附有的）<br>
+                    • <strong>poem</strong> /ˈpoʊɪm/ n. 诗（一首诗）；poetry n. 诗歌（总称，不可数）
+                </div>
+            </div>
+
+            <!-- 句7 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">7</span><span class="en-sentence">If you understand guo hua you will have a better understanding of Chinese people.</span></div>
+                <div class="zh-trans">如果你了解国画，你将对中国人有更深刻的理解。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：If 条件状语从句 + 主句（将来时）</strong><br>
+                    条件句结构：<code>If + 主语 + 一般现在时, 主语 + will/shall + 动词原形</code><br>
+                    口诀：<strong>主将从现</strong>——主句用将来时，从句（if引导）用现在时。<br><br>
+                    <code>a better understanding of</code>：<code>understanding</code> 此处用名词形式（"理解/认识"），<code>better</code> 是比较级，暗示"比之前更深的理解"。<br><br>
+                    <strong>📌 understand vs. have an understanding of：</strong><br>
+                    • <code>understand sth.</code>：动词，直接表示"理解"<br>
+                    • <code>have an understanding of sth.</code>：名词短语，更书面，强调"对……有认知/见解"
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>understanding</strong> /ˌʌndəˈstændɪŋ/ n. 理解，认识（此处名词用法）<br>
+                    • <strong>have a better understanding of</strong> 对……有更深刻的理解（固定表达）
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ③ 核心词汇 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔑</span>核心词汇</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>单词/短语</th>
+                        <th>音标</th>
+                        <th>词性</th>
+                        <th>释义</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>mystery / mysteries</strong></td><td>/ˈmɪstri/</td><td>n.</td><td>奥妙，神秘之处</td></tr>
+                    <tr><td><strong>involve</strong></td><td>/ɪnˈvɒlv/</td><td>v.</td><td>包括，涉及</td></tr>
+                    <tr><td><strong>writing brush</strong></td><td>/ˈraɪtɪŋ brʌʃ/</td><td>n.</td><td>毛笔</td></tr>
+                    <tr><td><strong>rice paper</strong></td><td>/ˈraɪs ˌpeɪpər/</td><td>n.</td><td>宣纸</td></tr>
+                    <tr><td><strong>absorbency</strong></td><td>/əbˈzɔːrbənsi/</td><td>n.</td><td>吸收性，吸墨性</td></tr>
+                    <tr><td><strong>determine</strong></td><td>/dɪˈtɜːrmɪn/</td><td>v.</td><td>决定，确定</td></tr>
+                    <tr><td><strong>feature</strong></td><td>/ˈfiːtʃər/</td><td>n.</td><td>特点，特征</td></tr>
+                    <tr><td><strong>essential</strong></td><td>/ɪˈsenʃl/</td><td>adj.</td><td>必不可少的，核心的</td></tr>
+                    <tr><td><strong>factor</strong></td><td>/ˈfæktər/</td><td>n.</td><td>要素，因素</td></tr>
+                    <tr><td><strong>dimension</strong></td><td>/dɪˈmenʃn/</td><td>n.</td><td>维度（three dimensions 三维）</td></tr>
+                    <tr><td><strong>realism</strong></td><td>/ˈriːəlɪzəm/</td><td>n.</td><td>写实主义，现实主义</td></tr>
+                    <tr><td><strong>scenery</strong></td><td>/ˈsiːnəri/</td><td>n.</td><td>风景，景色（不可数）</td></tr>
+                    <tr><td><strong>attach</strong></td><td>/əˈtætʃ/</td><td>v.</td><td>附上，连接</td></tr>
+                    <tr><td><strong>poem</strong></td><td>/ˈpoʊɪm/</td><td>n.</td><td>诗（一首）</td></tr>
+                    <tr><td><strong>understanding</strong></td><td>/ˌʌndəˈstændɪŋ/</td><td>n.</td><td>理解，认识</td></tr>
+                    <tr><td><strong>unlike</strong></td><td>/ˌʌnˈlaɪk/</td><td>prep.</td><td>与……不同，不像</td></tr>
+                    <tr><td><strong>instead</strong></td><td>/ɪnˈsted/</td><td>adv.</td><td>而是，转而</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ④ 语法要点 -->
+        <div class="section">
+            <h2 class="section-title"><span>📝</span>语法要点</h2>
+
+            <div class="grammar-point">
+                <h4>1. 形式主语 It is ... that ...（句6）</h4>
+                <div class="structure-box">
+                    <strong>It</strong> is very common <strong>that</strong> a Chinese painting is attached with a poem.<br>
+                    ↕ 等同于 ↕<br>
+                    That a Chinese painting is attached with a poem is very common.（主语从句前置，不自然）
+                </div>
+                <p><strong>语法规则</strong>：用 <code>It</code> 代替过长的主语从句，后置真实主语，使句子重心清晰。<br>
+                常见句型：<em>It is + adj./n. + that 从句</em></p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. If 条件句——"主将从现"（句7）</h4>
+                <div class="structure-box">
+                    If you <strong>understand</strong> guo hua, you <strong>will have</strong> a better understanding...<br>
+                    从句（if引导）：一般现在时 ← → 主句：将来时（will）
+                </div>
+                <p><strong>口诀</strong>：<strong>主将从现</strong>——条件状语从句用一般现在时，主句用 will + 动词原形表示将来。<br>
+                注意：<code>If</code> 引导的条件句中，<strong>不能</strong>直接用 will（× If you will understand...）</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. Unlike ... 对比结构 + Instead 转折（句5）</h4>
+                <div class="structure-box">
+                    <strong>Unlike</strong> Western paintings, guo hua doesn't use three dimensions or realism.<br>
+                    <strong>Instead</strong>, paintings involve a unique Chinese view of scenery.
+                </div>
+                <p><code>Unlike</code>：介词，引导对比状语，句首使用突出差异。<br>
+                <code>Instead</code>：副词，独立成句（句首+逗号），表示"转而/而是做另一件事"。<br>
+                ⚠️ 区分：<code>instead of + 名词/动名词</code> vs <code>Instead, + 完整句子</code></p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>4. 形容词/名词并列列举（句1、句3）</h4>
+                <div class="structure-box">
+                    <strong>句1</strong>：Red, green, black, white, heavy, light, dry <strong>and</strong> wet changes...<br>
+                    <strong>句3</strong>：The hardness or softness of brushes, paper absorbency <strong>and</strong> color...
+                </div>
+                <p>英语列举规则：多个并列成分用逗号分隔，最后两个用 <code>and</code>（或 <code>or</code>）连接。<br>
+                牛津逗号（Oxford comma）：最后 <code>and</code> 前加逗号（A, B, and C）是美式风格，英式常省略。</p>
+            </div>
+        </div>
+
+        <!-- ⑤ 文章结构分析 -->
+        <div class="section">
+            <h2 class="section-title"><span>💡</span>文章结构分析</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <strong>总述</strong><br>
+                    水墨变化<br>
+                    展现国画奥妙
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>工具材料</strong><br>
+                    笔墨纸绢<br>
+                    五大要素
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>核心三要素</strong><br>
+                    水·墨·线<br>
+                    决定特征
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>中西对比</strong><br>
+                    非三维非写实<br>
+                    独特意境观
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>文化升华</strong><br>
+                    诗画合一<br>
+                    理解中国人
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top:16px;">
+                <h4>📌 写作逻辑</h4>
+                <p>文章从<strong>感官印象</strong>（水墨色彩变化）切入，逐步深入到<strong>材料</strong>→<strong>核心要素</strong>→<strong>艺术哲学（中西对比）</strong>→<strong>文化内涵</strong>，层层递进，最终以"理解国画即理解中国人"升华主题，具有由表及里的说明逻辑。</p>
+            </div>
+        </div>
+
+        <!-- ⑥ 关键理解点 -->
+        <div class="section">
+            <h2 class="section-title"><span>🎯</span>关键理解点</h2>
+
+            <div class="highlight-box">
+                <h4>1. 中西绘画的本质差异</h4>
+                <div class="contrast-box">
+                    <div class="contrast-side west">
+                        <h4>🖼️ Western Painting（西方绘画）</h4>
+                        <ul style="margin-left:16px;">
+                            <li>three dimensions（三维透视）</li>
+                            <li>realism（写实，追求"像"）</li>
+                            <li>光影、明暗对比</li>
+                            <li>再现客观世界</li>
+                        </ul>
+                    </div>
+                    <div class="contrast-side east">
+                        <h4>🖌️ Guo Hua（中国国画）</h4>
+                        <ul style="margin-left:16px;">
+                            <li>水墨线条（非立体透视）</li>
+                            <li>意境，追求"神似"</li>
+                            <li>留白、虚实相生</li>
+                            <li>表达内心感受与意象</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>2. 国画三大核心要素</h4>
+                <p>文章第4句点明：<code>Water, ink and lines are the most essential factors</code></p>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><strong>Water（水）</strong>：控制墨色浓淡，创造干湿变化</li>
+                    <li><strong>Ink（墨）</strong>："墨分五色"——焦、浓、重、淡、清</li>
+                    <li><strong>Lines（线条）</strong>：中国画的骨架，十八描法（勾线技法）</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>3. "诗画合一"的文化意涵</h4>
+                <p>句6提到"a Chinese painting is attached with a poem"，对应中国传统艺术中<strong>诗、书、画、印</strong>四位一体的审美理念。画面的留白处题诗，既是视觉补充，也是意境延伸——这是西方绘画传统中没有的独特现象。</p>
+            </div>
+        </div>
+
+        <!-- ⑦ 文化背景 -->
+        <div class="section">
+            <h2 class="section-title"><span>🌏</span>文化背景</h2>
+
+            <div class="cultural-note">
+                <h4>国画（Guo Hua / Traditional Chinese Painting）</h4>
+                <ul style="margin-left:20px; margin-top:8px; line-height:2.2;">
+                    <li><strong>历史</strong>：起源可追溯至新石器时代，成熟于魏晋南北朝，鼎盛于宋元</li>
+                    <li><strong>两大流派</strong>：工笔画（gong bi，精细写实）/ 写意画（xie yi，重意境神韵）</li>
+                    <li><strong>题材</strong>：山水（landscape）、花鸟（flowers and birds）、人物（figure painting）</li>
+                    <li><strong>文房四宝</strong>：笔（brush）、墨（ink）、纸（paper）、砚（inkstone）—— Four Treasures of the Study</li>
+                    <li><strong>代表大家</strong>：齐白石（Qi Baishi，花鸟）、张大千（Zhang Daqian，山水）、徐悲鸿（Xu Beihong，人物马）</li>
+                    <li><strong>核心美学</strong>："气韵生动"（spirit resonance）——六朝谢赫《古画品录》中提出的最高品评标准</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑧ 仿写练习 -->
+        <div class="section">
+            <h2 class="section-title"><span>✍️</span>仿写练习</h2>
+
+            <div class="practice-template">
+                <h4>题目：介绍一种中国传统艺术形式</h4>
+                <p><strong>仿写模板（参照原文结构）：</strong></p>
+                <div class="structure-box">
+[Sensory description] shows the mysteries of [art form], [Chinese name].<br>
+Tools and materials involve [list of tools].<br>
+The [property] of [tool] and [material] determine the features of [art form].<br>
+[Key elements] are the most essential factors for [art form].<br>
+Unlike [Western equivalent], [art form] doesn't [Western feature]. Instead, it involves [unique Chinese element].<br>
+It's very common that [cultural practice related to art form].<br>
+If you understand [art form], you will have a better understanding of Chinese people.
+                </div>
+
+                <p style="margin-top:16px;"><strong>示例（中国书法 Chinese Calligraphy）：</strong></p>
+                <div class="structure-box">
+Thick, thin, fast and slow movements of a brush on paper reveal the mysteries of Chinese calligraphy, shu fa.<br>
+Tools and materials involve writing brushes, ink sticks, rice paper and inkstones.<br>
+The pressure and speed of brushstrokes and paper texture determine the style of shu fa.<br>
+Rhythm, structure and breath are the most essential factors for shu fa.<br>
+Unlike Western typography, shu fa doesn't focus on uniformity or mechanical precision. Instead, it expresses the writer's inner spirit and emotion.<br>
+It's very common that a piece of calligraphy carries a poem or classical saying.<br>
+If you understand shu fa, you will have a better understanding of Chinese aesthetics and philosophy.
+                </div>
+            </div>
+        </div>
+
+        <!-- ⑨ 阅读技巧 -->
+        <div class="section">
+            <h2 class="section-title"><span>📌</span>阅读技巧</h2>
+
+            <div class="grammar-point">
+                <h4>1. 识别说明文的"由表及里"结构</h4>
+                <ul style="margin-left:20px;">
+                    <li><strong>表象层</strong>（句1）：感官描述——色彩变化，引起兴趣</li>
+                    <li><strong>工具层</strong>（句2-4）：材料和核心要素，介绍"怎么画"</li>
+                    <li><strong>哲学层</strong>（句5）：中西对比，揭示"画什么/为何画"</li>
+                    <li><strong>文化层</strong>（句6-7）：诗画合一，理解中国人，升华意义</li>
+                </ul>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. 对比词/转折词的信号作用</h4>
+                <ul style="margin-left:20px;">
+                    <li><strong>Unlike</strong>：出现时，后面会对比两种事物的差异，快速定位"中西不同点"</li>
+                    <li><strong>Instead</strong>：出现时，前后句形成转折，说明"用什么代替了什么"</li>
+                    <li><strong>Instead of</strong>：后接名词/动名词，表示"不做A，而做B"</li>
+                </ul>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. 提取关键信息（5W1H 法）</h4>
+                <ul style="margin-left:20px;">
+                    <li><strong>What</strong>：Traditional Chinese painting / Guo hua（国画）</li>
+                    <li><strong>Materials</strong>：brushes, ink, colored ink, rice paper, silk</li>
+                    <li><strong>Key factors</strong>：water, ink, lines</li>
+                    <li><strong>How different</strong>：no 3D / no realism → unique view of scenery</li>
+                    <li><strong>Cultural feature</strong>：painting + poem（诗画合一）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑩ 难点解析 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔍</span>难点解析</h2>
+
+            <div class="grammar-point">
+                <h4>1. 句1 主语的识别</h4>
+                <p>句子很长，主语是：<code>Red, green, black, white, heavy, light, dry and wet <strong>changes</strong> of water and ink on paper</code></p>
+                <p>核心名词是 <strong>changes</strong>（变化），前面8个形容词都是修饰它的定语，后面 <code>of water and ink on paper</code> 是介词短语作后置定语。不要把颜色词误认为是主语。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. "doesn't use three dimensions or realism" 中的 or</h4>
+                <p>此处 <code>or</code> 用于否定句中，相当于"也不"：</p>
+                <div class="structure-box">
+                    doesn't use A <strong>or</strong> B = doesn't use A and doesn't use B<br>
+                    （既不用A，也不用B）<br><br>
+                    对比肯定句：uses A <strong>and</strong> B（既用A，也用B）
+                </div>
+                <p>规律：<strong>肯定句用 and 连接并列，否定句用 or 连接并列</strong>（德摩根定律在语法中的体现）。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. "have a better understanding of" vs. "understand better"</h4>
+                <div class="structure-box">
+                    you will <strong>have a better understanding of</strong> Chinese people<br>
+                    ≈ you will <strong>understand</strong> Chinese people <strong>better</strong>
+                </div>
+                <p>两种表达语义相同，但 <code>have an understanding of</code> 是名词化表达，更正式、书面；<code>understand</code> 是动词，更口语。学术写作中更常见名词化形式。</p>
+            </div>
+        </div>
+
+        <!-- ⑪ 阅读理解自查 -->
+        <div class="section">
+            <h2 class="section-title"><span>✅</span>阅读理解自查</h2>
+            <ul class="checklist">
+                <li>我能找出句1的真正主语并正确翻译吗？</li>
+                <li>我理解 Unlike 和 Instead 的不同用法吗？</li>
+                <li>我能解释 It is common that... 的形式主语结构吗？</li>
+                <li>我能说出国画与西方绘画的3个核心区别吗？</li>
+                <li>我理解否定句中 and/or 的转换规律吗？</li>
+                <li>我能仿照原文写一段介绍中国书法的英语短文吗？</li>
+            </ul>
+        </div>
+
+        <!-- ⑫ 拓展学习 -->
+        <div class="section">
+            <h2 class="section-title"><span>📚</span>拓展学习</h2>
+
+            <div class="highlight-box">
+                <h4>相关话题</h4>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li>Chinese Calligraphy（中国书法）—— 与国画并称"书画"</li>
+                    <li>The Four Treasures of the Study（文房四宝）</li>
+                    <li>Ink wash painting（水墨画）—— 国画中水墨风格的代表</li>
+                    <li>Landscape painting in China vs. Western landscape（中西山水画对比）</li>
+                    <li>UNESCO Intangible Cultural Heritage: Chinese Calligraphy（书法已列非遗）</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>词汇拓展</h4>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><strong>brushstroke</strong> /ˈbrʌʃstroʊk/ n. 笔触，笔法</li>
+                    <li><strong>ink wash</strong> 水墨（技法）</li>
+                    <li><strong>perspective</strong> /pəˈspektɪv/ n. 透视法；视角</li>
+                    <li><strong>aesthetics</strong> /esˈθetɪks/ n. 美学</li>
+                    <li><strong>void / negative space</strong> 留白（国画独特表现手法）</li>
+                    <li><strong>scroll</strong> /skroʊl/ n. 卷轴（中国画常见装裱形式）</li>
+                </ul>
+            </div>
+        </div>
+
+    </div><!-- end .content -->
+
+    <div class="footer">
+        <p><strong>笔记创建时间</strong>: 2026-06-23</p>
+        <p><strong>文章主题</strong>: 中国传统文化 / 艺术</p>
+        <p><strong>难度等级</strong>: ★★★☆☆（B1-B2）</p>
+    </div>
+
+</div><!-- end .container -->
+</body>
+</html>
