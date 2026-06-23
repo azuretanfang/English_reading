@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Invention of printing - 印刷术的发明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title span {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .original-text {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .translation {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            color: #856404;
+        }
+        
+        .vocabulary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .vocabulary-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .vocabulary-table th,
+        .vocabulary-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .vocabulary-table tbody tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .grammar-point {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .grammar-point h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .structure-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: "Courier New", monospace;
+        }
+        
+        .process-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        .process-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .process-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 2em;
+            color: #667eea;
+        }
+        
+        .highlight-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #155724;
+        }
+        
+        .cultural-note {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #721c24;
+        }
+        
+        .practice-template {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            color: #e83e8c;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .process-arrow {
+                transform: rotate(90deg);
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 12 Invention of printing</h1>
+            <p class="subtitle">印刷术的发明 - 英语精读笔记</p>
+        </div>
+        
+        <div class="content">
+            <!-- 原文精读 -->
+            <div class="section">
+                <h2 class="section-title"><span>📖</span>原文精读</h2>
+                
+                <div class="original-text">
+                    <strong>A Chinese named Bi Sheng invented movable type print around 1,000 years ago.</strong>
+                </div>
+                <div class="translation">
+                    一位名叫毕昇的中国人在大约1000年前发明了活字印刷术。
+                </div>
+                
+                <div class="original-text">
+                    <strong>The movable components are cubes made of baked clay.</strong>
+                </div>
+                <div class="translation">
+                    可移动的组件是由烧制粘土制成的立方体。
+                </div>
+                
+                <div class="original-text">
+                    <strong>Characters were carved on each piece of clay, which looked like the seals widely used in China.</strong>
+                </div>
+                <div class="translation">
+                    每个粘土块上都刻有字符，看起来像中国广泛使用的印章。
+                </div>
+                
+                <div class="original-text">
+                    <strong>The movable components could be arranged freely to form different vocabularies and sentences.</strong>
+                </div>
+                <div class="translation">
+                    可移动组件可以自由排列，组成不同的词汇和句子。
+                </div>
+                
+                <div class="original-text">
+                    <strong>They were fixed on an iron plate with frames in certain sequence.</strong>
+                </div>
+                <div class="translation">
+                    它们按照特定顺序被固定在带框架的铁板上。
+                </div>
+                
+                <div class="original-text">
+                    <strong>Then ink was painted and a piece of paper was laid down.</strong>
+                </div>
+                <div class="translation">
+                    然后涂上墨水，铺上一张纸。
+                </div>
+                
+                <div class="original-text">
+                    <strong>A printed sheet was created this way.</strong>
+                </div>
+                <div class="translation">
+                    通过这种方式创建了一张印刷页。
+                </div>
+                
+                <div class="original-text">
+                    <strong>This technique improved the efficiency of printing and transformed traditional transcription into modern printing.</strong>
+                </div>
+                <div class="translation">
+                    这项技术提高了印刷效率，将传统抄写转变为现代印刷。
+                </div>
+                
+                <div class="original-text">
+                    <strong>Scripts and paintings spread widely in the world with the help of yìn shuā.</strong>
+                </div>
+                <div class="translation">
+                    文字和绘画在印刷术的帮助下在世界范围内广泛传播。
+                </div>
+            </div>
+            
+            <!-- 核心词汇 -->
+            <div class="section">
+                <h2 class="section-title"><span>🔑</span>核心词汇</h2>
+                <table class="vocabulary-table">
+                    <thead>
+                        <tr>
+                            <th>单词/短语</th>
+                            <th>音标</th>
+                            <th>词性</th>
+                            <th>释义</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>movable type print</strong></td>
+                            <td>/ˈmuːvəbl taɪp prɪnt/</td>
+                            <td>n.</td>
+                            <td>活字印刷</td>
+                        </tr>
+                        <tr>
+                            <td><strong>movable</strong></td>
+                            <td>/ˈmuːvəbl/</td>
+                            <td>adj.</td>
+                            <td>可移动的</td>
+                        </tr>
+                        <tr>
+                            <td><strong>component</strong></td>
+                            <td>/kəmˈpoʊnənt/</td>
+                            <td>n.</td>
+                            <td>组件，部件</td>
+                        </tr>
+                        <tr>
+                            <td><strong>cube</strong></td>
+                            <td>/kjuːb/</td>
+                            <td>n.</td>
+                            <td>立方体</td>
+                        </tr>
+                        <tr>
+                            <td><strong>baked clay</strong></td>
+                            <td>/beɪkt kleɪ/</td>
+                            <td>n.</td>
+                            <td>烧制的粘土</td>
+                        </tr>
+                        <tr>
+                            <td><strong>carve</strong></td>
+                            <td>/kɑːrv/</td>
+                            <td>v.</td>
+                            <td>雕刻</td>
+                        </tr>
+                        <tr>
+                            <td><strong>seal</strong></td>
+                            <td>/siːl/</td>
+                            <td>n.</td>
+                            <td>印章</td>
+                        </tr>
+                        <tr>
+                            <td><strong>arrange</strong></td>
+                            <td>/əˈreɪndʒ/</td>
+                            <td>v.</td>
+                            <td>排列，安排</td>
+                        </tr>
+                        <tr>
+                            <td><strong>vocabulary</strong></td>
+                            <td>/voʊˈkæbjəleri/</td>
+                            <td>n.</td>
+                            <td>词汇</td>
+                        </tr>
+                        <tr>
+                            <td><strong>iron plate</strong></td>
+                            <td>/ˈaɪərn pleɪt/</td>
+                            <td>n.</td>
+                            <td>铁板</td>
+                        </tr>
+                        <tr>
+                            <td><strong>frame</strong></td>
+                            <td>/freɪm/</td>
+                            <td>n.</td>
+                            <td>框架</td>
+                        </tr>
+                        <tr>
+                            <td><strong>sequence</strong></td>
+                            <td>/ˈsiːkwəns/</td>
+                            <td>n.</td>
+                            <td>顺序，序列</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ink</strong></td>
+                            <td>/ɪŋk/</td>
+                            <td>n.</td>
+                            <td>墨水</td>
+                        </tr>
+                        <tr>
+                            <td><strong>efficiency</strong></td>
+                            <td>/ɪˈfɪʃənsi/</td>
+                            <td>n.</td>
+                            <td>效率</td>
+                        </tr>
+                        <tr>
+                            <td><strong>transform</strong></td>
+                            <td>/trænsˈfɔːrm/</td>
+                            <td>v.</td>
+                            <td>转变，变革</td>
+                        </tr>
+                        <tr>
+                            <td><strong>transcription</strong></td>
+                            <td>/trænˈskrɪpʃən/</td>
+                            <td>n.</td>
+                            <td>抄写，转录</td>
+                        </tr>
+                        <tr>
+                            <td><strong>script</strong></td>
+                            <td>/skrɪpt/</td>
+                            <td>n.</td>
+                            <td>文字，手稿</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 语法要点 -->
+            <div class="section">
+                <h2 class="section-title"><span>📝</span>语法要点</h2>
+                
+                <div class="grammar-point">
+                    <h4>1. 被动语态的使用</h4>
+                    <p>文章大量使用被动语态描述发明过程：</p>
+                    <div class="structure-box">
+                        "Characters <strong>were carved</strong> on each piece of clay"<br>
+                        "They <strong>were fixed</strong> on an iron plate"<br>
+                        "Then ink <strong>was painted</strong> and a piece of paper <strong>was laid</strong> down"
+                    </div>
+                    <p><strong>语法规则</strong>：被动语态 = be + 过去分词</p>
+                    <p><strong>用法场景</strong>：强调动作对象而非执行者，常用于说明文、科技文献</p>
+                </div>
+                
+                <div class="grammar-point">
+                    <h4>2. 一般过去时描述历史事件</h4>
+                    <div class="structure-box">
+                        "Bi Sheng <strong>invented</strong> movable type print"<br>
+                        "This technique <strong>improved</strong> the efficiency"
+                    </div>
+                    <p><strong>语法规则</strong>：描述过去发生的、已完成的动作</p>
+                </div>
+                
+                <div class="grammar-point">
+                    <h4>3. 介词搭配</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>with frames</strong> - 用框架（工具）</li>
+                        <li><strong>in certain sequence</strong> - 按特定顺序</li>
+                        <li><strong>with the help of</strong> - 在...的帮助下</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 文章结构分析 -->
+            <div class="section">
+                <h2 class="section-title"><span>💡</span>文章结构分析</h2>
+                
+                <div class="process-flow">
+                    <div class="process-step">
+                        <strong>引言</strong><br>
+                        发明者和时间<br>
+                        Bi Sheng, 1000 years ago
+                    </div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">
+                        <strong>材料描述</strong><br>
+                        movable components<br>
+                        (baked clay cubes)
+                    </div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">
+                        <strong>制作工艺</strong><br>
+                        carve characters →<br>
+                        arrange → fix on plate
+                    </div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">
+                        <strong>印刷过程</strong><br>
+                        paint ink →<br>
+                        lay paper → print
+                    </div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-step">
+                        <strong>历史意义</strong><br>
+                        improved efficiency +<br>
+                        spread widely
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 关键理解点 -->
+            <div class="section">
+                <h2 class="section-title"><span>🎯</span>关键理解点</h2>
+                
+                <div class="highlight-box">
+                    <h4>1. 毕昇发明的核心理念</h4>
+                    <p><strong>"movable"</strong> - 可移动性是最关键的创新点</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>之前的印刷：整块木板雕刻 → 无法重复使用</li>
+                        <li>毕昇的发明：单个字模可自由组合 → 可重复使用</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>2. 技术细节流程</h4>
+                    <div class="structure-box">
+                        clay cubes → carve characters → arrange → fix on plate → ink → paper → print<br>
+                        (粘土块)   (刻字符)        (排列)  (固定铁板)  (涂墨) (铺纸) (印刷)
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>3. 历史影响</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>效率提升</strong>：从抄写到印刷</li>
+                        <li><strong>传播加速</strong>：scripts and paintings spread widely</li>
+                        <li><strong>文明推动</strong>：为知识传播和文明发展奠定基础</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 文化背景 -->
+            <div class="section">
+                <h2 class="section-title"><span>🌏</span>文化背景</h2>
+                
+                <div class="cultural-note">
+                    <h4>毕昇 (Bi Sheng) - 北宋时期发明家</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>时间</strong>：1041-1048年（北宋庆历年间）</li>
+                        <li><strong>发明</strong>：活字印刷术 - 中国四大发明之一</li>
+                        <li><strong>材料演进</strong>：粘土 → 木材 → 铜活字 → 铅活字</li>
+                        <li><strong>传播路径</strong>：中国 → 朝鲜 → 欧洲（古腾堡，1450年左右）</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 仿写练习 -->
+            <div class="section">
+                <h2 class="section-title"><span>✍️</span>仿写练习</h2>
+                
+                <div class="practice-template">
+                    <h4>题目：描述一项发明的过程</h4>
+                    
+                    <p><strong>模板</strong>：</p>
+                    <div class="structure-box">
+[Inventor] invented [invention] around [time].<br>
+The [components] are made of [material].<br>
+[Parts] were [action] on each [component].<br>
+They could be [action] to [purpose].<br>
+They were fixed on [tool] in certain sequence.<br>
+Then [action] was taken and [result] was created.<br>
+This technique improved [aspect] and transformed [field].
+                    </div>
+                    
+                    <p style="margin-top: 20px;"><strong>示例</strong>（描述造纸术）：</p>
+                    <div class="structure-box">
+Cai Lun invented paper around 2,000 years ago.<br>
+The raw materials are tree bark, hemp, and rags.<br>
+Fibers were extracted from each material.<br>
+They could be mixed to form different textures.<br>
+They were spread on a flat surface in certain thickness.<br>
+Then pressure was applied and the paper was dried.<br>
+This technique improved the efficiency of writing and transformed knowledge preservation.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 阅读技巧 -->
+            <div class="section">
+                <h2 class="section-title"><span>📌</span>阅读技巧</h2>
+                
+                <div class="grammar-point">
+                    <h4>1. 识别说明文结构</h4>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>是什么</strong> (invention, inventor, time)</li>
+                        <li><strong>怎么做</strong> (materials, process, steps)</li>
+                        <li><strong>为什么重要</strong> (impact, significance)</li>
+                    </ul>
+                </div>
+                
+                <div class="grammar-point">
+                    <h4>2. 关注连接词</h4>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>then</strong> - 表示时间顺序</li>
+                        <li><strong>with the help of</strong> - 表示手段/工具</li>
+                        <li><strong>this way</strong> - 指代前文描述的方法</li>
+                    </ul>
+                </div>
+                
+                <div class="grammar-point">
+                    <h4>3. 提取关键信息（5W1H法）</h4>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Who</strong>: Bi Sheng</li>
+                        <li><strong>When</strong>: around 1,000 years ago</li>
+                        <li><strong>What</strong>: movable type print</li>
+                        <li><strong>How</strong>: clay cubes → arrange → ink → paper</li>
+                        <li><strong>Why</strong>: improve efficiency, spread knowledge</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 难点解析 -->
+            <div class="section">
+                <h2 class="section-title"><span>🔍</span>难点解析</h2>
+                
+                <div class="grammar-point">
+                    <h4>1. "which looked like the seals widely used in China"</h4>
+                    <p><strong>结构分析</strong>：</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>main clause: "Characters were carved on each piece of clay"</li>
+                        <li>non-restrictive relative clause: "which looked like the seals"</li>
+                        <li>past participle phrase: "widely used in China" (修饰seals)</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>翻译</strong>：每个粘土块上刻有字符，看起来像中国广泛使用的印章</p>
+                </div>
+                
+                <div class="grammar-point">
+                    <h4>2. "with the help of yìn shuā"</h4>
+                    <p><strong>yìn shuā</strong> = 印刷 (拼音)</p>
+                    <p><strong>句意</strong>：在印刷术的帮助下</p>
+                </div>
+            </div>
+            
+            <!-- 阅读理解自查 -->
+            <div class="section">
+                <h2 class="section-title"><span>✅</span>阅读理解自查</h2>
+                
+                <ul class="checklist">
+                    <li>我能用英语简述活字印刷的发明过程吗？</li>
+                    <li>我理解被动语态在此处的用法吗？</li>
+                    <li>我能提取文章的关键信息（5W1H）吗？</li>
+                    <li>我能仿写一个描述发明过程的段落吗？</li>
+                </ul>
+            </div>
+            
+            <!-- 拓展学习 -->
+            <div class="section">
+                <h2 class="section-title"><span>📚</span>拓展学习</h2>
+                
+                <div class="highlight-box">
+                    <h4>相关话题</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Four Great Inventions of China (中国四大发明)</li>
+                        <li>Gutenberg and movable type in Europe (古腾堡与欧洲活字印刷)</li>
+                        <li>Digital printing technology (数字印刷技术)</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>推荐阅读</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>"The Biography of Bi Sheng" (毕昇传)</li>
+                        <li>"A History of Printing" (印刷史)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>笔记创建时间</strong>: 2026-06-13</p>
+            <p><strong>文章主题</strong>: 科技发展 / 历史发明</p>
+            <p><strong>难度等级</strong>: ★★☆☆☆</p>
+        </div>
+    </div>
+</body>
+</html>
