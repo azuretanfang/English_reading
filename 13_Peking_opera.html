@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13 Peking Opera - 京剧</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; }
+
+        .content { padding: 40px 30px; }
+
+        .section { margin-bottom: 40px; }
+
+        .section-title {
+            font-size: 1.6em;
+            color: #c0392b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #c0392b;
+            display: flex;
+            align-items: center;
+        }
+        .section-title span { margin-right: 10px; font-size: 1.2em; }
+
+        /* 原文 */
+        .original-text {
+            background: #fdf2f8;
+            border-left: 4px solid #c0392b;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            font-size: 15.5px;
+            line-height: 2.2;
+        }
+
+        .translation {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            color: #856404;
+        }
+
+        /* 逐句精读卡片 */
+        .sentence-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #f0d6e8;
+        }
+        .sentence-num {
+            display: inline-block;
+            background: #c0392b;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px; height: 28px;
+            text-align: center; line-height: 28px;
+            font-size: 13px; font-weight: bold;
+            margin-right: 8px; vertical-align: middle;
+        }
+        .en-sentence { font-size: 16px; color: #1a1a2e; font-weight: 500; }
+        .zh-trans {
+            color: #555; font-size: 14.5px;
+            margin: 8px 0 10px 36px;
+            padding-left: 12px;
+            border-left: 3px solid #f5b7b1;
+        }
+        .grammar-box {
+            background: #fdf2f8;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0 10px 36px;
+            font-size: 13.5px; color: #4a1a2e;
+        }
+        .grammar-box strong { color: #c0392b; }
+        .note-box {
+            background: #fff9e6;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0 10px 36px;
+            font-size: 13px; color: #7d6608;
+            border-left: 3px solid #f0c040;
+        }
+        .vocab-tag {
+            display: inline-block;
+            background: #fdeef0; color: #922b21;
+            border-radius: 4px; padding: 1px 7px;
+            font-size: 12px; margin-right: 6px;
+            border: 1px solid #f5b7b1;
+        }
+
+        /* 词汇表 */
+        .vocabulary-table {
+            width: 100%; border-collapse: collapse;
+            margin: 20px 0; background: white;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .vocabulary-table thead {
+            background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+            color: white;
+        }
+        .vocabulary-table th, .vocabulary-table td {
+            padding: 12px 15px; text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .vocabulary-table tbody tr:hover { background: #fdf2f8; }
+
+        /* 语法点 */
+        .grammar-point {
+            background: #fdf2f8;
+            border-left: 4px solid #c0392b;
+            padding: 20px; margin: 15px 0; border-radius: 8px;
+        }
+        .grammar-point h4 { color: #c0392b; margin-bottom: 10px; }
+
+        .structure-box {
+            background: #f5f5f5; padding: 15px;
+            border-radius: 8px; margin: 10px 0;
+            font-family: "Courier New", monospace;
+        }
+
+        /* 文章结构流程图 */
+        .process-flow {
+            display: flex; flex-wrap: wrap;
+            gap: 15px; margin: 20px 0; justify-content: center;
+        }
+        .process-step {
+            background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+            color: white; padding: 15px 20px;
+            border-radius: 8px; flex: 1; min-width: 140px;
+            text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .process-arrow {
+            display: flex; align-items: center;
+            font-size: 2em; color: #c0392b;
+        }
+
+        /* highlight & cultural */
+        .highlight-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px; margin: 15px 0;
+            border-radius: 8px; color: #155724;
+        }
+        .cultural-note {
+            background: #fdeef0;
+            border-left: 4px solid #c0392b;
+            padding: 20px; margin: 15px 0;
+            border-radius: 8px; color: #6b1a1a;
+        }
+        .cultural-note h4 { color: #c0392b; margin-bottom: 8px; }
+
+        /* 仿写练习 */
+        .practice-template {
+            background: #fff3cd; border: 2px dashed #ffc107;
+            padding: 20px; margin: 15px 0; border-radius: 8px;
+        }
+
+        /* 自查 checklist */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            padding: 10px 0 10px 30px; position: relative;
+        }
+        .checklist li:before {
+            content: "☐"; position: absolute; left: 0;
+            font-size: 1.2em; color: #c0392b;
+        }
+
+        code {
+            background: #f5f5f5; padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            color: #e83e8c;
+        }
+
+        .footer {
+            background: #f8f9fa; padding: 20px 30px;
+            text-align: center; color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .content { padding: 20px 15px; }
+            .process-flow { flex-direction: column; }
+            .process-arrow { transform: rotate(90deg); justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>🎭 13 Peking Opera</h1>
+        <p class="subtitle">京剧 - 英语精读笔记</p>
+    </div>
+
+    <div class="content">
+
+        <!-- ① 原文 -->
+        <div class="section">
+            <h2 class="section-title"><span>📄</span>原文</h2>
+            <div class="original-text">
+                Jingju, or Peking opera, is an ancient performance art with a history of 200 years. Jingju has four kinds of roles according to different identities and personalities. The lyrics of jingju are performed with swinging or rhythmic speaking, accompanied by dozens of musical instruments. Now, jingju still enchants many Chinese people and foreigners with its unique charm.
+            </div>
+            <div class="translation">
+                京剧是一种有着200年历史的古老表演艺术。京剧根据不同的身份和性格设有四种角色。京剧的唱词以摇曳或有节奏的念白形式演出，并由数十种乐器伴奏。如今，京剧依然以其独特魅力迷倒众多中国人和外国人。
+            </div>
+        </div>
+
+        <!-- ② 逐句精读 -->
+        <div class="section">
+            <h2 class="section-title"><span>📖</span>逐句精读（共4句）</h2>
+
+            <!-- 句1 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">1</span><span class="en-sentence">Jingju, or Peking opera, is an ancient performance art with a history of 200 years.</span></div>
+                <div class="zh-trans">京剧（即北京歌剧）是一种有着200年历史的古老表演艺术。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主系表结构 + 同位语 + 介词短语后置定语</strong><br>
+                    <code>Jingju, or Peking opera,</code>：逗号中的 <code>or Peking opera</code> 是同位语，解释 Jingju 的英译名。<code>or</code> 在此表示"即/也就是"，用于补充说明。<br><br>
+                    <code>with a history of 200 years</code>：介词短语作后置定语，修饰 <code>an ancient performance art</code>，表示"有着200年历史的"。<br><br>
+                    <strong>📌 with + 名词短语</strong> 作后置定语，是英语中非常常见的结构：<br>
+                    <em>a city with a population of 10 million</em>（一个有1000万人口的城市）
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">ancient 古老的</span>
+                    <span class="vocab-tag">performance art 表演艺术</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>ancient</strong> /ˈeɪnʃənt/ adj. 古老的，古代的<br>
+                    • <strong>performance</strong> /pəˈfɔːrməns/ n. 表演，演出（perform v.；performer n.）
+                </div>
+            </div>
+
+            <!-- 句2 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">2</span><span class="en-sentence">Jingju has four kinds of roles according to different identities and personalities.</span></div>
+                <div class="zh-trans">京剧根据不同的身份和性格设有四种角色。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主语 + 谓语 + 宾语 + 介词短语状语</strong><br>
+                    <code>according to different identities and personalities</code>：介词短语作状语，说明"按照……划分"的依据。<br><br>
+                    <strong>📌 according to：</strong>固定搭配，意为"根据，按照"，后接名词或名词短语。<br>
+                    例：<em>According to the report, ...</em>（根据报告……）<br><br>
+                    <strong>📌 四种角色（京剧行当）：</strong><br>
+                    生（shēng）男性角色 / 旦（dàn）女性角色 / 净（jìng）花脸 / 丑（chǒu）小丑
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>role</strong> /roʊl/ n. 角色，作用<br>
+                    • <strong>identity</strong> /aɪˈdentəti/ n. 身份，认同感（复数：identities）<br>
+                    • <strong>personality</strong> /ˌpɜːrsəˈnæləti/ n. 性格，个性（复数：personalities）
+                </div>
+            </div>
+
+            <!-- 句3 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">3</span><span class="en-sentence">The lyrics of jingju are performed with swinging or rhythmic speaking, accompanied by dozens of musical instruments.</span></div>
+                <div class="zh-trans">京剧的唱词以摇曳或有节奏的念白形式演出，并由数十种乐器伴奏。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：被动语态 + 分词短语作伴随状语</strong><br>
+                    主句：<code>The lyrics of jingju are performed with swinging or rhythmic speaking</code>（被动语态：be + performed）<br>
+                    伴随状语：<code>accompanied by dozens of musical instruments</code><br>
+                    → 过去分词短语作伴随状语，表示"同时……"，相当于 "and it is accompanied by..."<br><br>
+                    <strong>📌 with + 形容词 + 名词：</strong><code>with swinging or rhythmic speaking</code> 中，<code>swinging</code> 和 <code>rhythmic</code> 都是形容词修饰 <code>speaking</code>。<br><br>
+                    <strong>📌 accompany + by：</strong>固定搭配，"由……伴奏/陪同"。被动形式：<em>be accompanied by</em>
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">swinging 摇曳的</span>
+                    <span class="vocab-tag">rhythmic 有节奏的</span>
+                    <span class="vocab-tag">accompanied by 由…伴奏</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>lyric</strong> /ˈlɪrɪk/ n. 歌词（常用复数 lyrics）<br>
+                    • <strong>swinging</strong> /ˈswɪŋɪŋ/ adj. 摇摆的，有动感的<br>
+                    • <strong>rhythmic</strong> /ˈrɪðmɪk/ adj. 有节奏的，节拍感强的<br>
+                    • <strong>accompany</strong> /əˈkʌmpəni/ v. 伴奏，陪同<br>
+                    • <strong>dozens of</strong> 数十个（dozen = 12；dozens of 泛指"很多"）
+                </div>
+            </div>
+
+            <!-- 句4 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">4</span><span class="en-sentence">Now, jingju still enchants many Chinese people and foreigners with its unique charm.</span></div>
+                <div class="zh-trans">如今，京剧依然以其独特魅力迷倒众多中国人和外国人。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：时间状语 + 主语 + 谓语 + 宾语 + 方式状语</strong><br>
+                    <code>Now</code>：时间状语，与前文"200年历史"形成古今对比，突出京剧的持久生命力。<br>
+                    <code>enchants ... with its unique charm</code>：<code>enchant sb. with sth.</code> = 以某物迷住某人，固定搭配。<br><br>
+                    <strong>📌 still：</strong>副词，表示"仍然，依然"，暗含"尽管时间久远，至今依然"的语气。<br><br>
+                    <strong>📌 enchant vs. attract：</strong><br>
+                    • <code>attract</code>：吸引（较中性）<br>
+                    • <code>enchant</code>：使着迷，有魔法般的迷人效果（情感色彩更强）
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>enchant</strong> /ɪnˈtʃænt/ v. 使着迷，使陶醉（enchanting adj. 迷人的）<br>
+                    • <strong>unique</strong> /juːˈniːk/ adj. 独特的，独一无二的<br>
+                    • <strong>charm</strong> /tʃɑːrm/ n. 魅力，吸引力；v. 使着迷
+                </div>
+            </div>
+        </div>
+
+        <!-- ③ 核心词汇 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔑</span>核心词汇</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>单词/短语</th>
+                        <th>音标</th>
+                        <th>词性</th>
+                        <th>释义</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Jingju / Peking opera</strong></td><td>/ˈdʒɪŋdʒuː/</td><td>n.</td><td>京剧</td></tr>
+                    <tr><td><strong>ancient</strong></td><td>/ˈeɪnʃənt/</td><td>adj.</td><td>古老的，古代的</td></tr>
+                    <tr><td><strong>performance art</strong></td><td>/pəˈfɔːrməns ɑːrt/</td><td>n.</td><td>表演艺术</td></tr>
+                    <tr><td><strong>role</strong></td><td>/roʊl/</td><td>n.</td><td>角色，作用</td></tr>
+                    <tr><td><strong>identity</strong></td><td>/aɪˈdentəti/</td><td>n.</td><td>身份，认同感</td></tr>
+                    <tr><td><strong>personality</strong></td><td>/ˌpɜːrsəˈnæləti/</td><td>n.</td><td>性格，个性</td></tr>
+                    <tr><td><strong>lyric(s)</strong></td><td>/ˈlɪrɪk(s)/</td><td>n.</td><td>歌词，唱词</td></tr>
+                    <tr><td><strong>swinging</strong></td><td>/ˈswɪŋɪŋ/</td><td>adj.</td><td>摇曳的，摇摆的</td></tr>
+                    <tr><td><strong>rhythmic</strong></td><td>/ˈrɪðmɪk/</td><td>adj.</td><td>有节奏的</td></tr>
+                    <tr><td><strong>accompany</strong></td><td>/əˈkʌmpəni/</td><td>v.</td><td>伴奏，陪同</td></tr>
+                    <tr><td><strong>dozens of</strong></td><td>/ˈdʌzənz əv/</td><td>phr.</td><td>数十个，许多</td></tr>
+                    <tr><td><strong>musical instrument</strong></td><td>/ˈmjuːzɪkl ˈɪnstrəmənt/</td><td>n.</td><td>乐器</td></tr>
+                    <tr><td><strong>enchant</strong></td><td>/ɪnˈtʃænt/</td><td>v.</td><td>使着迷，使陶醉</td></tr>
+                    <tr><td><strong>unique</strong></td><td>/juːˈniːk/</td><td>adj.</td><td>独特的，独一无二的</td></tr>
+                    <tr><td><strong>charm</strong></td><td>/tʃɑːrm/</td><td>n.</td><td>魅力，吸引力</td></tr>
+                    <tr><td><strong>according to</strong></td><td>/əˈkɔːrdɪŋ tuː/</td><td>prep.</td><td>根据，按照</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ④ 语法要点 -->
+        <div class="section">
+            <h2 class="section-title"><span>📝</span>语法要点</h2>
+
+            <div class="grammar-point">
+                <h4>1. 同位语（Appositive）</h4>
+                <p>句1中 <code>or Peking opera</code> 是同位语，补充说明前面的专有名词 Jingju：</p>
+                <div class="structure-box">
+                    Jingju, <strong>or Peking opera</strong>, is an ancient performance art...
+                </div>
+                <p><strong>语法规则</strong>：同位语用逗号隔开，与被说明成分指同一事物，起解释或补充作用。<br>
+                常见引导词：<code>or</code>（即）/ <code>that is</code>（也就是）/ <code>namely</code>（即）</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. 被动语态 + 分词短语作伴随状语</h4>
+                <p>句3综合了两个重要语法现象：</p>
+                <div class="structure-box">
+                    The lyrics ... <strong>are performed</strong> with swinging or rhythmic speaking,<br>
+                    <strong>accompanied by</strong> dozens of musical instruments.
+                </div>
+                <p><strong>被动语态</strong>：<code>are performed</code> = be + 过去分词，强调唱词"被演出"。<br>
+                <strong>分词伴随状语</strong>：<code>accompanied by ...</code> 是过去分词短语，表示同时发生的伴随动作。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. with + 名词短语 作后置定语</h4>
+                <div class="structure-box">
+                    an ancient performance art <strong>with a history of 200 years</strong><br>
+                    a city <strong>with a population of 10 million</strong>（类比）
+                </div>
+                <p><code>with + 名词短语</code> 修饰前面的名词，说明其属性或特征，相当于定语从句的简化形式。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>4. enchant sb. with sth. — 固定搭配</h4>
+                <div class="structure-box">
+                    jingju still <strong>enchants</strong> many Chinese people and foreigners <strong>with its unique charm</strong>
+                </div>
+                <p>结构：<code>enchant + 人 + with + 事物</code>，意为"以某物迷住某人"。<br>
+                同类搭配：<em>impress sb. with sth.</em>（以某物打动某人）/ <em>attract sb. with sth.</em></p>
+            </div>
+        </div>
+
+        <!-- ⑤ 文章结构分析 -->
+        <div class="section">
+            <h2 class="section-title"><span>💡</span>文章结构分析</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <strong>总述</strong><br>
+                    定义 + 历史<br>
+                    200年表演艺术
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>角色</strong><br>
+                    四种行当<br>
+                    按身份&性格划分
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>演出形式</strong><br>
+                    唱词 + 念白<br>
+                    数十种乐器伴奏
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>当代影响</strong><br>
+                    仍然迷倒<br>
+                    中外观众
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top:16px;">
+                <h4>📌 写作逻辑</h4>
+                <p>全文采用"<strong>总—分—总</strong>"结构：先总体介绍京剧定义（句1），再分述其角色特征（句2）和演出形式（句3），最后以当代影响力收尾（句4），形成完整的说明框架。</p>
+            </div>
+        </div>
+
+        <!-- ⑥ 关键理解点 -->
+        <div class="section">
+            <h2 class="section-title"><span>🎯</span>关键理解点</h2>
+
+            <div class="highlight-box">
+                <h4>1. 京剧四大行当</h4>
+                <p>文章提到"four kinds of roles according to different identities and personalities"，对应：</p>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><strong>生（Shēng）</strong>：男性角色，包括老生、小生、武生</li>
+                    <li><strong>旦（Dàn）</strong>：女性角色，如青衣、花旦、武旦</li>
+                    <li><strong>净（Jìng）</strong>：花脸，性格鲜明的男性角色</li>
+                    <li><strong>丑（Chǒu）</strong>：小丑，负责幽默滑稽的表演</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>2. "swinging or rhythmic speaking" 的具体含义</h4>
+                <p>对应京剧两种核心演唱/念白方式：</p>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><strong>swinging（唱腔）</strong>：旋律摇曳婉转的演唱，如西皮、二黄腔</li>
+                    <li><strong>rhythmic speaking（念白）</strong>：有节奏的念白，分京白和韵白</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>3. "enchants ... with its unique charm" 的情感力量</h4>
+                <p>作者用 <code>enchant</code>（使着迷/施魔法般迷住）而非普通的 <code>attract</code>，暗示京剧对观众具有近乎魔力般的吸引力，同时 <code>unique charm</code> 强调了京剧在全球表演艺术中的不可替代性。</p>
+            </div>
+        </div>
+
+        <!-- ⑦ 文化背景 -->
+        <div class="section">
+            <h2 class="section-title"><span>🌏</span>文化背景</h2>
+
+            <div class="cultural-note">
+                <h4>京剧（Jingju / Peking Opera）</h4>
+                <ul style="margin-left:20px; margin-top:8px; line-height:2;">
+                    <li><strong>起源</strong>：形成于清朝乾隆年间（约1790年），迄今约200余年</li>
+                    <li><strong>发源地</strong>：徽班进京后融合多种地方戏曲逐渐演化而成</li>
+                    <li><strong>四大要素</strong>：唱（singing）、念（speaking）、做（acting）、打（acrobatics/combat）</li>
+                    <li><strong>脸谱文化</strong>：不同颜色代表不同性格——红色（忠勇）、白色（奸诈）、黑色（刚正）、花脸（勇猛）</li>
+                    <li><strong>国际认可</strong>：2010年被联合国教科文组织列入"人类非物质文化遗产代表作名录"</li>
+                    <li><strong>代表人物</strong>：梅兰芳（Mei Lanfang）是将京剧推向世界的最重要旦角艺术家</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑧ 仿写练习 -->
+        <div class="section">
+            <h2 class="section-title"><span>✍️</span>仿写练习</h2>
+
+            <div class="practice-template">
+                <h4>题目：介绍一种传统表演艺术</h4>
+                <p><strong>仿写模板（参照原文结构）：</strong></p>
+                <div class="structure-box">
+[Art form], or [English name], is an ancient performance art with a history of [N] years.<br>
+[Art form] has [N] kinds of roles / characters / styles according to different [criteria].<br>
+The [element] of [art form] are performed with [manner], accompanied by [instruments/props].<br>
+Now, [art form] still enchants many [audience] with its unique charm.
+                </div>
+
+                <p style="margin-top:16px;"><strong>示例（昆曲 Kunqu Opera）：</strong></p>
+                <div class="structure-box">
+Kunqu, or Kun opera, is an ancient performance art with a history of over 600 years.<br>
+Kunqu has several types of roles according to different genders and social statuses.<br>
+The arias of Kunqu are performed with gentle and melodious singing, accompanied by the flute and other traditional instruments.<br>
+Now, Kunqu still enchants many art lovers around the world with its elegant and refined charm.
+                </div>
+            </div>
+        </div>
+
+        <!-- ⑨ 阅读技巧 -->
+        <div class="section">
+            <h2 class="section-title"><span>📌</span>阅读技巧</h2>
+
+            <div class="grammar-point">
+                <h4>1. 识别说明文的"总—分"结构</h4>
+                <ul style="margin-left:20px;">
+                    <li><strong>句1（总）</strong>：定义 + 历史时间</li>
+                    <li><strong>句2（分1）</strong>：角色体系</li>
+                    <li><strong>句3（分2）</strong>：演出形式</li>
+                    <li><strong>句4（总结）</strong>：当代影响力</li>
+                </ul>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. 关注专有名词的解释方式</h4>
+                <p>文章开头用 <code>or Peking opera</code> 为 "Jingju" 提供英文注释，这是面向国际读者的常见写作策略。阅读时遇到"专有名词 + or + 通用解释"，即可快速理解生词。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. 提取关键信息（5W1H 法）</h4>
+                <ul style="margin-left:20px;">
+                    <li><strong>What</strong>：Peking opera（京剧）</li>
+                    <li><strong>How old</strong>：200 years（200年历史）</li>
+                    <li><strong>How many roles</strong>：4 kinds（四种行当）</li>
+                    <li><strong>How performed</strong>：swinging/rhythmic speaking + dozens of instruments</li>
+                    <li><strong>Current status</strong>：still enchants Chinese and foreigners</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑩ 难点解析 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔍</span>难点解析</h2>
+
+            <div class="grammar-point">
+                <h4>1. "accompanied by dozens of musical instruments" 的位置</h4>
+                <p><strong>结构分析</strong>：</p>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li>主句：<code>The lyrics ... are performed with swinging or rhythmic speaking</code></li>
+                    <li>分词伴随状语：<code>accompanied by dozens of musical instruments</code></li>
+                    <li>逻辑主语：分词的逻辑主语是主句主语 <code>The lyrics</code>（唱词被乐器伴奏）</li>
+                </ul>
+                <p style="margin-top:8px;"><strong>翻译陷阱</strong>：不要译成"乐器伴奏着演唱"，正确是"演唱由乐器伴奏"（被动关系）。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. "with swinging or rhythmic speaking" 的 with 用法</h4>
+                <p>这里的 <code>with</code> 不表示"和"，而是表示<strong>方式/手段</strong>，意为"以……方式/形式"：</p>
+                <div class="structure-box">
+                    are performed <strong>with</strong> swinging or rhythmic speaking<br>
+                    = are performed <strong>in the form of</strong> swinging or rhythmic speaking
+                </div>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. dozens of 的数量表达</h4>
+                <p><code>dozens of</code> 表示"数十个，许多"（泛指，非精确数字）：</p>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><code>a dozen</code>（一打，12个）→ 精确</li>
+                    <li><code>dozens of</code>（数十个）→ 泛指，强调数量多</li>
+                    <li>类似：<em>hundreds of</em>（数百）/ <em>thousands of</em>（数千）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑪ 阅读理解自查 -->
+        <div class="section">
+            <h2 class="section-title"><span>✅</span>阅读理解自查</h2>
+            <ul class="checklist">
+                <li>我能用英语说出京剧有几种角色，以及划分依据吗？</li>
+                <li>我理解 "accompanied by" 的语法功能（分词伴随状语）吗？</li>
+                <li>我能解释 "enchant sb. with sth." 的用法并造句吗？</li>
+                <li>我能区分 <code>with</code> 作"方式状语"与"伴随状语"的不同用法吗？</li>
+                <li>我能仿照原文结构，用英语介绍另一种中国传统艺术吗？</li>
+            </ul>
+        </div>
+
+        <!-- ⑫ 拓展学习 -->
+        <div class="section">
+            <h2 class="section-title"><span>📚</span>拓展学习</h2>
+
+            <div class="highlight-box">
+                <h4>相关话题</h4>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li>Chinese Traditional Opera Forms（中国传统戏曲形式）：昆曲 Kunqu、越剧 Yue opera、川剧 Sichuan opera</li>
+                    <li>UNESCO Intangible Cultural Heritage（联合国教科文组织非物质文化遗产）</li>
+                    <li>Mei Lanfang and the global spread of Peking Opera（梅兰芳与京剧的国际传播）</li>
+                    <li>Face-painting in Peking Opera（京剧脸谱艺术）</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>相关词汇拓展</h4>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><strong>aria</strong> /ˈɑːriə/ n. 咏叹调，唱段（歌剧/戏曲）</li>
+                    <li><strong>costume</strong> /ˈkɒstjuːm/ n. 戏服，服装</li>
+                    <li><strong>acrobatics</strong> /ˌækrəˈbætɪks/ n. 杂技，武打技巧</li>
+                    <li><strong>intangible cultural heritage</strong> 非物质文化遗产</li>
+                    <li><strong>repertoire</strong> /ˈrepətwɑːr/ n. 剧目，曲目</li>
+                </ul>
+            </div>
+        </div>
+
+    </div><!-- end .content -->
+
+    <div class="footer">
+        <p><strong>笔记创建时间</strong>: 2026-06-23</p>
+        <p><strong>文章主题</strong>: 中国传统文化 / 表演艺术</p>
+        <p><strong>难度等级</strong>: ★★☆☆☆（B1-B2）</p>
+    </div>
+
+</div><!-- end .container -->
+</body>
+</html>
