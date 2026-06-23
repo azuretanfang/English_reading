@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Chinese Frescoes - 中国壁画</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #7b4f12 0%, #c8860a 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #7b4f12 0%, #c8860a 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; }
+
+        .content { padding: 40px 30px; }
+        .section { margin-bottom: 40px; }
+
+        .section-title {
+            font-size: 1.6em;
+            color: #7b4f12;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #c8860a;
+            display: flex;
+            align-items: center;
+        }
+        .section-title span { margin-right: 10px; font-size: 1.2em; }
+
+        .original-text {
+            background: #fdf6ee;
+            border-left: 4px solid #c8860a;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            font-size: 15.5px;
+            line-height: 2.2;
+        }
+
+        .translation {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            color: #856404;
+        }
+
+        /* 逐句精读卡片 */
+        .sentence-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #f0dcc0;
+        }
+        .sentence-num {
+            display: inline-block;
+            background: #7b4f12;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px; height: 28px;
+            text-align: center; line-height: 28px;
+            font-size: 13px; font-weight: bold;
+            margin-right: 8px; vertical-align: middle;
+        }
+        .en-sentence { font-size: 16px; color: #1a1a2e; font-weight: 500; }
+        .zh-trans {
+            color: #555; font-size: 14.5px;
+            margin: 8px 0 10px 36px;
+            padding-left: 12px;
+            border-left: 3px solid #f0c070;
+        }
+        .grammar-box {
+            background: #fdf6ee;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0 10px 36px;
+            font-size: 13.5px; color: #3d2000;
+        }
+        .grammar-box strong { color: #7b4f12; }
+        .note-box {
+            background: #fff9e6;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0 10px 36px;
+            font-size: 13px; color: #7d6608;
+            border-left: 3px solid #f0c040;
+        }
+        .vocab-tag {
+            display: inline-block;
+            background: #fdf0dd; color: #7b3f00;
+            border-radius: 4px; padding: 1px 7px;
+            font-size: 12px; margin-right: 6px;
+            border: 1px solid #f0c070;
+        }
+
+        /* 词汇表 */
+        .vocabulary-table {
+            width: 100%; border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .vocabulary-table thead {
+            background: linear-gradient(135deg, #7b4f12 0%, #c8860a 100%);
+            color: white;
+        }
+        .vocabulary-table th, .vocabulary-table td {
+            padding: 12px 15px; text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .vocabulary-table tbody tr:hover { background: #fdf6ee; }
+
+        /* 语法点 */
+        .grammar-point {
+            background: #fdf6ee;
+            border-left: 4px solid #c8860a;
+            padding: 20px; margin: 15px 0; border-radius: 8px;
+        }
+        .grammar-point h4 { color: #7b4f12; margin-bottom: 10px; }
+
+        .structure-box {
+            background: #f5f5f5; padding: 15px;
+            border-radius: 8px; margin: 10px 0;
+            font-family: "Courier New", monospace;
+            font-size: 13.5px; line-height: 1.9;
+        }
+
+        /* 文章结构 */
+        .process-flow {
+            display: flex; flex-wrap: wrap;
+            gap: 15px; margin: 20px 0; justify-content: center;
+        }
+        .process-step {
+            background: linear-gradient(135deg, #7b4f12 0%, #c8860a 100%);
+            color: white; padding: 15px 20px;
+            border-radius: 8px; flex: 1; min-width: 130px;
+            text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+        .process-arrow {
+            display: flex; align-items: center;
+            font-size: 2em; color: #c8860a;
+        }
+
+        .highlight-box {
+            background: #fdf6ee;
+            border-left: 4px solid #c8860a;
+            padding: 20px; margin: 15px 0;
+            border-radius: 8px; color: #3d2000;
+        }
+        .highlight-box h4 { color: #7b4f12; margin-bottom: 8px; }
+
+        .cultural-note {
+            background: #fff8f0;
+            border-left: 4px solid #7b4f12;
+            padding: 20px; margin: 15px 0;
+            border-radius: 8px; color: #3d2000;
+        }
+        .cultural-note h4 { color: #7b4f12; margin-bottom: 8px; }
+
+        .practice-template {
+            background: #fff3cd; border: 2px dashed #ffc107;
+            padding: 20px; margin: 15px 0; border-radius: 8px;
+        }
+
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { padding: 10px 0 10px 30px; position: relative; }
+        .checklist li:before {
+            content: "☐"; position: absolute; left: 0;
+            font-size: 1.2em; color: #c8860a;
+        }
+
+        code {
+            background: #f5f5f5; padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            color: #e83e8c;
+        }
+
+        .timeline {
+            border-left: 3px solid #c8860a;
+            margin: 16px 0 16px 16px;
+            padding-left: 20px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 14px;
+        }
+        .timeline-item::before {
+            content: "●";
+            position: absolute;
+            left: -28px;
+            color: #c8860a;
+            font-size: 14px;
+        }
+
+        .footer {
+            background: #f8f9fa; padding: 20px 30px;
+            text-align: center; color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .content { padding: 20px 15px; }
+            .process-flow { flex-direction: column; }
+            .process-arrow { transform: rotate(90deg); justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>🏛️ 15 Chinese Frescoes</h1>
+        <p class="subtitle">中国壁画 - 英语精读笔记</p>
+    </div>
+
+    <div class="content">
+
+        <!-- ① 原文 -->
+        <div class="section">
+            <h2 class="section-title"><span>📄</span>原文</h2>
+            <div class="original-text">
+                Chinese frescoes date back to the prehistoric period some 10,000 years ago. People carved images of human activities and natural views on rocks. Excavated from tombs built 2,200 years ago, the bi hua remains clear, vivid and colorful. Legend has it that an ancient painter drew a dragon on the wall and when he added eyes to the drawing the image turned into a real dragon. With the introduction of Buddhism to China, bi hua on the subject of religion rapidly developed. The bi hua, or frescoes, in the Dunhuang Mogao Grottoes are the most famous ones in China. They are a collection of masterpieces of numerous painters in the past 1,000 years. They tell historical tales and religious stories.
+            </div>
+            <div class="translation">
+                中国壁画可以追溯到大约一万年前的史前时期。人们在岩石上刻下人类活动和自然景观的图像。从2200年前建造的墓葬中出土的壁画，至今仍清晰、生动、色彩鲜艳。传说有位古代画家在墙上画了一条龙，当他为画作点上眼睛时，这幅图像便变成了一条真龙。随着佛教传入中国，以宗教为主题的壁画迅速发展起来。位于敦煌莫高窟的壁画是中国最著名的壁画，它们是过去一千年间无数画家杰作的集合，讲述着历史故事和宗教故事。
+            </div>
+        </div>
+
+        <!-- ② 逐句精读 -->
+        <div class="section">
+            <h2 class="section-title"><span>📖</span>逐句精读（共8句）</h2>
+
+            <!-- 句1 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">1</span><span class="en-sentence">Chinese frescoes date back to the prehistoric period some 10,000 years ago.</span></div>
+                <div class="zh-trans">中国壁画可以追溯到大约一万年前的史前时期。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主语 + 谓语短语 + 时间状语</strong><br>
+                    <code>date back to</code>：固定短语，意为"追溯到，起源于某时期"。主语通常是事物（历史、传统、建筑等），不用于人。<br><br>
+                    <code>some 10,000 years ago</code>：<code>some</code> 此处是副词，意为"大约、将近"（≈ about/approximately），修饰数字，表示概数。注意不是"一些"的意思。<br><br>
+                    <strong>📌 date back to vs. date from：</strong><br>
+                    两者均可表示"起源于"，但 <code>date back to</code> 更强调"往回追溯"的动作感，<code>date from</code> 更中性。
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">date back to 追溯到</span>
+                    <span class="vocab-tag">prehistoric 史前的</span>
+                    <span class="vocab-tag">some 大约</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>fresco</strong> /ˈfreskoʊ/ n. 壁画（复数 frescoes）；专指绘在湿灰泥上的壁画<br>
+                    • <strong>prehistoric</strong> /ˌpriːhɪˈstɒrɪk/ adj. 史前的（pre- 前缀表"之前"）
+                </div>
+            </div>
+
+            <!-- 句2 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">2</span><span class="en-sentence">People carved images of human activities and natural views on rocks.</span></div>
+                <div class="zh-trans">人们在岩石上刻下人类活动和自然景观的图像。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主语 + 谓语 + 宾语（含介词短语后置定语）+ 地点状语</strong><br>
+                    <code>images of human activities and natural views</code>：<code>of human activities and natural views</code> 是介词短语作后置定语，修饰 <code>images</code>，说明图像的内容。<br><br>
+                    <code>on rocks</code>：地点状语，说明雕刻的载体（岩石上），这是岩画（rock art）的典型描述方式。<br><br>
+                    <strong>📌 carve vs. draw vs. paint：</strong><br>
+                    • <code>carve</code>：雕刻（用工具在硬质材料上刻画）<br>
+                    • <code>draw</code>：绘画（用笔勾勒线条）<br>
+                    • <code>paint</code>：涂色（用颜料上色）
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>carve</strong> /kɑːrv/ v. 雕刻，刻（三态：carve-carved-carved）<br>
+                    • <strong>image</strong> /ˈɪmɪdʒ/ n. 图像，形象<br>
+                    • <strong>natural views</strong> 自然景观
+                </div>
+            </div>
+
+            <!-- 句3 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">3</span><span class="en-sentence">Excavated from tombs built 2,200 years ago, the bi hua remains clear, vivid and colorful.</span></div>
+                <div class="zh-trans">从2200年前建造的墓葬中出土的壁画，至今仍清晰、生动、色彩鲜艳。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：过去分词短语作状语（句首）+ 主系表结构</strong><br>
+                    <code>Excavated from tombs built 2,200 years ago</code>：过去分词短语作状语，修饰主句主语 <code>the bi hua</code>，表示被动的背景情况（被从墓中挖出）。<br>
+                    ▸ 逻辑主语检验：<code>the bi hua</code> 是被挖掘出来的，符合被动关系。<br><br>
+                    <code>built 2,200 years ago</code>：过去分词短语作后置定语，修饰 <code>tombs</code>（建于2200年前的墓葬）。<br><br>
+                    <code>remains clear, vivid and colorful</code>：<code>remain</code> 是连系动词（系动词），接形容词表语，意为"保持……状态"，强调历经时间仍未改变。<br><br>
+                    <strong>📌 remain + 形容词：</strong>表示"仍然/依然是……"。类似系动词：stay, keep, continue to be
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">excavated 被出土的</span>
+                    <span class="vocab-tag">tomb 墓葬</span>
+                    <span class="vocab-tag">remain 保持</span>
+                    <span class="vocab-tag">vivid 生动的</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>excavate</strong> /ˈekskəveɪt/ v. 挖掘，出土（考古用语）<br>
+                    • <strong>tomb</strong> /tuːm/ n. 墓穴，陵墓（注意：b 不发音）<br>
+                    • <strong>vivid</strong> /ˈvɪvɪd/ adj. 生动的，鲜明的（vividly adv.）
+                </div>
+            </div>
+
+            <!-- 句4 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">4</span><span class="en-sentence">Legend has it that an ancient painter drew a dragon on the wall and when he added eyes to the drawing the image turned into a real dragon.</span></div>
+                <div class="zh-trans">传说有位古代画家在墙上画了一条龙，当他为画作点上眼睛时，这幅图像便变成了一条真龙。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：Legend has it that...（传说句型）+ 时间状语从句</strong><br>
+                    <code>Legend has it that ...</code>：固定句型，意为"传说……"，相当于 <code>According to legend, ...</code> 或 <code>It is said that ...</code>。<code>has it</code> 中 <code>it</code> 是形式宾语，真实宾语是 that 从句。<br><br>
+                    <code>when he added eyes to the drawing</code>：<code>when</code> 引导时间状语从句，表示"当……时候"。<br><br>
+                    <code>turned into</code>：固定短语，意为"变成"。与 <code>turn</code> 相关的搭配：<br>
+                    • <code>turn into</code> 变成（强调变化结果）<br>
+                    • <code>turn out to be</code> 结果是……<br>
+                    • <code>turn over</code> 翻转
+                </div>
+                <div style="margin:10px 0 0 36px;">
+                    <span class="vocab-tag">Legend has it that 传说</span>
+                    <span class="vocab-tag">turn into 变成</span>
+                </div>
+                <div class="note-box">
+                    <strong>📌 文化注释：</strong><br>
+                    此句来源于中国典故"<strong>画龙点睛</strong>"（huà lóng diǎn jīng）——南朝画家张僧繇在金陵安乐寺画了四条龙，不点眼睛是因为"点之即飞去"，后来应众人要求点了两条龙的眼睛，果然破壁飞走。成语含义：在关键处加上一笔，使整体立刻生动传神。
+                </div>
+            </div>
+
+            <!-- 句5 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">5</span><span class="en-sentence">With the introduction of Buddhism to China, bi hua on the subject of religion rapidly developed.</span></div>
+                <div class="zh-trans">随着佛教传入中国，以宗教为主题的壁画迅速发展起来。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：With + 名词短语 作伴随/原因状语 + 主句</strong><br>
+                    <code>With the introduction of Buddhism to China</code>：<code>with + 名词短语</code> 作状语，表示"随着……/伴随……的发生"，暗含因果关系（佛教传入→壁画发展）。<br><br>
+                    <code>on the subject of religion</code>：介词短语作后置定语，修饰 <code>bi hua</code>，意为"以……为主题的"。<br>
+                    类似表达：<code>on the topic of</code> / <code>about</code> / <code>dealing with</code><br><br>
+                    <strong>📌 the introduction of A to B：</strong>固定名词短语，意为"A被引入/传入B"。<br>
+                    例：<em>the introduction of gunpowder to Europe</em>（火药传入欧洲）
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>introduction</strong> /ˌɪntrəˈdʌkʃn/ n. 引入，传入；介绍（此处指"传入"）<br>
+                    • <strong>Buddhism</strong> /ˈbʊdɪzəm/ n. 佛教（Buddhist n./adj. 佛教徒/佛教的）<br>
+                    • <strong>rapidly</strong> /ˈræpɪdli/ adv. 迅速地（rapid adj.）
+                </div>
+            </div>
+
+            <!-- 句6 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">6</span><span class="en-sentence">The bi hua, or frescoes, in the Dunhuang Mogao Grottoes are the most famous ones in China.</span></div>
+                <div class="zh-trans">敦煌莫高窟的壁画（bi hua，即 frescoes）是中国最著名的壁画。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主语（含同位语+后置定语）+ 系动词 + 表语（最高级）</strong><br>
+                    <code>The bi hua, or frescoes,</code>：同位语结构，<code>or frescoes</code> 解释了 <code>bi hua</code> 的英文对应词。<br><br>
+                    <code>in the Dunhuang Mogao Grottoes</code>：介词短语作后置定语，修饰 <code>The bi hua</code>，限定地点。<br><br>
+                    <code>the most famous ones</code>：最高级，<code>ones</code> 是代词，代替前面提到的 <code>bi hua / frescoes</code>，避免重复。<br><br>
+                    <strong>📌 one/ones 代词用法：</strong>代替前文可数名词，ones 用于复数：<br>
+                    <em>These paintings are better than the old ones.</em>
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>grotto</strong> /ˈɡrɒtoʊ/ n. 石窟，岩洞（复数 grottoes）<br>
+                    • <strong>Dunhuang Mogao Grottoes</strong> 敦煌莫高窟（甘肃省，世界文化遗产）
+                </div>
+            </div>
+
+            <!-- 句7 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">7</span><span class="en-sentence">They are a collection of masterpieces of numerous painters in the past 1,000 years.</span></div>
+                <div class="zh-trans">它们是过去一千年间无数画家杰作的集合。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主系表结构 + 多层介词短语后置定语</strong><br>
+                    <code>They</code>：代词，指代上句的 <code>The bi hua in the Dunhuang Mogao Grottoes</code>。<br><br>
+                    层层修饰拆解：<br>
+                    <code>a collection</code>（一个集合）<br>
+                    　↳ <code>of masterpieces</code>（杰作的集合）<br>
+                    　　↳ <code>of numerous painters</code>（无数画家的杰作）<br>
+                    　　↳ <code>in the past 1,000 years</code>（过去1000年间）<br><br>
+                    <strong>📌 a collection of：</strong>固定短语，意为"……的集合/汇聚"。<br>
+                    <strong>📌 in the past + 时间段：</strong>表示"在过去……时间内"，常与现在完成时连用，此处用一般现在时是因为描述的是持续的历史事实。
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>masterpiece</strong> /ˈmɑːstərpiːs/ n. 杰作，代表作（master + piece）<br>
+                    • <strong>numerous</strong> /ˈnjuːmərəs/ adj. 众多的，无数的（= many，但更书面）<br>
+                    • <strong>collection</strong> /kəˈlekʃn/ n. 收藏，集合
+                </div>
+            </div>
+
+            <!-- 句8 -->
+            <div class="sentence-card">
+                <div><span class="sentence-num">8</span><span class="en-sentence">They tell historical tales and religious stories.</span></div>
+                <div class="zh-trans">它们讲述着历史故事和宗教故事。</div>
+                <div class="grammar-box">
+                    <strong>🔤 句型：主语 + 谓语 + 并列宾语（简洁收束句）</strong><br>
+                    此句是全文的最后一句，结构极其简洁——主谓宾，无任何修饰成分。这是说明文的常见收尾方式：用短句点明核心功能，干净有力。<br><br>
+                    <code>historical tales</code>：历史故事/传说<br>
+                    <code>religious stories</code>：宗教故事<br><br>
+                    <strong>📌 tell vs. narrate vs. describe：</strong><br>
+                    • <code>tell stories/tales</code>：最口语化，强调讲述行为<br>
+                    • <code>narrate</code>：叙述（书面，强调叙事过程）<br>
+                    • <code>describe</code>：描述（侧重外貌、状态的刻画）
+                </div>
+                <div class="note-box">
+                    <strong>📌 词汇：</strong><br>
+                    • <strong>tale</strong> /teɪl/ n. 故事，传说（与 story 近义，tale 更多指民间故事/传说）<br>
+                    • <strong>religious</strong> /rɪˈlɪdʒəs/ adj. 宗教的（religion n.）
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ③ 核心词汇 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔑</span>核心词汇</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>单词/短语</th>
+                        <th>音标</th>
+                        <th>词性</th>
+                        <th>释义</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>fresco / frescoes</strong></td><td>/ˈfreskoʊ/</td><td>n.</td><td>壁画</td></tr>
+                    <tr><td><strong>date back to</strong></td><td>—</td><td>phr.</td><td>追溯到，起源于</td></tr>
+                    <tr><td><strong>prehistoric</strong></td><td>/ˌpriːhɪˈstɒrɪk/</td><td>adj.</td><td>史前的</td></tr>
+                    <tr><td><strong>carve</strong></td><td>/kɑːrv/</td><td>v.</td><td>雕刻</td></tr>
+                    <tr><td><strong>excavate</strong></td><td>/ˈekskəveɪt/</td><td>v.</td><td>挖掘，出土</td></tr>
+                    <tr><td><strong>tomb</strong></td><td>/tuːm/</td><td>n.</td><td>墓穴，陵墓</td></tr>
+                    <tr><td><strong>vivid</strong></td><td>/ˈvɪvɪd/</td><td>adj.</td><td>生动的，鲜明的</td></tr>
+                    <tr><td><strong>remain</strong></td><td>/rɪˈmeɪn/</td><td>v.</td><td>保持，仍然是</td></tr>
+                    <tr><td><strong>Legend has it that</strong></td><td>—</td><td>phr.</td><td>传说……</td></tr>
+                    <tr><td><strong>turn into</strong></td><td>—</td><td>phr.</td><td>变成</td></tr>
+                    <tr><td><strong>introduction</strong></td><td>/ˌɪntrəˈdʌkʃn/</td><td>n.</td><td>传入，引入</td></tr>
+                    <tr><td><strong>Buddhism</strong></td><td>/ˈbʊdɪzəm/</td><td>n.</td><td>佛教</td></tr>
+                    <tr><td><strong>rapidly</strong></td><td>/ˈræpɪdli/</td><td>adv.</td><td>迅速地</td></tr>
+                    <tr><td><strong>grotto / grottoes</strong></td><td>/ˈɡrɒtoʊ/</td><td>n.</td><td>石窟，岩洞</td></tr>
+                    <tr><td><strong>masterpiece</strong></td><td>/ˈmɑːstərpiːs/</td><td>n.</td><td>杰作，代表作</td></tr>
+                    <tr><td><strong>numerous</strong></td><td>/ˈnjuːmərəs/</td><td>adj.</td><td>众多的，无数的</td></tr>
+                    <tr><td><strong>tale</strong></td><td>/teɪl/</td><td>n.</td><td>故事，传说</td></tr>
+                    <tr><td><strong>religious</strong></td><td>/rɪˈlɪdʒəs/</td><td>adj.</td><td>宗教的</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ④ 语法要点 -->
+        <div class="section">
+            <h2 class="section-title"><span>📝</span>语法要点</h2>
+
+            <div class="grammar-point">
+                <h4>1. 过去分词短语作句首状语（句3）</h4>
+                <div class="structure-box">
+                    <strong>Excavated from tombs built 2,200 years ago</strong>, the bi hua remains clear...<br>
+                    ↓ 等同于 ↓<br>
+                    The bi hua, <strong>which was excavated from tombs built 2,200 years ago</strong>, remains clear...
+                </div>
+                <p><strong>语法规则</strong>：过去分词短语置于句首作状语，其逻辑主语必须与主句主语一致。此处 <code>the bi hua</code> 是被挖掘出来的（被动），用过去分词 <code>Excavated</code>。<br>
+                <strong>⚠️ 悬垂分词（错误）</strong>：若逻辑主语不一致会造成歧义，须注意。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. Legend has it that ...（句4）</h4>
+                <div class="structure-box">
+                    <strong>Legend has it that</strong> an ancient painter drew a dragon on the wall...<br><br>
+                    同义表达：<br>
+                    • According to legend, ...<br>
+                    • It is said / reported that ...<br>
+                    • The legend goes that ...
+                </div>
+                <p><code>has it that</code> 中，<code>it</code> 是形式宾语，真实宾语是 <code>that</code> 从句。这是固定句式，表示"据传说/据说"，在叙述民间故事或历史传说时极为常用。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. With + 名词短语 作状语（句5）</h4>
+                <div class="structure-box">
+                    <strong>With the introduction of Buddhism to China</strong>, bi hua ... rapidly developed.<br><br>
+                    结构：With + the + 名词 + of + A + to + B<br>
+                    含义：随着A被引入B / 伴随A传入B
+                </div>
+                <p><code>with + 名词短语</code> 作状语，可以表示：<br>
+                ① <strong>伴随</strong>：随着……（表同时发生）<br>
+                ② <strong>原因</strong>：由于……（暗含因果）<br>
+                ③ <strong>方式</strong>：以……方式（表方法手段）</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>4. remain 作连系动词（句3）</h4>
+                <div class="structure-box">
+                    the bi hua <strong>remains</strong> clear, vivid and colorful<br>
+                    （壁画仍然清晰、生动、色彩鲜艳）
+                </div>
+                <p><code>remain</code> 是半系动词，后接形容词（表语），表示"保持某种状态，仍然是"。<br>
+                类似用法：<code>stay + adj.</code>（stay healthy）/ <code>keep + adj.</code>（keep warm）/ <code>continue to be + adj.</code></p>
+            </div>
+        </div>
+
+        <!-- ⑤ 文章结构分析 -->
+        <div class="section">
+            <h2 class="section-title"><span>💡</span>文章结构分析</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <strong>起源</strong><br>
+                    史前岩刻<br>
+                    1万年前
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>早期</strong><br>
+                    墓葬壁画<br>
+                    2200年前
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>传说</strong><br>
+                    画龙点睛<br>
+                    艺术神话
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>宗教发展</strong><br>
+                    佛教传入<br>
+                    宗教壁画兴盛
+                </div>
+                <div class="process-arrow">→</div>
+                <div class="process-step">
+                    <strong>巅峰</strong><br>
+                    敦煌莫高窟<br>
+                    千年杰作
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top:16px;">
+                <h4>📌 写作逻辑</h4>
+                <p>文章以<strong>时间为轴</strong>（1万年前→2200年前→佛教传入后→近1000年），纵向梳理中国壁画的发展脉络，从史前岩刻一路追溯至敦煌莫高窟，最后以"讲述历史与宗教故事"收尾，点明壁画的文化功能，是典型的<strong>历史发展型说明文</strong>结构。</p>
+            </div>
+        </div>
+
+        <!-- ⑥ 关键理解点 -->
+        <div class="section">
+            <h2 class="section-title"><span>🎯</span>关键理解点</h2>
+
+            <div class="highlight-box">
+                <h4>1. 中国壁画的时间脉络</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><strong>约1万年前</strong>：史前岩画，雕刻于岩石上，记录人类活动与自然景观</div>
+                    <div class="timeline-item"><strong>约2200年前</strong>（西汉时期）：墓葬壁画出现，至今色彩依然鲜艳</div>
+                    <div class="timeline-item"><strong>汉代以后</strong>：随佛教传入（约公元1世纪），宗教题材壁画迅速发展</div>
+                    <div class="timeline-item"><strong>近1000年（北魏至元代）</strong>：敦煌莫高窟集各代壁画之大成，成为最高峰</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>2. "画龙点睛"——点睛之笔的文化隐喻</h4>
+                <p>句4的传说并非只是猎奇故事，它揭示了中国传统绘画美学的核心理念：<strong>眼睛是传达神韵的关键</strong>。"点睛"之意在英文中也有对应表达：<em>the finishing touch</em>（最后的点睛之笔），指使作品完整并赋予生命力的关键细节。</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>3. 敦煌莫高窟的独特性</h4>
+                <p>文章说它是 <em>"a collection of masterpieces of numerous painters in the past 1,000 years"</em>，强调两点：<br>
+                ① <strong>集体性</strong>：非一人之作，是千年无数画家的共同创造<br>
+                ② <strong>时间跨度</strong>：从北魏（5世纪）到元代（14世纪），历经近千年持续创作</p>
+            </div>
+        </div>
+
+        <!-- ⑦ 文化背景 -->
+        <div class="section">
+            <h2 class="section-title"><span>🌏</span>文化背景</h2>
+
+            <div class="cultural-note">
+                <h4>中国壁画（Bi Hua / Chinese Frescoes）</h4>
+                <ul style="margin-left:20px; margin-top:8px; line-height:2.2;">
+                    <li><strong>定义</strong>：绘制或雕刻在墙壁、岩石、洞窟表面的图像，是人类最古老的艺术形式之一</li>
+                    <li><strong>题材演变</strong>：史前狩猎 → 汉代礼仪/神话 → 南北朝佛教故事 → 唐代净土世界 → 宋元世俗生活</li>
+                    <li><strong>敦煌莫高窟</strong>：位于甘肃省，现存735个洞窟、45,000平方米壁画，1987年列入UNESCO世界文化遗产</li>
+                    <li><strong>飞天形象</strong>（Apsara）：敦煌壁画中最具代表性的元素，融合了印度犍陀罗与中国传统美学</li>
+                    <li><strong>技法</strong>：以矿物颜料（石青、石绿、朱砂等）为主，历经千年仍色彩鲜艳</li>
+                    <li><strong>画龙点睛</strong>：来自南朝梁代画家张僧繇，典故记录于唐代张彦远《历代名画记》</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑧ 仿写练习 -->
+        <div class="section">
+            <h2 class="section-title"><span>✍️</span>仿写练习</h2>
+
+            <div class="practice-template">
+                <h4>题目：介绍一种中国古代艺术形式的历史发展</h4>
+                <p><strong>仿写模板（参照原文时间线结构）：</strong></p>
+                <div class="structure-box">
+[Art form] dates back to [time period] some [N] years ago.<br>
+People [action] on [material/surface] in those early days.<br>
+[Past participle phrase], [art form] remains [qualities] today.<br>
+Legend has it that [famous story related to the art].<br>
+With the [introduction/development] of [factor], [art form] on the subject of [theme] rapidly developed.<br>
+The [art form] in [famous location] are the most famous ones in China.<br>
+They are a collection of masterpieces of numerous [creators] in the past [N] years.<br>
+They tell [type of stories].
+                </div>
+
+                <p style="margin-top:16px;"><strong>示例（青铜器 Bronze Ware）：</strong></p>
+                <div class="structure-box">
+Chinese bronze ware dates back to the Xia Dynasty some 4,000 years ago.<br>
+People cast images of animals and ritual scenes on bronze vessels in those early days.<br>
+Excavated from royal tombs built over 3,000 years ago, the bronze ware remains elegant and detailed.<br>
+Legend has it that the Yellow Emperor cast the first great bronze cauldron to unify the nation.<br>
+With the development of ritual systems in the Zhou Dynasty, bronze ware on the subject of ceremony rapidly flourished.<br>
+The bronze ware in the National Museum of China are the most famous ones in the country.<br>
+They are a collection of masterpieces of numerous craftsmen in the past 2,000 years.<br>
+They tell historical tales and ritual stories of ancient Chinese civilization.
+                </div>
+            </div>
+        </div>
+
+        <!-- ⑨ 阅读技巧 -->
+        <div class="section">
+            <h2 class="section-title"><span>📌</span>阅读技巧</h2>
+
+            <div class="grammar-point">
+                <h4>1. 识别"时间轴"型说明文结构</h4>
+                <p>本文用多个时间标志词串联历史发展，阅读时可快速定位：</p>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><code>some 10,000 years ago</code> → 起源</li>
+                    <li><code>2,200 years ago</code> → 早期发展</li>
+                    <li><code>With the introduction of Buddhism</code> → 宗教时期</li>
+                    <li><code>in the past 1,000 years</code> → 近代集大成</li>
+                </ul>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. 句首过去分词短语的快速识别</h4>
+                <p>当句子以过去分词开头（如 <code>Excavated</code>、<code>Built</code>、<code>Located</code>）：<br>
+                ① 它修饰紧跟其后的主语<br>
+                ② 主语和分词之间存在被动关系<br>
+                ③ 快速翻译策略：先译主句，再把分词短语译为"在……之后/从……中"</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. 提取关键信息（5W1H 法）</h4>
+                <ul style="margin-left:20px;">
+                    <li><strong>What</strong>：Chinese frescoes / bi hua（中国壁画）</li>
+                    <li><strong>When（起源）</strong>：prehistoric period, 10,000 years ago</li>
+                    <li><strong>Early form</strong>：carved images on rocks → paintings in tombs</li>
+                    <li><strong>Development factor</strong>：introduction of Buddhism</li>
+                    <li><strong>Most famous</strong>：Dunhuang Mogao Grottoes</li>
+                    <li><strong>Content</strong>：historical tales + religious stories</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ⑩ 难点解析 -->
+        <div class="section">
+            <h2 class="section-title"><span>🔍</span>难点解析</h2>
+
+            <div class="grammar-point">
+                <h4>1. 句3 的双层过去分词结构</h4>
+                <div class="structure-box">
+                    Excavated from tombs [built 2,200 years ago], the bi hua remains clear...<br><br>
+                    • 第一层：<strong>Excavated</strong> from tombs → 修饰主句主语 the bi hua（壁画被挖掘）<br>
+                    • 第二层：<strong>built</strong> 2,200 years ago → 修饰 tombs（墓葬被建造）
+                </div>
+                <p>两个过去分词各有不同的逻辑主语（bi hua 和 tombs），阅读时需要逐层辨清修饰关系。</p>
+            </div>
+
+            <div class="grammar-point">
+                <h4>2. "some" 作副词修饰数字</h4>
+                <div class="structure-box">
+                    date back to the prehistoric period <strong>some</strong> 10,000 years ago<br>
+                    （some = about/approximately，大约）<br><br>
+                    对比：<br>
+                    • some books（一些书）→ some 是限定词，修饰可数名词复数<br>
+                    • <strong>some 10,000 years</strong>（大约1万年）→ some 是副词，修饰数字
+                </div>
+            </div>
+
+            <div class="grammar-point">
+                <h4>3. "turned into a real dragon"——turn into 的用法</h4>
+                <div class="structure-box">
+                    the image <strong>turned into</strong> a real dragon（变成了一条真龙）<br><br>
+                    turn into + 名词：变成（强调形态/性质的根本改变）<br>
+                    turn into vs. change into vs. become：<br>
+                    • turn into：常指意想不到或戏剧性的变化<br>
+                    • change into：中性，改变成另一种形态<br>
+                    • become：最通用，可接名词或形容词
+                </div>
+            </div>
+        </div>
+
+        <!-- ⑪ 阅读理解自查 -->
+        <div class="section">
+            <h2 class="section-title"><span>✅</span>阅读理解自查</h2>
+            <ul class="checklist">
+                <li>我能说出中国壁画发展的四个主要时间节点吗？</li>
+                <li>我理解 "Excavated from tombs built 2,200 years ago" 中两层过去分词的修饰关系吗？</li>
+                <li>我能用 "Legend has it that..." 造一个句子吗？</li>
+                <li>我理解 <code>remain + 形容词</code> 的系动词用法吗？</li>
+                <li>我能解释"画龙点睛"的典故，并说出对应的英文表达吗？</li>
+                <li>我能仿照原文写一段介绍中国青铜器或陶瓷历史的英语短文吗？</li>
+            </ul>
+        </div>
+
+        <!-- ⑫ 拓展学习 -->
+        <div class="section">
+            <h2 class="section-title"><span>📚</span>拓展学习</h2>
+
+            <div class="highlight-box">
+                <h4>相关话题</h4>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li>Dunhuang Mogao Grottoes（敦煌莫高窟）—— UNESCO世界文化遗产</li>
+                    <li>Rock art / Cave painting（岩画/洞窟壁画）—— 人类最早艺术形式</li>
+                    <li>Chinese idiom: 画龙点睛（huà lóng diǎn jīng）—— "the finishing touch"</li>
+                    <li>Buddhist art in China（中国佛教艺术）—— 云冈、龙门、莫高三大石窟</li>
+                    <li>Han Dynasty tomb paintings（汉代墓葬壁画）—— 马王堆、满城汉墓</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>词汇拓展</h4>
+                <ul style="margin-left:20px; margin-top:8px;">
+                    <li><strong>mural</strong> /ˈmjʊərəl/ n. 壁画（= fresco，更泛指墙壁上的画）</li>
+                    <li><strong>pigment</strong> /ˈpɪɡmənt/ n. 颜料，色素（矿物颜料 mineral pigment）</li>
+                    <li><strong>archaeology</strong> /ˌɑːrkiˈɒlədʒi/ n. 考古学</li>
+                    <li><strong>relic</strong> /ˈrelɪk/ n. 文物，遗迹</li>
+                    <li><strong>apsara</strong> /ˈæpsərə/ n. 飞天（佛教艺术中的天女形象）</li>
+                    <li><strong>the finishing touch</strong> 点睛之笔，最后的完美细节</li>
+                </ul>
+            </div>
+        </div>
+
+    </div><!-- end .content -->
+
+    <div class="footer">
+        <p><strong>笔记创建时间</strong>: 2026-06-23</p>
+        <p><strong>文章主题</strong>: 中国传统文化 / 艺术史</p>
+        <p><strong>难度等级</strong>: ★★★☆☆（B1-B2）</p>
+    </div>
+
+</div><!-- end .container -->
+</body>
+</html>
