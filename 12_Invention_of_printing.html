@@ -213,6 +213,70 @@
             font-family: "Courier New", monospace;
             color: #e83e8c;
         }
+
+        /* 逐句精读卡片 */
+        .sentence-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #e8edf2;
+        }
+        .sentence-num {
+            display: inline-block;
+            background: #667eea;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .en-sentence {
+            font-size: 16px;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+        .zh-trans {
+            color: #555;
+            font-size: 14.5px;
+            margin: 8px 0 10px 36px;
+            padding-left: 12px;
+            border-left: 3px solid #a9b8f5;
+        }
+        .grammar-box {
+            background: #eef0ff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0 10px 36px;
+            font-size: 13.5px;
+            color: #2d3a6b;
+        }
+        .grammar-box strong { color: #667eea; }
+        .vocab-tag {
+            display: inline-block;
+            background: #eafaf1;
+            color: #1e8449;
+            border-radius: 4px;
+            padding: 1px 7px;
+            font-size: 12px;
+            margin-right: 6px;
+            border: 1px solid #a9dfbf;
+        }
+        .note-box {
+            background: #fff9e6;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0 10px 36px;
+            font-size: 13px;
+            color: #7d6608;
+            border-left: 3px solid #f0c040;
+        }
         
         .footer {
             background: #f8f9fa;
@@ -316,6 +380,187 @@
                 <div class="translation">
                     文字和绘画在印刷术的帮助下在世界范围内广泛传播。
                 </div>
+            </div>
+            
+            <!-- 逐句精读 -->
+            <div class="section">
+                <h2 class="section-title"><span>📖</span>逐句精读（共9句）</h2>
+
+                <!-- 句1 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">1</span><span class="en-sentence">A Chinese named Bi Sheng invented movable type print around 1,000 years ago.</span></div>
+                    <div class="zh-trans">一位名叫毕昇的中国人在大约1000年前发明了活字印刷术。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：主语（含后置定语）+ 谓语 + 宾语 + 时间状语</strong><br>
+                        <code>A Chinese named Bi Sheng</code>：<code>named Bi Sheng</code> 是过去分词短语作后置定语，修饰 <code>A Chinese</code>，相当于 "who was named Bi Sheng"。<br><br>
+                        <strong>📌 过去分词作后置定语</strong>：<code>named</code> = "被命名为"，这种结构替代定语从句，更简洁。<br>
+                        类似：<em>a book written in English</em>（一本用英文写的书）
+                    </div>
+                    <div style="margin:10px 0 0 36px;">
+                        <span class="vocab-tag">movable type print 活字印刷</span>
+                        <span class="vocab-tag">around 大约</span>
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>movable</strong> /ˈmuːvəbl/ adj. 可移动的<br>
+                        • <strong>invent</strong> /ɪnˈvent/ v. 发明（inventor 发明者；invention 发明物）
+                    </div>
+                </div>
+
+                <!-- 句2 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">2</span><span class="en-sentence">The movable components are cubes made of baked clay.</span></div>
+                    <div class="zh-trans">可移动的组件是由烧制粘土制成的立方体。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：主系表结构 + 过去分词后置定语</strong><br>
+                        <code>The movable components</code> 主语 → <code>are</code> 系动词 → <code>cubes made of baked clay</code> 表语<br><br>
+                        <strong>📌 made of vs. made from：</strong><br>
+                        • <code>made of</code>：能看出原材料（成品保留原材料特征）→ cubes <em>made of</em> clay（能看出是粘土）<br>
+                        • <code>made from</code>：原材料发生了化学变化 → paper <em>made from</em> wood pulp
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>component</strong> /kəmˈpoʊnənt/ n. 组件，部件<br>
+                        • <strong>cube</strong> /kjuːb/ n. 立方体<br>
+                        • <strong>baked clay</strong> /beɪkt kleɪ/ n. 烧制的粘土（陶土）
+                    </div>
+                </div>
+
+                <!-- 句3 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">3</span><span class="en-sentence">Characters were carved on each piece of clay, which looked like the seals widely used in China.</span></div>
+                    <div class="zh-trans">每个粘土块上都刻有字符，看起来像中国广泛使用的印章。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：被动语态 + 非限制性定语从句</strong><br>
+                        主句：<code>Characters were carved on each piece of clay</code>（被动语态：be + 过去分词）<br>
+                        非限制性定语从句：<code>which looked like the seals widely used in China</code><br>
+                        • <code>which</code> 指代前面整个主句的内容（即"刻有字的粘土块"）<br>
+                        • <code>widely used in China</code> 是过去分词短语，后置修饰 <code>seals</code><br><br>
+                        <strong>📌 注意：</strong>非限制性定语从句前有逗号，补充说明，不是限定范围。
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>carve</strong> /kɑːrv/ v. 雕刻，刻（carve → carved → carved）<br>
+                        • <strong>seal</strong> /siːl/ n. 印章；v. 封闭（此处用名词义）
+                    </div>
+                </div>
+
+                <!-- 句4 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">4</span><span class="en-sentence">The movable components could be arranged freely to form different vocabularies and sentences.</span></div>
+                    <div class="zh-trans">可移动的组件可以自由排列，组成不同的词汇和句子。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：情态动词 + 被动语态 + 不定式目的状语</strong><br>
+                        <code>could be arranged</code>：情态动词 could + be + 过去分词 = 情态被动<br>
+                        <code>to form different vocabularies and sentences</code>：不定式作目的状语，表示"为了……"<br><br>
+                        <strong>📌 freely：</strong>副词，修饰 arranged，表示"自由地"。这正是活字印刷最核心的创新点——字模可以自由组合。
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>arrange</strong> /əˈreɪndʒ/ v. 排列，安排（arrangement n.）<br>
+                        • <strong>vocabulary</strong> /voʊˈkæbjəleri/ n. 词汇（复数：vocabularies）
+                    </div>
+                </div>
+
+                <!-- 句5 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">5</span><span class="en-sentence">They were fixed on an iron plate with frames in certain sequence.</span></div>
+                    <div class="zh-trans">它们按照特定顺序被固定在带框架的铁板上。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：被动语态 + 介词短语</strong><br>
+                        <code>They were fixed on an iron plate</code>：被动语态，they 指代上句的 movable components<br>
+                        <code>with frames</code>：介词短语，修饰 iron plate，说明铁板带有框架<br>
+                        <code>in certain sequence</code>：介词短语作状语，表示排列顺序<br><br>
+                        <strong>📌 介词辨析：</strong><br>
+                        • <code>in sequence</code> 按顺序 / <code>in certain sequence</code> 按特定顺序<br>
+                        • <code>fix on</code> 固定在……上
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>iron plate</strong> /ˈaɪərn pleɪt/ n. 铁板<br>
+                        • <strong>frame</strong> /freɪm/ n. 框架<br>
+                        • <strong>sequence</strong> /ˈsiːkwəns/ n. 顺序，序列
+                    </div>
+                </div>
+
+                <!-- 句6 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">6</span><span class="en-sentence">Then ink was painted and a piece of paper was laid down.</span></div>
+                    <div class="zh-trans">然后涂上墨水，铺上一张纸。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：并列被动句 + 时间副词</strong><br>
+                        <code>Then</code>：时间副词，表示紧接着上一步之后<br>
+                        两个被动语态并列：<code>ink was painted</code> 和 <code>a piece of paper was laid down</code><br><br>
+                        <strong>📌 动词辨析：</strong><br>
+                        • <code>paint</code> 此处作"涂抹"讲，不是"绘画"<br>
+                        • <code>lay down</code> = 铺下，放下（lay 是 lie 的过去式，也是 lay 的原形——注意区分！）<br>
+                        lay（放/铺）→ laid → laid；lie（躺）→ lay → lain
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>ink</strong> /ɪŋk/ n. 墨水，墨汁<br>
+                        • <strong>lay down</strong> 铺下，放平（过去分词 laid）
+                    </div>
+                </div>
+
+                <!-- 句7 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">7</span><span class="en-sentence">A printed sheet was created this way.</span></div>
+                    <div class="zh-trans">通过这种方式创建了一张印刷页。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：被动语态 + 方式状语（指代前文）</strong><br>
+                        <code>A printed sheet was created</code>：被动语态，强调结果（印刷页）而非操作者<br>
+                        <code>this way</code>：方式状语，指代前面几句描述的整个印刷流程（排字→涂墨→铺纸）<br><br>
+                        <strong>📌 this way 的用法：</strong>前指功能，总结前文步骤，是说明文的常见收束方式。等同于 "in this way" 或 "by doing this"。
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>printed sheet</strong> 印刷页，印张<br>
+                        • <strong>create</strong> /kriˈeɪt/ v. 创造，创建
+                    </div>
+                </div>
+
+                <!-- 句8 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">8</span><span class="en-sentence">This technique improved the efficiency of printing and transformed traditional transcription into modern printing.</span></div>
+                    <div class="zh-trans">这项技术提高了印刷效率，将传统抄写转变为现代印刷。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：主语 + 并列谓语（V1 + O1 and V2 + O2）</strong><br>
+                        主语 <code>This technique</code> 带两个并列谓语：<br>
+                        ① <code>improved the efficiency of printing</code><br>
+                        ② <code>transformed traditional transcription into modern printing</code><br><br>
+                        <strong>📌 transform A into B：</strong>固定搭配，把A转变为B。<br>
+                        例：<em>The invention transformed the world.</em>（这项发明改变了世界。）<br><br>
+                        <strong>📌 efficiency of printing：</strong>介词 of 表示所属关系，"印刷的效率"。
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>efficiency</strong> /ɪˈfɪʃənsi/ n. 效率（efficient adj. 高效的）<br>
+                        • <strong>transform ... into ...</strong> 把……转变为……<br>
+                        • <strong>transcription</strong> /trænˈskrɪpʃən/ n. 抄写，誊写
+                    </div>
+                </div>
+
+                <!-- 句9 -->
+                <div class="sentence-card">
+                    <div><span class="sentence-num">9</span><span class="en-sentence">Scripts and paintings spread widely in the world with the help of yìn shuā.</span></div>
+                    <div class="zh-trans">文字和绘画在印刷术（yìn shuā）的帮助下在世界范围内广泛传播。</div>
+                    <div class="grammar-box">
+                        <strong>🔤 句型：主语 + 谓语 + 地点状语 + 方式状语</strong><br>
+                        <code>Scripts and paintings</code>：并列主语（文字与绘画）<br>
+                        <code>spread widely in the world</code>：spread 是不规则动词（spread-spread-spread），此处用一般过去时<br>
+                        <code>with the help of yìn shuā</code>：介词短语作状语，表示"借助……的帮助"<br><br>
+                        <strong>📌 with the help of：</strong>固定搭配，= with the assistance of，表示凭借某种手段或力量。<br>
+                        <strong>📌 yìn shuā</strong> 是中文"印刷"的拼音，文章在此用拼音指代印刷技术。
+                    </div>
+                    <div class="note-box">
+                        <strong>📌 词汇：</strong><br>
+                        • <strong>script</strong> /skrɪpt/ n. 文字，手稿，脚本<br>
+                        • <strong>spread</strong> /spred/ v. 传播，蔓延（三态同形：spread-spread-spread）<br>
+                        • <strong>with the help of</strong> 在……的帮助下
+                    </div>
+                </div>
+
             </div>
             
             <!-- 核心词汇 -->
